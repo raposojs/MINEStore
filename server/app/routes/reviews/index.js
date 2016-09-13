@@ -84,3 +84,6 @@ router.delete('/products/:id/reviews', function(request, response, next){
 		}
 	})
 })
+
+module.exports = router;
+

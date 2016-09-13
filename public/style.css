@@ -8,9 +8,9 @@ body {
   padding-top: 60px;
   margin: 0 auto; }
 
-fullstack-logo {
+minestore-logo {
   display: block; }
-  fullstack-logo img {
+  minestore-logo img {
     display: block;
     width: 100%; }
 
@@ -23,7 +23,7 @@ navbar {
     width: 91%;
     max-width: 1340px;
     padding-top: 20px; }
-  navbar fullstack-logo {
+  navbar minestore-logo {
     margin-top: 5px;
     margin-right: 20px;
     width: 40px; }
@@ -57,7 +57,7 @@ navbar {
       color: #f30046;
       cursor: pointer; }
 
-#home fullstack-logo {
+#home minestore-logo {
   padding-top: 30px;
   width: 150px;
   margin: 0 auto; }
