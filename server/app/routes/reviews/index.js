@@ -51,13 +51,16 @@ router.post('/products/:id/reviews', function (request, response, next) {
 		.catch(next)
 })
 
-router.put('/products/:id/reviews', function (request, response, next) {
-	var id = request.params.id;
-	var body = request.body;
-	Reviews.update(request.body, {
-		where: {
-			id: id
+router.put('/products/:id/reviews', function(request, response, next){
+	var reviewId = request.params.id;
+	var body=request.body;
+	Reviews.update(body, {
+		where:
+		{id: reviewId}
 		}
+	)
+	.then(function(review){
+		response.status(201).send(review);
 	})
 		.then(function (review) {
 			response.status(201).send(review);
