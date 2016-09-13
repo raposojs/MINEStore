@@ -1,6 +1,6 @@
 module.exports = {
-  DATABASE_URI: 'postgres://localhost:5432/fsg',
-  SESSION_SECRET: 'Optimus Prime is my real dad',
+  DATABASE_URI: 'postgres://localhost:5432/minestore',
+  SESSION_SECRET: 'Optimus Prime is my real dad nope',
   TWITTER: {
     consumerKey: 'INSERT_TWITTER_CONSUMER_KEY_HERE',
     consumerSecret: 'INSERT_TWITTER_CONSUMER_SECRET_HERE',
