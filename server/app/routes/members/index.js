@@ -13,27 +13,27 @@ var ensureAuthenticated = function (req, res, next) {
 };
 
 router.param('id', function (req, res, next, id) {
-    if(typeof id !== 'number') return next();
+    if (typeof +id !== 'number') return next();
+	console.log('ID is', id);
 	User.findById(id)
-	.then(function (user) {
-		console.log(user);
-		if (user) {
-			req.user = user;
-			next();
-			return null; // silence Bluebird warning re: non-returned promise in next
-		} else {
-			throw HttpError(404);
-		}
-	})
-	.catch(next);
+		.then(function (user) {
+			if (user) {
+				req.user = user;
+				next();
+				return null; // silence Bluebird warning re: non-returned promise in next
+			} else {
+				throw HttpError(404);
+			}
+		})
+		.catch(next);
 });
 
 router.get('/', function (req, res, next) {
 	User.findAll()
-	.then(function (users) {
-		res.json(users);
-	})
-	.catch(next);
+		.then(function (users) {
+			res.json(users);
+		})
+		.catch(next);
 });
 
 router.get('/secret-stash', ensureAuthenticated, function (req, res) {
@@ -62,28 +62,28 @@ router.get('/:id', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
 	User.create(req.body)
-	.then(function (user) {
-		res.status(201).json(user);
-	})
-	.catch(next);
+		.then(function (user) {
+			res.status(201).json(user);
+		})
+		.catch(next);
 });
 
 router.put('/:id', function (req, res, next) {
 	delete req.body.id;
 	_.extend(req.user, req.body);
 	req.user.save()
-	.then(function (updatedUser) {
-		res.json(updatedUser);
-	})
-	.catch(next);
+		.then(function (updatedUser) {
+			res.json(updatedUser);
+		})
+		.catch(next);
 });
 
 router.delete('/:id', function (req, res, next) {
 	req.user.destroy()
-	.then(function () {
-		res.status(204).end();
-	})
-	.catch(next);
+		.then(function () {
+			res.status(204).end();
+		})
+		.catch(next);
 });
 
 
