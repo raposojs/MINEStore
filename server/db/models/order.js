@@ -8,5 +8,7 @@ module.exports = db.define('order', {
 	price: {
 		allowNull: false,
 		type: Sequelize.DECIMAL
-	}
+	},
+	isCart: Sequelize.BOOLEAN,
+	sId: Sequelize.STRING
 })
