@@ -2,10 +2,10 @@ var router = require('express').Router();
 module.exports = router;
 // var bodyParser = require('body-parser')
 
-var Order = require('../../db/models/order.js')
+var Order = require('../../../db/models/order.js')
 
 // GET => ORDER ID => 'orders/:id'
-router.get('orders/:id', function(req,res,next){
+router.get('/orders/:id', function(req,res,next){
 	var orderId = req.params.id
 
 	Order.findAll({
@@ -20,7 +20,7 @@ router.get('orders/:id', function(req,res,next){
 })
 
 // POST => ORDER ID => 'orders/:id'
-router.post('orders/:id', function(req,res,next){
+router.post('/orders/:id', function(req,res,next){
 	var orderId = req.params.id
 
 	Order.create({
@@ -32,7 +32,7 @@ router.post('orders/:id', function(req,res,next){
 })
 
 // DELETE => ORDER ID => 'orders/:id'
-router.delete('orders/:id', function(req,res,next){
+router.delete('/orders/:id', function(req,res,next){
 	var bookId = req.params.id
 
 	Order.find({
@@ -50,7 +50,7 @@ router.delete('orders/:id', function(req,res,next){
 })
 
 // PUT => ORDER ID => 'orders/:id'
-router.put('orders/:id', function(req,res,next){
+router.put('/orders/:id', function(req,res,next){
 	var orderId = req.params.id
 
 	Order.find({

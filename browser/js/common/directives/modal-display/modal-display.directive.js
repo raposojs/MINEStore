@@ -1,18 +1,18 @@
-app.directive('modalDisplay', function ($uibModal) {
-    return {
-        restrict: 'A',
-        templateUrl: 'js/common/directives/modal-display/modal-display.template.html',
-        link: function(scope, element, attr){
-        	element.on('mouseover', function(e){
-        		e.preventDefault();
-        		$uibModal.open({
-        			animation: scope.
-        		})
+// app.directive('modalDisplay', function ($uibModal) {
+//     return {
+//         restrict: 'A',
+//         templateUrl: 'js/common/directives/modal-display/modal-display.template.html',
+//         link: function(scope, element, attr){
+//         	element.on('mouseover', function(e){
+//         		e.preventDefault();
+//         		$uibModal.open({
+//         			animation: scope.
+//         		});
 
-        	})
-        }
-    };
-});
+//         	})
+//         }
+//     };
+// });
 
 
 
