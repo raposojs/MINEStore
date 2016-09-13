@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Reviews = require("../../../db/models/reviews.js");
 
-router.get('/products/:id/reviews', function (request, response, next) {
+router.get('/products/:id', function (request, response, next) {
 	var id = request.params.id;
 	Reviews.findAll({
 		where: {
@@ -19,7 +19,7 @@ router.get('/products/:id/reviews', function (request, response, next) {
 		.catch(next);
 })
 
-router.get('/users/:id/reviews', function (request, response, next) {
+router.get('/users/:id', function (request, response, next) {
 	var id = request.params.id;
 	Reviews.findAll({
 		where: {
@@ -36,7 +36,7 @@ router.get('/users/:id/reviews', function (request, response, next) {
 		.catch(next);
 })
 
-router.post('/products/:id/reviews', function (request, response, next) {
+router.post('/products/:id', function (request, response, next) {
 	var id = request.params.id;
 	var body = request.body;
 	Reviews.create({
@@ -51,7 +51,7 @@ router.post('/products/:id/reviews', function (request, response, next) {
 		.catch(next)
 })
 
-router.put('/products/:id/reviews', function(request, response, next){
+router.put('/products/:id', function(request, response, next){
 	var reviewId = request.params.id;
 	var body=request.body;
 	Reviews.update(body, {
@@ -68,7 +68,7 @@ router.put('/products/:id/reviews', function(request, response, next){
 		.catch(next)
 })
 
-router.delete('/products/:id/reviews', function (request, response, next) {
+router.delete('/products/:id', function (request, response, next) {
 	var id = request.params.id;
 	Reviews.findById(id)
 		.then(function (review) {
