@@ -5,16 +5,7 @@ var Product = require('../../db/models/product.js');
 module.exports = router;
 
 
-var ensureAuthenticated = function (req, res, next) {
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        res.status(401).end();
-    }
-};
-
-
-router.get('/', ensureAuthenticated, function(req, res, next){
+router.get('/', function(req, res, next){
 	Product.findAll()
 		.then(function(products){
 			res.status(200).send(products);
@@ -23,7 +14,7 @@ router.get('/', ensureAuthenticated, function(req, res, next){
 });
 
 
-router.get('/:productID', ensureAuthenticated, function(req, res, next){
+router.get('/:productID', function(req, res, next){
 	Product.findById(req.params.productID)
 		.then(function(product){
 			res.status(200).send(product);
@@ -32,7 +23,7 @@ router.get('/:productID', ensureAuthenticated, function(req, res, next){
 });
 
 
-router.post('/add', ensureAuthenticated, function(req, res, next){
+router.post('/add', function(req, res, next){
 	Product.create(req.body)
 		.then(function(createdProduct){
 			console.log("product has been created");
@@ -43,7 +34,7 @@ router.post('/add', ensureAuthenticated, function(req, res, next){
 });
 
 
-router.put('/:productID', ensureAuthenticated, function(req, res, next){
+router.put('/:productID', function(req, res, next){
     Product.update(req.body, {where: {id: req.params.productID}})
     	.then(function(updatedProduct){
     		console.log(updatedProduct);
@@ -53,7 +44,7 @@ router.put('/:productID', ensureAuthenticated, function(req, res, next){
 });
 
 
-router.delete('/:productID', ensureAuthenticated, function(req, res, next){
+router.delete('/:productID', function(req, res, next){
     Product.destroy({id: req.params.productID})
     	.then(function(){
     		console.log('destroyed successfully');
