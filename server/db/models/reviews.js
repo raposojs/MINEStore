@@ -1,7 +1,7 @@
 var Sequelize=require('sequelize')
 var db=require("../_db.js");
 
-var Reviews=db.define("reviews",{
+var Reviews=db.define("review",{
 	reviewContent: {
 		type: Sequelize.TEXT,
 		allowNull: false,
@@ -21,4 +21,4 @@ var Reviews=db.define("reviews",{
 
 module.exports=Reviews;
 
-Reviews.create({reviewContent: "rock sucks", stars: 0});
+// Reviews.create({reviewContent: "rock sucks", stars: 0});

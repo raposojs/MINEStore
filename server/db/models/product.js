@@ -39,6 +39,7 @@ module.exports = db.define('product', {
 }, {
 	getterMethods: {
 		snippet: function(){
+			// console.log('THIS DESCRIPTION', this);
 			return this.description.slice(0, 15) + '...';
 		},
 		displayPrice: function(){
