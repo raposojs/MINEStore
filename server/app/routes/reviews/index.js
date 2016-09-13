@@ -51,24 +51,25 @@ router.post('/products/:id', function (request, response, next) {
 		.catch(next)
 })
 
-router.put('/products/:id', function(request, response, next){
+router.put('/:id', function (request, response, next) {
 	var reviewId = request.params.id;
-	var body=request.body;
+	var body = request.body;
 	Reviews.update(body, {
-		where:
-		{id: reviewId}
+		where: {
+			id: reviewId
 		}
+	}
 	)
-	.then(function(review){
-		response.status(201).send(review);
-	})
+		.then(function (review) {
+			response.status(201).send(review);
+		})
 		.then(function (review) {
 			response.status(201).send(review);
 		})
 		.catch(next)
 })
 
-router.delete('/products/:id', function (request, response, next) {
+router.delete('/:id', function (request, response, next) {
 	var id = request.params.id;
 	Reviews.findById(id)
 		.then(function (review) {
