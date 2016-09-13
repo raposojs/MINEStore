@@ -4,7 +4,7 @@ var Sequelize = require('sequelize');
 var db = require('../_db');
 
 module.exports = db.define('order', {
-	timestamp: true,
+		// timestamp: true,
 	price: {
 		allowNull: false,
 		type: Sequelize.DECIMAL
