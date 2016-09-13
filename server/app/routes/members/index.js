@@ -16,6 +16,7 @@ router.param('id', function (req, res, next, id) {
     if(typeof id !== 'number') return next();
 	User.findById(id)
 	.then(function (user) {
+		console.log(user);
 		if (user) {
 			req.user = user;
 			next();
