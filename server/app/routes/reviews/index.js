@@ -6,7 +6,7 @@ router.get('/products/:id/reviews', function(request, response, next){
 	var id = request.params.id;
 	Reviews.findAll({
 		where: {
-			productId: id;
+			productId: id
 		}
 	})
 	.then(function(reviews){
@@ -52,12 +52,13 @@ router.post('/products/:id/reviews', function(request, response, next){
 })
 
 router.put('/products/:id/reviews', function(request, response, next){
-	var id = request.params.id;
+	var reviewId = request.params.id;
 	var body=request.body;
-	Reviews.update(request.body, {
+	Reviews.update(body, {
 		where:
-		id: id}
-	})
+		{id: reviewId}
+		}
+	)
 	.then(function(review){
 		response.status(201).send(review);
 	})
