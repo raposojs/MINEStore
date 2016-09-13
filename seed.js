@@ -97,12 +97,16 @@ var seedOrders = function () {
     var orders = [
         {
             price: 20,
+            isCart: true,
+            sId: 'sdfaflwfavsadvdamffdsaf'
         },
         {
             price: 40,
+            isCart: false,
         },
         {
-            price: 10000
+            price: 10000,
+            isCart: false
         }
     ];
 
