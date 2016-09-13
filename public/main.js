@@ -192,12 +192,12 @@ app.controller('AboutController', function ($scope, FullstackPics) {
     });
 })();
 
-app.config(function ($stateProvider) {
-    $stateProvider.state('docs', {
-        url: '/docs',
-        templateUrl: 'js/docs/docs.html'
-    });
-});
+// app.config(function ($stateProvider) {
+//     $stateProvider.state('docs', {
+//         url: '/docs',
+//         templateUrl: 'js/docs/docs.html'
+//     });
+// });
 
 app.config(function ($stateProvider) {
     $stateProvider.state('home', {
