@@ -22,7 +22,7 @@ router.param('id', function (req, res, next, id) {
 				next();
 				return null; // silence Bluebird warning re: non-returned promise in next
 			} else {
-				throw HttpError(404);
+				throw new Error(404);
 			}
 		})
 		.catch(next);
