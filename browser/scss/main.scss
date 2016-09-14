@@ -15,9 +15,12 @@ body {
 }
 
 #main {
-  padding-top: 60px;
+  padding-top: 20px;
   margin: 0 auto;
+  background:white;
 }
+
+
 
 @import 'directives/main';
 @import 'home/main';
@@ -57,10 +60,12 @@ body {
 // }
 
 .thumbnail img {
+  
   object-fit: cover;
   height: 350px;
   width: 100%;
 }
+
 
 .singleproduct{
   text-align: center;
@@ -88,4 +93,17 @@ body {
   width: 150px;
   height: 75px;
   font-size: 18pt;
+}
+
+.overPic {
+  z-index: 100;
+  width: 100%;
+  top:25%;
+  position:absolute;
+  color:#222222;
+}
+
+h1 {
+  font-size: 30vh;
+  font-family: "Times New Roman"
 }
