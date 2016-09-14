@@ -1,4 +1,4 @@
-app.directive('randoGreeting', function (RandomGreetings) {
+app.directive('randoGreeting', function () {
 
     return {
         restrict: 'E',
