@@ -61,3 +61,31 @@ body {
   height: 350px;
   width: 100%;
 }
+
+.singleproduct{
+  text-align: center;
+  background-image: url(http://www.quartzsitemineshaft.com/Empire_mine_shaft.jpg);
+  color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+}
+
+#name{font-size: 72pt;}
+
+#description{
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;;
+}
+
+#priceandstock{
+  font-size: 18pt;
+}
+
+#mineIt{
+  color: #ffffff;
+  width: 150px;
+  height: 75px;
+  font-size: 18pt;
+}
