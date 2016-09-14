@@ -1,4 +1,12 @@
 <section id="home">
     <minestore-logo></minestore-logo>
     <rando-greeting></rando-greeting>
+
+    <section id="about">
+    <carousel interval="6000">
+        <slide ng-repeat="image in images">
+            <img height="300" ng-src="{{ image }}" />
+        </slide>
+    </carousel>
+</section>
 </section>
