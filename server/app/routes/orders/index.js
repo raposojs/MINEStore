@@ -4,6 +4,22 @@ module.exports = router;
 
 var Order = require('../../../db/models/order.js')
 
+router.param('id', function (req, res, next, id) {
+    if (typeof +id !== 'number') return next();
+	console.log('ID is', id);
+	Order.findById(id)
+		.then(function (order) {
+			if (order) {
+				req.order = order;
+				next();
+				return null; // silence Bluebird warning re: non-returned promise in next
+			} else {
+				throw new Error(404);
+			}
+		})
+		.catch(next);
+});
+
 router.get('/', function (req, res, next) {
 	Order.findAll()
 		.then(function (orders) {
@@ -45,14 +61,17 @@ router.post('/', function (req, res, next) {
 })
 
 router.post('/:id/add', function (req, res, next) {
-	Order.addProduct(req.body.product)
-		.then(function (order) {
-			res.send(order);
+	req.order.addProduct(req.body.product.id)
+		.then(function (newOrder) {
+			res.json(newOrder);
 		}).catch(next);
 });
 
 router.post('/:id/remove', function (req, res, next) {
-
+	req.order.removeProduct(req.body.product.id)
+	.then(function(newOrder){
+		res.json(newOrder);
+	}).catch(next);
 })
 
 // DELETE => ORDER ID => 'orders/:id'
