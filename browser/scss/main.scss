@@ -15,7 +15,7 @@ body {
 }
 
 #main {
-  padding-top: 60px;
+  padding-top: 20px;
   margin: 0 auto;
   background:white;
 }
@@ -60,6 +60,7 @@ body {
 // }
 
 .thumbnail img {
+  
   object-fit: cover;
   height: 350px;
   width: 100%;
@@ -68,19 +69,12 @@ body {
 .overPic {
   z-index: 100;
   width: 100%;
-  top:20%;
+  top:25%;
   position:absolute;
-  text-align: center;
-  color:black;
+  color:#222222;
 }
 
 h1 {
-  font-size: 300px;
+  font-size: 30vh;
   font-family: "Times New Roman"
 }
-
-// navbar.ng-isolate-scope {
-
-//   border-bottom: 1px solid black;
-//   box-shadow: 1px 1px 14px -3px black;
-// }
