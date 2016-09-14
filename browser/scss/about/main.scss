@@ -5,12 +5,12 @@
   @include clearfix;
 
   p {
-    width: 40%;
+    // width: auto auto;
     margin: 0 auto;
-    text-align: justify;
+    text-align: center;
     font-size: 22px;
     font-weight: 300;
-    float: left;
+    // float: left;
   }
 
   .carousel {
@@ -26,6 +26,9 @@
     }
     .carousel-indicators {
       display: none;
+    }
+    .right.carousel-control, .left.carousel-control {
+        display: none;
     }
     img {
       max-width: 100%;
