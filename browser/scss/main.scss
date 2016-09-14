@@ -46,7 +46,18 @@ body {
 
 #minebtn {
 	color: #ffffff;
-	background-color: #444;
+	background-color: #009900;
 	border: solid 1px rgba(0, 0, 0, 0.3)
 
+}
+
+// .thumbnail {
+//   height: 300px;
+//   width: 100%;
+// }
+
+.thumbnail img {
+  object-fit: cover;
+  height: 350px;
+  width: 100%;
 }

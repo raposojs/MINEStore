@@ -5,6 +5,8 @@ app.controller('CatalogCtrl', function($scope, $http){
 	$http.get('/api/products')
 		.then(function(products){
 			$scope.products = products.data;
+			// $scope.rarity = $scope.products.rarity
+			
 	});
 
 })
