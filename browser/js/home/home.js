@@ -6,9 +6,8 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('HomeController', function ($scope, FullstackPics) {
+app.controller('HomeController', function ($scope, MineralPics) {
 
-    // Images of beautiful Fullstack people.
-    $scope.images = _.shuffle(FullstackPics);
+    $scope.images = _.shuffle(MineralPics);
 
 });
