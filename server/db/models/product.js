@@ -46,5 +46,12 @@ module.exports = db.define('product', {
 			var priceString = this.price.toString();
 			return '$' + priceString;
 		}
+	},
+	instanceMethods:{
+		reduceStock: function(num){
+			//if num > this.stocks -- short circuit
+			if(num > this.stocks) return;
+			this.stocks -= num;
+		}
 	}
 });

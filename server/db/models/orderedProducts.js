@@ -14,4 +14,8 @@ module.exports = db.define('OrderedProduct', {
 		type: Sequelize.INTEGER,
 		allowNull: false
 	},
+	quantity:{
+		type: Sequelize.INTEGER,
+		defaultValue: 1
+	}
 });
