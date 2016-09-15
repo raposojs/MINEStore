@@ -11,7 +11,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 { label: 'About', state: 'about' },
                 { label: 'Catalog', state: 'catalog' },
                 // { label: 'Documentation', state: 'docs' },
-                { label: 'Members Only', state: 'membersOnly', auth: true },
+                { label: 'My Account', state: 'myAccount', auth: true },
                 { label: 'Cart', state: 'cart'}
             ];
 

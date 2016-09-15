@@ -13,5 +13,5 @@ app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory){
 		$state.go('singleproduct', {productID: product.id});
 	}
 
-	
+
 })
