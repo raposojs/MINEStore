@@ -1,6 +1,23 @@
 <div class="container">
-  <h3>Search Query:</h3>
-  <input ng-model="searchQuery">
+
+  <div>
+    <h3 class="searchQuery">Search: </h3>
+    <input class="searchQuery" ng-model="searchQuery">
+    <h3 class="filter">Filter by:</h3>
+    <select>
+      <option>All</option>
+      <option>Mineral</option>
+      <option>Meteorite</option>
+      <option>Rock</option>
+    </select>
+        <h3 class="sort">Sort by:</h3>
+    <select>
+      <option>- Select Sort -</option>
+      <option>Price</option>
+      <option>Meteorite</option>
+      <option>Rock</option>
+    </select>
+  </div>
 
 	<div class="row">
 		<div class="col-md-4" ng-repeat="product in products | filter:searchQuery">

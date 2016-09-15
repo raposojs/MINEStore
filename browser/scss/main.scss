@@ -5,7 +5,7 @@
 body {
   padding-top: 45px;
   padding-bottom: 20px;
-  background: #fdfdfd;
+  background: white;
 }
 
 @mixin clearfix {
@@ -100,7 +100,7 @@ body {
 .overPic {
   z-index: 100;
   width: 100%;
-  top:17%;
+  // top:17%;
   position:absolute;
   color:#222222;
 }
@@ -164,16 +164,48 @@ h1 {
   text-shadow: 0 1px 1px #fff;
   }
 
+.prettyp { 
+  color: #7a7c7f; 
+  font-size: 29px; 
+  font-family: "Libre Baskerville", serif; 
+  line-height: 45px; 
+  text-align: center; 
+  text-shadow: 0 1px 1px #fff; 
+  padding-top: 20px;
+  margin: 0px 340px 30px 340px;
+  }
+
+
+.prettypsignature { font-style: italic; color: #B6B6B6; font-size: 24px; margin-top: 20px; text-align: center; text-shadow: 0 1px 1px #fff; }
+
   .homeThumbs {
     text-align: center;
     img {
       display: inline-block;
-      margin: auto;
+      // margin: auto;
       border-radius:25px;
-      margin: 10px 50px;
+      margin: 30px 50px;
+      // padding-top: 40px;
     }
   }
 
+// SEARCH QUERY
+
+.searchQuery {
+  display: inline;
+  margin: 20px 0px 30px 0px;
+  width: 17.5%;
+}
+
+.filter {
+  display: inline;
+  margin-left: 110px;
+}
+
+.sort {
+  display: inline;
+  margin-left: 197px; 
+}
 
 // CART // // // // // // 
 
@@ -514,3 +546,4 @@ li {
   // height: 100px;
   margin-bottom: 12px;
 }
+
