@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('CatalogCtrl', function($scope, $http, $state){
+app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory){
 	
 	$http.get('/api/products')
 		.then(function(products){
@@ -9,10 +9,9 @@ app.controller('CatalogCtrl', function($scope, $http, $state){
 			
 	});
 
-
-
 	$scope.detail = function(product){
-		console.log(product);
 		$state.go('singleproduct', {productID: product.id});
 	}
+
+	
 })
