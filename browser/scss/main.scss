@@ -3,6 +3,7 @@
 }
 
 body {
+  padding-top: 8vh;
   background: #fdfdfd;
 }
 
@@ -107,3 +108,10 @@ h1 {
   font-size: 30vh;
   font-family: "Times New Roman"
 }
+
+.navbar-default {
+  border-bottom: none;
+  background-color: #fff;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
+}
+
