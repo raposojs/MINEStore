@@ -1,12 +1,12 @@
 app.config(function($stateProvider){
     $stateProvider.state('cart', {
         url:'/cart',
-        template: '<cart></cart>',
+        template: '<cart value="value"></cart>',
+        //templateUrl: 'js/cart/templates/cart.html',
         controller: 'CartCtrl',
         resolve: {
             cart: function(CartFactory){
-                console.log('Trying to Get Cart with ID 1');
-                return CartFactory.getCart(1);
+                return CartFactory.getUserCart();
             }
         }
     });

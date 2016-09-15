@@ -8,8 +8,16 @@ app.factory('CartFactory', function ($http) {
                     return cart.data;
                 }).catch(console.error.bind(console));
         },
+        getUserCart: function(){
+            return $http.get('/api/orders/user')
+            .then(function(cart){
+                if(!cart || !cart.data) return null;
+                console.log('cart is not null', cart);
+                return cart.data;
+            }).catch(console.error.bind(console));
+        },
         createCart: function (id, data) {
-            return $http.post('/', data)
+            return $http.post('/api/orders/', data)
                 .then(function (cart) {
                     if (!cart) return null;
                     return cart;
@@ -17,14 +25,14 @@ app.factory('CartFactory', function ($http) {
         },
         addItemToCart: function (id, item) {
             //TODO: find cart and add item to products and update price accordingly
-            return $http.post('/' + id + '/add', item)
+            return $http.post('/api/orders/' + id + '/add', item)
                 .then(function (cart) {
                     if (!cart) return null;
                     return cart;
                 }).catch(console.error.bind(console));
         },
         deleteItemFromCart: function (id, item) {
-            return $http.post('/' + id + '/remove', item)
+            return $http.post('/api/orders/' + id + '/remove', item)
                 .then(function (success) {
                     if (!cart) return null;
                     return cart;
@@ -32,7 +40,7 @@ app.factory('CartFactory', function ($http) {
         },
         updateCart: function (cart) {
             //TODO: things like price and isCart
-            return $http.put('/' + cart.id, cart)
+            return $http.put('/api/orders/' + cart.id, cart)
                 .then(function (cart) {
                     //Returning updated cart
                     return cart;
@@ -40,7 +48,7 @@ app.factory('CartFactory', function ($http) {
         },
         clearCart: function (id) {
             //TODO: destroy cart
-            return $http.delete('/' + id)
+            return $http.delete('/api/orders/' + id)
                 .then(function (success) {
                     if (success) return {};
                     throw new Error('Successfully deleted');

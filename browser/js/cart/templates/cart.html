@@ -1,11 +1,11 @@
-<div>
+
+<div style="text-align: center">
     <ul class="cart-items" ng-repeat="product in products">
-        <li>{{name}} -- {{price}}</li>
+        <li>{{product.name}} -- {{product.price}}</li>
         <button ng-click="removeItemFromCart(product)">Remove From Cart</button>
     </ul>
-    <h1 class="total-price">Total Cost: {{cart.price}</h1>
+    <h4 class="total-price">Total Cost: {{price}}</h4>
     <button ng-click="checkout()">Checkout</button>
     <button ng-click="clearCart(id)">Clear Cart</button>
 </div>
-
 
