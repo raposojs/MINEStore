@@ -40,8 +40,6 @@ router.get('/:id', function (req, res, next) {
 			}
 			theOrder.getProducts()
 				.then(function (products) {
-					console.log('PRODUCTS', products);
-					console.log('SNIPPET', products[0].snippet);
 					res.json({ cart: theOrder, products: products });
 				}).catch(next);
 		})
