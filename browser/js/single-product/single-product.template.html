@@ -1,0 +1,108 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+	<h1 class="product-name">{{product.name}}</h1>
+	<h4><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> 16 reviews</h4>
+	<h5>{{product.category}} 💎 💎 💎 💎</h5>
+	<h2>{{product.displayPrice}}</h2>
+
+	<hr class="product-hr">
+
+	<div class="row">
+		<div class="col-md-5 image">
+			<img class="product-img" src="{{product.pictureURL}}">
+		</div>
+
+		<div class="col-md-7 product-body">
+			
+			<p class="product-article">{{product.description}}</p>
+			<hr>
+			<h3 class="stock-status">In Stock</h3>
+			<p>{{product.stocks}} stocks left</p>
+			<button class="btn btn-success">Mine It ⚒</button>
+			<button class="btn btn-primary">Add to my Wishlist</button>
+			<button class="btn btn-info">Write a review</button>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#service-three" data-toggle="tab">REVIEWS</a></li>
+		</ul>
+
+		
+		<div class="reviews">
+			<!-- ng-repeat="review in reviews" -->
+			<div class="product-rating">
+				<div class="container">
+					<div class="row review-row">
+						<div class="col-md-2">
+								<img src="http://placekitten.com/g/130/100"/>
+						</div>
+						<div class="col-md-10">
+							<h6 class="review-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></h6>
+							<p>Octahedral coordination, such as in the perovskite structure or the quartz polymorph stishovite (SiO2). In the latter case, the mineral no longer has a silicate structure, but that of rutile (TiO2), and its associated group, which are simple oxides. These silica tetrahedra are then polymerized to some degree to create various structures, such as one-dimensional chains, two-dimensional sheets, and three-dimensional frameworks. The basic silicate mineral where no polymerization of the tetrahedra has occurred requires other elements to balance out the base 4- charge.</p>
+						</div>
+						<hr class="review-hr">
+					</div>
+				</div>
+				<hr>
+			</div>
+			<!-- ng-repeat ends -->
+
+		</div>
+	</div>
+</div>
+
+
+
+<style>
+.product-name {
+	font-size: 7vh;
+}
+
+.product-img {
+	width: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	box-shadow: 10px 14px 92px -12px rgba(0,0,0,0.75);
+	border-radius: 2px;
+}
+
+hr.product-hr {
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	margin-bottom: 5vh;
+}
+
+i.gold {
+	color: #FFBF00;
+}
+
+.product-article {
+	border-left: solid 10px rgba(0, 0, 0, 0.2);
+	padding-left: 3vh;
+}
+
+.product-body {
+	margin-bottom: 3vh;
+}
+
+.review-row {
+	margin-top: 2vh;
+}
+
+.review-row img {
+	box-shadow: 10px 14px 92px -12px rgba(0,0,0,0.75);
+}
+
+hr.review-hr {
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.review-rating {
+	margin-top: 0;
+}
+
+.stock-status {
+	color: #449D44;
+}
+</style>
