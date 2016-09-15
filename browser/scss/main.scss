@@ -109,9 +109,44 @@ h1 {
   font-family: "Times New Roman"
 }
 
+.back-line {
+  line-height: 0;
+  border-bottom: 1px dotted #999;
+  text-align: center; }
+  .back-line > span {
+    background: #fff;
+    color: #999;
+    padding: 0.5em;
+    border: 1px dotted #999;
+    border-radius: 50%; }
+
+
 .navbar-default {
   border-bottom: none;
   background-color: #fff;
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
 }
 
+.signin-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: -webkit-min-content; }
+  .signin-container > * {
+    width: 33%; }
+  .signin-container .local {
+    max-width: 18em;
+    text-align: left; }
+  .signin-container .or {
+    max-width: 10em; }
+  .signin-container .oauth {
+    max-width: 18em; }
+  .signin-container .btn-social {
+    text-align: center;
+    width: 100%; }
+
+@media (max-width: 600px) {
+  .signin-container {
+    flex-direction: column; }
+    .signin-container > * {
+      width: 100%; } }
