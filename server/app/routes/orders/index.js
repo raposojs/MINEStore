@@ -5,7 +5,7 @@ module.exports = router;
 var Order = require('../../../db/models/order.js')
 
 router.param('id', function (req, res, next, id) {
-    if (typeof +id !== 'number') return next();
+    if (id.match("[A-Za-z+]")) return next();
 	console.log('ID is', id);
 	Order.findById(id)
 		.then(function (order) {
@@ -29,6 +29,44 @@ router.get('/', function (req, res, next) {
 });
 
 
+
+
+router.get('/user', function(req, res, next){
+	if(req.user){
+		Order.findOne({
+			where:{
+				userId : req.user.id
+			}
+		})
+		.then(function(order){
+			if (!order) {
+				res.end();
+				return null;
+			}
+			order.getProducts()
+				.then(function (products) {
+					res.json({ cart: order, products: products });
+				}).catch(next);
+		}).catch(next);
+	} else {
+		Order.findOne({
+			where: {
+				sId : req.session.id
+			}
+		})
+		.then(function(order){
+			if (!order) {
+				res.end();
+				return null;
+			}
+			order.getProducts()
+				.then(function (products) {
+					res.json({ cart: order, products: products });
+				}).catch(next);
+		}).catch(next);
+	}
+})
+
 // GET => ORDER ID => 'orders/:id'
 router.get('/:id', function (req, res, next) {
 	var orderId = req.params.id;
@@ -45,6 +83,7 @@ router.get('/:id', function (req, res, next) {
 		})
 		.catch(next)
 });
+
 
 // POST => ORDER ID => 'orders/:id'
 router.post('/', function (req, res, next) {
