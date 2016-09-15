@@ -263,7 +263,7 @@ var seed = function () {
                 return order.addProduct(products[index]);
             });
             orderProducts.push(orders[1].addProduct(products[2]));
-            orderProducts.push(orders[2].addProduct(products[4]));
+            orderProducts.push(orders[1].addProduct(products[4]));
             orderProducts.push(orders[3].addProduct(products[5]));
             return Promise.all(orderProducts);
         });

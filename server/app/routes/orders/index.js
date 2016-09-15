@@ -1,95 +1,71 @@
 var router = require('express').Router();
+var Promise = require('bluebird');
 module.exports = router;
 // var bodyParser = require('body-parser')
 
 var Order = require('../../../db/models/order.js')
 
-router.param('id', function (req, res, next, id) {
-    if (id.match("[A-Za-z+]")) return next();
-	console.log('ID is', id);
-	Order.findById(id)
-		.then(function (order) {
-			if (order) {
-				req.order = order;
-				next();
-				return null; // silence Bluebird warning re: non-returned promise in next
-			} else {
-				throw new Error(404);
-			}
-		})
-		.catch(next);
-});
-
-router.get('/', function (req, res, next) {
-	Order.findAll()
-		.then(function (orders) {
-			res.status(200).send(orders);
-		})
-		.catch(next);
-});
+// var cart = {};
+// var products = [];
 
 
-
-
-router.get('/user', function(req, res, next){
-	if(req.user){
+router.use('/*', function (req, res, next) {
+	if (req.user) {
 		Order.findOne({
-			where:{
-				userId : req.user.id
+			where: {
+				userId: req.user.id
 			}
 		})
-		.then(function(order){
-			if (!order) {
-				res.end();
-				return null;
-			}
-			order.getProducts()
-				.then(function (products) {
-					res.json({ cart: order, products: products });
-				}).catch(next);
-		}).catch(next);
+			.then(function (order) {
+				if (!order) {
+					res.end();
+					return null;
+				}
+				order.getProducts()
+					.then(function (productsArray) {
+						req.cart = order;
+						req.products = productsArray;
+						next();
+						//res.json({ cart: order, products: products });
+					}).catch(next);
+			}).catch(next);
 	} else {
 		Order.findOne({
 			where: {
-				sId : req.session.id
+				sId: req.session.id
 			}
 		})
-		.then(function(order){
-			if (!order) {
-				res.end();
-				return null;
-			}
-			order.getProducts()
-				.then(function (products) {
-					res.json({ cart: order, products: products });
-				}).catch(next);
-		}).catch(next);
+			.then(function (order) {
+				if (!order) {
+					res.end();
+					return null;
+				}
+				order.getProducts()
+					.then(function (productsArray) {
+						req.cart = order;
+						req.products = productsArray;
+						next();
+						// res.json({ cart: order, products: products });
+					}).catch(next);
+			}).catch(next);
 	}
 })
 
+// router.get('/all', function(req, res ,next){
+// 	res.json({allCart: cart, allProducts: products});
+// })
+
+
 // GET => ORDER ID => 'orders/:id'
-router.get('/:id', function (req, res, next) {
-	var orderId = req.params.id;
-	Order.findById(orderId)
-		.then(function (theOrder) {
-			if (!theOrder) {
-				res.end();
-				return null;
-			}
-			theOrder.getProducts()
-				.then(function (products) {
-					res.json({ cart: theOrder, products: products });
-				}).catch(next);
-		})
-		.catch(next)
+router.get('/', function (req, res, next) {
+	res.json({ cart: req.cart, products: req.products });
 });
 
 
 // POST => ORDER ID => 'orders/:id'
 router.post('/', function (req, res, next) {
-
 	Order.create({
-		price: req.body.price,
+		price: 0,
 		isCart: true
 	})
 		.then(function (createdOrder) {
@@ -97,50 +73,40 @@ router.post('/', function (req, res, next) {
 		})
 })
 
-router.post('/:id/add', function (req, res, next) {
-	req.order.addProduct(req.body.product.id)
+router.post('/add', function (req, res, next) {
+	req.cart.addProduct(req.body.id)
 		.then(function (newOrder) {
-			res.json(newOrder);
+			req.cart.price = req.cart.price + req.body.price
+				req.cart.save()
+				.then(function (updatedOrder) {
+					res.json(updatedOrder);
+				})
 		}).catch(next);
 });
 
-router.post('/:id/remove', function (req, res, next) {
-	req.order.removeProduct(req.body.product.id)
-	.then(function(newOrder){
-		res.json(newOrder);
-	}).catch(next);
+router.post('/remove', function (req, res, next) {
+	req.cart.removeProduct(req.body.id)
+		.then(function (newOrder) {
+			req.cart.price = req.cart.price - req.body.price;
+				req.cart.save()
+				.then(function (updatedOrder) {
+					res.json(updatedOrder);
+				})
+		}).catch(next);
 })
 
 // DELETE => ORDER ID => 'orders/:id'
-router.delete('/:id', function (req, res, next) {
-	var orderId = req.params.id
+router.delete('/', function (req, res, next) {
 
-	Order.findById(orderId)
-		.then(function (theOrder) {
-			return theOrder.destroy();
-		})
+	req.cart.destroy()
 		.then(function (updatedOrder) {
 			res.sendStatus(204)
 		})
 })
 
-// PUT => ORDER ID => 'orders/:id'
-// router.put('/:id', function(req,res,next){
-// 	var orderId = req.params.id
 
-// 	Order.findById(orderId)
-// 	.then(function(theOrder){
-// 		theOrder = req.body
-// 		console.log(theOrder);
-// 		return theOrder.update()
-// 	})
-// 	.then(function(updatedOrder){
-// 		res.send(updatedOrder)
-// 	})
-// })
-
-router.put('/:id', function (req, res, next) {
-	Order.update(req.body, { where: { id: req.params.id } })
+router.put('/', function (req, res, next) {
+	Order.update(req.body, { where: { id: req.cart.id } })
 		.then(function (updatedOrder) {
 			console.log(updatedOrder);
 			res.status(204).end();
