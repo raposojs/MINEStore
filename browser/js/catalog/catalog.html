@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
 	<div class="row">
 		<div class="col-md-4" ng-repeat="product in products">
 
@@ -8,8 +8,8 @@
           <h4 class="pull-right">{{product.displayPrice}}</h4>
           <h4><a href="#">{{product.name}}</a></h4>
           <!-- <p>{{product.snippet}}</p> -->
-          <button class="btn btn-primary btn-sm" id="detailbtn" ui-sref="#">Detail</button>
-          <button class="btn btn-primary btn-sm" id="minebtn" ui-sref="#"> Mine It! ⚒ </button>
+          <button class="btn btn-primary btn-lg" id="detailbtn" ui-sref="#">Detail</button>
+          <button class="btn btn-primary btn-lg" id="minebtn" ui-sref="#"> Mine It! ⚒ </button>
         </div>
         <span class="modalWindow">
           Location: {{product.location}}<br>
