@@ -1,6 +1,11 @@
 <div class="container">
+  <h3>Search Query:</h3>
+  <input ng-model="searchQuery">
+
 	<div class="row">
-		<div class="col-md-4" ng-repeat="product in products">
+		<div class="col-md-4" ng-repeat="product in products | filter:searchQuery">
+
+    
 
       <div class="thumbnail">
         <img class="thumbnail-image" src="{{product.pictureURL}}" alt="">
