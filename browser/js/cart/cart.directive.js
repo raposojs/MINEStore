@@ -1,12 +1,9 @@
-app.directive('cart', function(){
+app.directive('cart', function (CartFactory) {
     return {
         restrict: 'E',
         scope: {
 
         },
-        controller: 'CartController',
-        link: function(scope, element, attrs){
-
-        }
+        templateUrl: 'js/cart/templates/cart.html'
     }
 });

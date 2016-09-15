@@ -13,5 +13,5 @@ module.exports = db.define('OrderedProduct', {
 	orderId: {
 		type: Sequelize.INTEGER,
 		allowNull: false
-	}
+	},
 });

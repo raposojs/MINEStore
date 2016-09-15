@@ -37,7 +37,6 @@ router.post('/add', function (req, res, next) {
 router.put('/:productID', function (req, res, next) {
     Product.update(req.body, { where: { id: req.params.productID } })
 		.then(function (updatedProduct) {
-			console.log(updatedProduct);
 			res.status(204).end();
 		})
 		.catch(next);
