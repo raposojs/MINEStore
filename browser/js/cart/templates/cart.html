@@ -1,11 +1,13 @@
 
-<div style="text-align: center">
-    <ul class="cart-items" ng-repeat="product in products">
-        <li>{{product.name}} -- {{product.price}}</li>
-        <button ng-click="removeItemFromCart(product)">Remove From Cart</button>
+<div style="text-align: center" ng-show="cart">
+    <ul class="cart-items" ng-repeat="product in products" style="list-style-type:none">
+        <li>{{product.name}} -- {{(product.price * 1).toFixed(2)}}</li>
+        <button ng-click="deleteItemFromCart(product.id, product.price)">Remove From Cart</button>
     </ul>
-    <h4 class="total-price">Total Cost: {{price}}</h4>
+    <h4 class="total-price">Total Cost: {{(cart.price * 1).toFixed(2)}}</h4>
+    <h4 class="total-tax">Tax: {{(cart.price * tax).toFixed(2)}}</h4>
+    <h4 class="total-final">Total Final: {{(cart.price * (1+tax)).toFixed(2)}}</h4>
     <button ng-click="checkout()">Checkout</button>
-    <button ng-click="clearCart(id)">Clear Cart</button>
+    <button ng-click="updateCart()">Update</button>
 </div>
 

@@ -6,7 +6,7 @@ app.config(function($stateProvider){
         controller: 'CartCtrl',
         resolve: {
             cart: function(CartFactory){
-                return CartFactory.getUserCart();
+                return CartFactory.getCart();
             }
         }
     });
