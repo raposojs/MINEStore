@@ -3,7 +3,8 @@
 }
 
 body {
-  padding-top: 8vh;
+  padding-top: 45px;
+  padding-bottom: 20px;
   background: #fdfdfd;
 }
 
@@ -121,11 +122,11 @@ h1 {
     border-radius: 50%; }
 
 
-.navbar-default {
-  border-bottom: none;
-  background-color: #fff;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
-}
+// .navbar-default {
+//   border-bottom: none;
+//   background-color: #fff;
+//   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
+// }
 
 .signin-container {
   display: flex;
