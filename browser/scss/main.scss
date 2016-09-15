@@ -100,13 +100,13 @@ body {
 .overPic {
   z-index: 100;
   width: 100%;
-  top:20%;
+  top:17%;
   position:absolute;
   color:#222222;
 }
 
 h1 {
-  font-size: 30vh;
+  font-size: 25vh;
   font-family: "Times New Roman"
 }
 
@@ -151,3 +151,26 @@ h1 {
     flex-direction: column; }
     .signin-container > * {
       width: 100%; } }
+
+.pretty { 
+  color: gray;
+  font-family: "Great Vibes", cursive;
+  font-size: 100px; 
+  line-height: 160px; 
+  font-weight: normal; 
+  margin-bottom: 0px; 
+  margin-top: 40px; 
+  text-align: center; 
+  text-shadow: 0 1px 1px #fff;
+  }
+
+  .homeThumbs {
+    text-align: center;
+    img {
+      display: inline-block;
+      margin: auto;
+      border-radius:25px;
+      margin: 10px 50px;
+    }
+  }
+
