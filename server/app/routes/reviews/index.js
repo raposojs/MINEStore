@@ -37,8 +37,11 @@ router.get('/users/:id', function (request, response, next) {
 })
 
 router.post('/products/:id', function (request, response, next) {
+
 	var id = request.params.id;
 	var body = request.body;
+	console.log(id);
+	console.log(body);
 	Reviews.create({
 		reviewContent: body.reviewContent,
 		stars: body.stars,
