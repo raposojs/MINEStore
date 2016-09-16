@@ -26,7 +26,7 @@
 		<div class="container text-center">
 
 			<div class="col-md-5 col-sm-12">
-				<h1>This is your shopping cart... {{cart}}</h1>
+				<h1>This is your shopping cart...</h1>
 				<p>
 					Feel free to remove and edit your order! If you want more amazing minerals, go back to our catalog by pressing <b><a ui-sref="catalog" title="back to catalog">HERE</a></b> or use the navigation bar above. It was a pleasure having you in our mine! Come back often!
 				</p>
@@ -42,12 +42,12 @@
 						<span>Price</span>
 					</li>
 					<li class="row" ng-repeat="product in products">
-						<span class="quantity">1</span>
-						<span class="itemName">Birthday Cake</span>
-						<span class="popbtn"><a class="arrow"></a></span>
-						<span class="price">$49.95</span>
+						<span class="quantity">{{product.quantity}}</span>
+						<span class="itemName">{{product.name}}</span>
+						<span class="popbtn"><a class="arrow" ng-click="deleteItemFromCart(product.id, product.price)"></a></span>
+						<span class="price">${{product.price}}</span>
 					</li>
-					<li class="row">
+					<!--<li class="row">
 						<span class="quantity">50</span>
 						<span class="itemName">Party Cups</span>
 						<span class="popbtn"><a class="arrow"></a></span>
@@ -70,11 +70,11 @@
 						<span class="itemName">Bullet-proof vest</span>
 						<span class="popbtn"  data-parent="#asd" data-toggle="collapse" data-target="#demo"><a class="arrow"></a></span>
 						<span class="price">$450.00</span>				
-					</li>
+					</li>-->
 					<li class="row totals">
 						<span class="itemName">Total:</span>
-						<span class="price">$1694.43</span>
-						<span class="order"> <a class="text-center">ORDER</a></span>
+						<span class="price">${{(cart.price * 1).toFixed(2)}}</span>
+						<span class="order"> <a class="text-center" ng-click=checkOut()>ORDER</a></span>
 					</li>
 				</ul>
 			</div>
