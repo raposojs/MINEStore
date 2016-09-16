@@ -45,13 +45,13 @@ module.exports = db.define('order', {
 							})
 					})
 			},
-			updateCart: function (products, quantities) {
+			updateCart: function (products) {
 				var self = this;
 				self.price = 0;
 				var promiseUpdateProducts = products.map(function (product, index) {
-					self.price += +product.price * quantities[index]
+					self.price += +product.price * product.quantity
 					return OrderedProducts.update({
-						quantity: quantities[index]
+						quantity: product.quantity
 					}, {
 							where: {
 								productId: product.id,
@@ -68,19 +68,19 @@ module.exports = db.define('order', {
 						console.error(err)
 					});
 			},
-			checkOut: function (products, quantities) {
+			checkOut: function (products) {
 				var self = this;
 				self.isCart = false;
 				var cannotProcess = false;
 
 				return this.getProducts()
 					.then(function (products) {
-						console.log('=====PRODUCTS=====\n', products);
 						var promisedReducedStock = products.map(function (product, index) {
-							if (quantities[index] > product.stocks) {
+							if (product.quantity > product.stocks) {
 								cannotProcess = true;
 							}
-							return product.reduceStock(+quantities[index]) //INSTANCE METHOD TODO
+							console.log('PRODUCT QUANTITY', +product.quantity);
+							return product.reduceStock(+product.quantity) //INSTANCE METHOD TODO
 						})
 						if (cannotProcess) return;
 						promisedReducedStock.push(self.save());
@@ -92,19 +92,6 @@ module.exports = db.define('order', {
 								console.error(err)
 							});
 					})
-
-				// var promisedReducedStock = products.map(function (product, index) {
-				// 	if (quantities[index] > product.stocks) {
-				// 		cannotProcess = true;
-				// 	}
-				// 	return product.reduceStock(quantities[index]) //INSTANCE METHOD TODO
-				// })
-				// if (cannotProcess) return;
-				// return Promise.all(promisedReducedStock)
-				// 	.then(function (success) {
-				// 		console.log('Successfully Reduced Stock and Checked Out');
-				// 		return;
-				// 	}).catch(console.error(err));
 			}
 		},
 		classMethods: {
