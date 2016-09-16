@@ -4,11 +4,11 @@
     <h3 class="searchQuery">Search: </h3>
     <input class="searchQuery" ng-model="searchQuery">
     <h3 class="filter">Filter by:</h3>
-    <select>
-      <option>All</option>
+    <select class="filter" ng-model="option" ng-change="filter(option)"ng-options=" key for key in categories">
+<!--       <option>All</option>
       <option>Mineral</option>
       <option>Meteorite</option>
-      <option>Rock</option>
+      <option>Rock</option> -->
     </select>
         <h3 class="sort">Sort by:</h3>
     <select>
