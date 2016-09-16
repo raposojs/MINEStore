@@ -9,8 +9,8 @@ app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory, Catal
 		// $scope.rarity = $scope.products.rarity
 			
 	});
-	console.log($scope.all);
 	$scope.categories=["All", "Mineral", "Meteorite", "Rock"];
+	$scope.sortBy=['name', 'price', 'rarity', 'stocks'];
 	$scope.detail = function(product){
 		$state.go('singleproduct', {productID: product.id});
 	}
@@ -23,10 +23,6 @@ app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory, Catal
 		$scope.products=$scope.products.filter(function(product){
 			return product.category===cat;
 		})
-		// CatalogFactory.getAll()
-		// .then(function(products){
-		// 	$scope.products=products;
-		// })
 	}
 
 	$scope.addToCart= function(product){
@@ -37,3 +33,4 @@ app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory, Catal
 		}).catch(console.error.bind(console));
 	}
 })
+
