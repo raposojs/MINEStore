@@ -25,10 +25,10 @@
     
 
       <div class="thumbnail">
-        <img class="thumbnail-image" src="{{product.pictureURL}}" alt="">
+        <img class="thumbnail-image" src="{{product.pictureURL}}" alt="" ng-click=detail(product)>
         <div class="caption">
           <h4 class="pull-right">{{product.displayPrice}}</h4>
-          <h4><a href="#">{{product.name}}</a></h4>
+          <h4><a href="#" ng-click=detail(product)>{{product.name}}</a></h4>
           <!-- <p>{{product.snippet}}</p> -->
 
           <button class="btn btn-primary btn-lg" id="detailbtn" ng-click=detail(product)>Detail</button>
