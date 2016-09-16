@@ -5,22 +5,18 @@
     <input class="searchQuery" ng-model="searchQuery">
     <h3 class="filter">Filter by:</h3>
     <select class="filter" ng-model="option" ng-change="filter(option)"ng-options=" key for key in categories">
-<!--       <option>All</option>
-      <option>Mineral</option>
-      <option>Meteorite</option>
-      <option>Rock</option> -->
     </select>
         <h3 class="sort">Sort by:</h3>
-    <select>
-      <option>- Select Sort -</option>
+    <select ng-model="choice" ng-options=" key for key in sortBy">
+<!--       <option>- Select Sort -</option>
       <option>Price</option>
       <option>Meteorite</option>
-      <option>Rock</option>
+      <option>Rock</option> -->
     </select>
   </div>
 
 	<div class="row">
-		<div class="col-md-4" ng-repeat="product in products | filter:searchQuery">
+		<div class="col-md-4" ng-repeat="product in products | filter:searchQuery | orderBy:choice">
 
     
 
