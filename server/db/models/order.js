@@ -68,7 +68,7 @@ module.exports = db.define('order', {
 						console.error(err)
 					});
 			},
-			checkOut: function (products) {
+			checkOut: function (frontProducts) {
 				var self = this;
 				self.isCart = false;
 				var cannotProcess = false;
@@ -76,11 +76,11 @@ module.exports = db.define('order', {
 				return this.getProducts()
 					.then(function (products) {
 						var promisedReducedStock = products.map(function (product, index) {
-							if (product.quantity > product.stocks) {
+							if (frontProducts[index].quantity > product.stocks) {
 								cannotProcess = true;
 							}
-							console.log('PRODUCT QUANTITY', +product.quantity);
-							return product.reduceStock(+product.quantity) //INSTANCE METHOD TODO
+							console.log('PRODUCT QUANTITY', +frontProducts[index].quantity);
+							return product.reduceStock(+frontProducts[index].quantity) //INSTANCE METHOD TODO
 						})
 						if (cannotProcess) return;
 						promisedReducedStock.push(self.save());
