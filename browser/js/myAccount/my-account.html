@@ -1,1 +1,34 @@
-<img src="http://www.glotime.org/wp-content/uploads/2015/07/jaden-smith-this-is-the-album.jpg" style="border-radius: 10px; margin: 80px">
+<div class="myaccount">
+    <div id="tabs" ng-controller="TabsCtrl">
+        <ul>
+            <li ng-repeat="tab in tabs" 
+                ng-class="{active:isActiveTab(tab.url)}" 
+                ng-click="onClickTab(tab)">{{tab.title}}</li>
+        </ul>
+        <div id="mainView">
+            <div ng-include="currentTab"></div>
+        </div>
+    </div>
+    <script type="text/ng-template" id="one.tpl.html">
+    <div id="viewOne">
+      <h4>My Account</h4>
+      <ul>Username: </ul>
+      <ul>Email: </ul>
+      <ul>ETC: </ul>
+    </div>
+  </script>
+  
+  <script type="text/ng-template" id="two.tpl.html">
+    <div id="viewTwo">
+      <h4>View Two</h4>
+      <p>Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu.</p>
+    </div>
+  </script>
+  
+  <script type="text/ng-template" id="three.tpl.html">
+    <div id="viewThree">
+      <h4>View Three</h4>
+      <p>In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet egestas purus in blandit. Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu.</p>
+    </div>
+  </script>
+</div>

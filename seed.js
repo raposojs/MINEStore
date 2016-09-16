@@ -147,7 +147,7 @@ var seedOrders = function () {
         },
         {
             price: 40,
-            isCart: false,
+            isCart: true,
             sId: 'sdfaflwfavsadvdamffdsah'
         },
         {

@@ -39,7 +39,6 @@ module.exports = db.define('product', {
 }, {
 	getterMethods: {
 		snippet: function(){
-			console.log('THIS DESCRIPTION', this);
 			return this.description.slice(0, 50) + '...';
 		},
 		displayPrice: function(){
@@ -49,10 +48,10 @@ module.exports = db.define('product', {
 	},
 	instanceMethods:{
 		reduceStock: function(num){
-			console.log('NUM', num);
+			console.log('NUM', +num);
 			//if num > this.stocks -- short circuit
-			if(num > this.stocks) return;
-			this.stocks -= num;
+			if(+num > this.stocks) return;
+			this.stocks -= +num;
 			this.save()
 			.then(function(success){
 				console.log('success');
