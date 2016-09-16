@@ -49,9 +49,16 @@ module.exports = db.define('product', {
 	},
 	instanceMethods:{
 		reduceStock: function(num){
+			console.log('NUM', num);
 			//if num > this.stocks -- short circuit
 			if(num > this.stocks) return;
 			this.stocks -= num;
+			this.save()
+			.then(function(success){
+				console.log('success');
+			}).catch(function(err){
+				console.log(err);
+			})
 		}
 	}
 });

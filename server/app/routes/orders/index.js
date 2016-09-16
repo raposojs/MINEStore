@@ -134,6 +134,18 @@ router.delete('/', function (req, res, next) {
 		})
 })
 
+router.put('/checkout', function(req, res, next){
+	console.log('BODY: ', req.body);
+	req.cart.checkOut(req.body.products, req.body.quantities)
+		.then(function(){
+			console.log('successfully checked out');
+			res.sendStatus(204);
+		})
+		.catch(next);
+});
+
+
+
 
 router.put('/', function (req, res, next) {
 
@@ -148,5 +160,7 @@ router.put('/', function (req, res, next) {
 	// 	})
 	// 	.catch(next);
 });
+
+
 
 
