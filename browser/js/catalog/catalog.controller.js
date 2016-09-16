@@ -28,4 +28,12 @@ app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory, Catal
 		// 	$scope.products=products;
 		// })
 	}
+
+	$scope.addToCart= function(product){
+		CartFactory.addItemToCart(product.id, product.price)
+		.then(function(cart){
+			$state.go('cart')
+			return cart;
+		}).catch(console.error.bind(console));
+	}
 })

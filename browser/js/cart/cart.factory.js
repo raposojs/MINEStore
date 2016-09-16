@@ -19,8 +19,10 @@ app.factory('CartFactory', function ($http) {
         addItemToCart: function (itemId, price) {
             //TODO: find cart and add item to products and update price accordingly
             var product = {
-                id: itemId,
-                price: price
+                product: {
+                    id: itemId,
+                    price: price
+                }
             }
             return $http.post('/api/orders/add', product)
                 .then(function (cart) {
