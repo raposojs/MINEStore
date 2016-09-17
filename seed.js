@@ -51,7 +51,7 @@ var seedUsers = function () {
             address: 'FB street, Google ave, NY'
         },
         {
-            email: 'NoMorePromise',
+            email: 'NoMorePromise@promise.com',
             password: '.then',
             address: 'Bird st, Blue City'
         }
