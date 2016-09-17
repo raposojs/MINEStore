@@ -37,7 +37,8 @@
          ng-repeat="product in products | filter:searchQuery | orderBy:choice">
 
       <div class="thumbnail">
-        <img class="thumbnail-image" 
+
+        <img class="thumbnail-image havePointer" 
              src="{{product.pictureURL}}" 
              alt="" 
              ng-click=detail(product)>
