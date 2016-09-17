@@ -11,8 +11,8 @@ var OrderedProducts = require('./models/orderedProducts');
 
 // if we had more models, we could associate them in this file
 // e.g. User.hasMany(Reports)
-Product.belongsToMany(Order, {through: 'OrderedProduct'});
-Order.belongsToMany(Product, {through: 'OrderedProduct'});
+Product.belongsToMany(Order, {through: OrderedProducts});
+Order.belongsToMany(Product, {through: OrderedProducts});
 Review.belongsTo(Product);
 Review.belongsTo(User);
 Order.belongsTo(User);

@@ -10,16 +10,16 @@ router.use('/*', function (req, res, next) {
 	// req.user = {};
 	// req.user.id = 1;
 	if (req.user) {
-		Order.findOne({
+		Order.findOrCreate({
 			where: {
 				userId: req.user.id,
 				isCart: true
 			}
 		})
-			.then(function (order) {
-				if (!order) {
-					res.end();
-					return null;
+			.spread(function (order, created) {
+				if (created) {
+					req.cart = order;
+					next();
 				}
 				order.getProducts()
 					.then(function (productsArray) {
@@ -29,16 +29,16 @@ router.use('/*', function (req, res, next) {
 					}).catch(next);
 			}).catch(next);
 	} else {
-		Order.findOne({
+		Order.findOrCreate({
 			where: {
 				sId: req.session.id,
 				isCart: true
 			}
 		})
-			.then(function (order) {
-				if (!order) {
-					res.end();
-					return null;
+			.spread(function (order, created) {
+				if (created) {
+					req.cart = order;
+					next();
 				}
 				order.getProducts()
 					.then(function (productsArray) {
@@ -53,26 +53,26 @@ router.use('/*', function (req, res, next) {
 // router.get('/all', function(req, res ,next){
 // 	res.json({allCart: cart, allProducts: products});
 // })
-router.use('/*', function(req, res, next){
+router.use('/*', function (req, res, next) {
 	OrderedProduct.findAll({
 		where: {
 			orderId: req.cart.id,
 		}
 	})
-	.then(function(resArray){
-		// resArray.forEach(function(quantity, index){
-		// 	req.products[index].quantity = 5;
-		// }); 
-		//WHY DOESN'T THIS WORK?
-		req.quantities = resArray;
-		next();
-	}).catch(next);
+		.then(function (resArray) {
+			// resArray.forEach(function(quantity, index){
+			// 	req.products[index].quantity = 5;
+			// }); 
+			//WHY DOESN'T THIS WORK?
+			req.quantities = resArray;
+			next();
+		}).catch(next);
 })
 
 
 // GET => ORDER ID => 'orders/:id'
 router.get('/', function (req, res, next) {
-	res.json({ cart: req.cart, products: req.products, quantities: req.quantities});
+	res.json({ cart: req.cart, products: req.products, quantities: req.quantities });
 });
 
 
@@ -91,8 +91,8 @@ router.post('/', function (req, res, next) {
 
 router.post('/add', function (req, res, next) {
 	req.cart.addProductToCart(req.body.product.id, req.body.product.price)
-		.then(function(success){
-			res.sendStatus(204);
+		.then(function (success) {
+			res.end();
 		}).catch(next)
 });
 
@@ -118,9 +118,9 @@ router.delete('/', function (req, res, next) {
 		})
 })
 
-router.put('/checkout', function(req, res, next){
+router.put('/checkout', function (req, res, next) {
 	req.cart.checkOut(req.body.products)
-		.then(function(){
+		.then(function () {
 			console.log('successfully checked out');
 			res.sendStatus(204);
 		})
@@ -133,9 +133,9 @@ router.put('/checkout', function(req, res, next){
 router.put('/', function (req, res, next) {
 
 	req.cart.updateCart(req.body.products, req.body.quantities)
-	.then(function(updatedOrder){
-		res.sendStatus(204)
-	}).catch(next)
+		.then(function (updatedOrder) {
+			res.sendStatus(204)
+		}).catch(next)
 });
 
 
