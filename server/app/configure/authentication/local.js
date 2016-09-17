@@ -59,7 +59,7 @@ module.exports = function (app, db) {
                     .then(function (result) {
                         console.log(result);
                         if (!result) {
-                            Order.update({userId: user.id}, { where : { sId: req.session.id}})
+                            Order.update({userId: user.id, sId: null}, { where : { sId: req.session.id}})
                                 .then(function (cart) {
                                     req.cart = cart;
                                     return res.status(200).send({
