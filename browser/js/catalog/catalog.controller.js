@@ -10,7 +10,7 @@ app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory, Catal
 			
 	});
 	$scope.categories = ['All', 'Mineral', 'Meteorite', 'Rock'];
-	$scope.sortBy = ['Name', 'Price', 'Rarity', 'Stocks'];
+	$scope.sortBy = ['name', 'price', 'rarity', 'stocks'];
 	$scope.detail = function(product){
 		$state.go('singleproduct', {productID: product.id});
 	}

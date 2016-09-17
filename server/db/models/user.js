@@ -10,25 +10,7 @@ var Users = db.define('user', {
         type: Sequelize.STRING,
         unique: true,
         validate: {
-            isEmail: true,
-            // isUnique: function(done){
-            //     var self=this;
-            //     Users.findAll({
-            //         where: 
-            //         {
-            //             email: self.email
-            //         }
-            //     })
-            //     .done(function(err, repeat){
-            //         if (err){
-            //             done(err);
-            //         }
-            //         if (repeat){
-            //             done(new Error());
-            //         }
-            //         done();
-            //     })
-            // }
+            isEmail: true
         }
     },
     username: {
