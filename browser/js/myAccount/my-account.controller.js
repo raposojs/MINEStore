@@ -1,16 +1,16 @@
 app.controller('TabsCtrl', function($scope){
 	$scope.tabs = [{
 	        title: 'About You',
-	        url: 'one.tpl.html'
+	        url: 'aboutYou'
 	    }, {
 	        title: 'Past Orders',
-	        url: 'two.tpl.html'
+	        url: 'pastOrders'
 	    }, {
 	        title: 'Settings',
-	        url: 'three.tpl.html'
+	        url: 'settings'
 	}];
 
-	$scope.currentTab = 'one.tpl.html';
+	$scope.currentTab = 'aboutYou';
 
 	$scope.onClickTab = function (tab) {
 	    $scope.currentTab = tab.url;

@@ -4,14 +4,10 @@
     <h3 class="searchQuery">Search: </h3>
     <input class="searchQuery" ng-model="searchQuery">
     <h3 class="filter">Filter by:</h3>
-    <select class="filter" ng-model="option" ng-change="filter(option)"ng-options=" key for key in categories">
+    <select class="searchQuery" ng-model="option" ng-change="filter(option)" ng-options="key for key in categories">
     </select>
         <h3 class="sort">Sort by:</h3>
-    <select ng-model="choice" ng-options=" key for key in sortBy">
-<!--       <option>- Select Sort -</option>
-      <option>Price</option>
-      <option>Meteorite</option>
-      <option>Rock</option> -->
+    <select ng-model="choice" class="searchQuery" ng-options="key for key in sortBy">
     </select>
   </div>
 
@@ -25,25 +21,11 @@
         <div class="caption">
           <h4 class="pull-right">{{product.displayPrice}}</h4>
           <h4><a href="#" ng-click=detail(product)>{{product.name}}</a></h4>
-          <!-- <p>{{product.snippet}}</p> -->
 
           <button class="btn btn-primary btn-lg" id="detailbtn" ng-click=detail(product)>Detail</button>
           <button class="btn btn-primary btn-lg" id="minebtn" ng-click="addToCart(product)"> Mine It! ⚒ </button>
 
         </div>
-        <!-- <span class="modalWindow">
-          Location: {{product.location}}<br>
-          Rarity: 💎 {{product.rarity}}<br>    
-          <p>{{reviews.length}} Reviews: 
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-          </p>
-          <button class="btn btn-primary btn-xs">Detail</button>
-          
-        </span> -->
       </div>
     </div>
 	</div>
