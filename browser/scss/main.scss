@@ -209,7 +209,7 @@ h1 {
 
 .sort {
   display: inline;
-  margin-left: 197px; 
+  margin-left: 80px; 
 }
 
 // SELECT DROPDOWN
@@ -638,6 +638,15 @@ li {
     padding: 0;
     margin: 0;
 }
+
+.myaccount h2 {
+  padding-bottom: 10px;
+}
+
+.myaccount {
+  padding: 0px 50px;
+}
+
 .myaccount li {
     float: left;
     margin: 5px 40px 20px;
