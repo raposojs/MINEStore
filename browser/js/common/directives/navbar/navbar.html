@@ -1,17 +1,29 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <minestore-logo></minestore-logo>
+            <minestore-logo 
+            ui-sref="home"></minestore-logo>
         </div>
-        <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+        <ul 
+        class="nav navbar-nav">
+            <li 
+            ng-repeat="item in items" 
+            ng-show="!item.auth || isLoggedIn()">
+                <a 
+                ui-sref-active="active" 
+                ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
+        <button 
+        ng-show="!user" 
+        ui-sref="login" 
+        class="btn login-button">Login</button>
+        <div 
+        ng-show="user" 
+        class="welcome">
             <span>Welcome, {{ user.username }}!</span>
-            <a ng-click="logout()">Logout</a>
+            <a 
+            ng-click="logout()">Logout</a>
         </div>
     </div>
 </nav>

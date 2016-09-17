@@ -326,8 +326,12 @@ li {
   margin-left: 25px;
   height: 63px;
   width: 40px;
-  padding: 32px 0 0 14px !important;
+  padding: 22px 0 0 12px !important;
   float: right;
+}
+
+.popbtn a {
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -506,13 +510,6 @@ li {
   .quantity{  
     width: 23px;
     padding-right: 40px !important;
-  }
-
-  .popbtn{
-    background-color: white;
-    position: absolute;
-    height:40px;
-    right: 0;
   }
 
   .price{ 
