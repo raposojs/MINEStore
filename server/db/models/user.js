@@ -5,11 +5,30 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
-module.exports = db.define('user', {
+var Users = db.define('user', {
     email: {
         type: Sequelize.STRING,
+        unique: true,
         validate: {
-            isEmail: true
+            isEmail: true,
+            // isUnique: function(done){
+            //     var self=this;
+            //     Users.findAll({
+            //         where: 
+            //         {
+            //             email: self.email
+            //         }
+            //     })
+            //     .done(function(err, repeat){
+            //         if (err){
+            //             done(err);
+            //         }
+            //         if (repeat){
+            //             done(new Error());
+            //         }
+            //         done();
+            //     })
+            // }
         }
     },
     password: {
@@ -62,3 +81,5 @@ module.exports = db.define('user', {
         }
     }
 });
+
+module.exports=Users;
