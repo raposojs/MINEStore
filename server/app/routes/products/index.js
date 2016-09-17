@@ -5,6 +5,14 @@ var Product = require('../../../db/models/product.js');
 module.exports = router;
 
 
+var ensureAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.status(401).end();
+    }
+};
+
 router.get('/', function (req, res, next) {
 	Product.findAll()
 		.then(function (products) {
@@ -23,7 +31,7 @@ router.get('/:productID', function (req, res, next) {
 });
 
 
-router.post('/add', function (req, res, next) {
+router.post('/add', ensureAuthenticated, function (req, res, next) {
 	Product.create(req.body)
 		.then(function (createdProduct) {
 			console.log("product has been created");
@@ -34,7 +42,7 @@ router.post('/add', function (req, res, next) {
 });
 
 
-router.put('/:productID', function (req, res, next) {
+router.put('/:productID', ensureAuthenticated, function (req, res, next) {
     Product.update(req.body, { where: { id: req.params.productID } })
 		.then(function (updatedProduct) {
 			res.status(204).end();
@@ -43,7 +51,7 @@ router.put('/:productID', function (req, res, next) {
 });
 
 
-router.delete('/:productID', function (req, res, next) {
+router.delete('/:productID', ensureAuthenticated, function (req, res, next) {
     Product.destroy({
 		where: { id: req.params.productID }
 	})

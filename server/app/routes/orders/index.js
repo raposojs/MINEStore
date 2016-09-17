@@ -2,6 +2,14 @@ var router = require('express').Router();
 var Promise = require('bluebird');
 module.exports = router;
 
+var ensureAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.status(401).end();
+    }
+};
+
 var Order = require('../../../db/models/order.js')
 var OrderedProduct = require('../../../db/models/orderedProducts.js');
 

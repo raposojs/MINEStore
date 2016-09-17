@@ -2,6 +2,14 @@ var express = require("express");
 var router = express.Router();
 var Reviews = require("../../../db/models/reviews.js");
 
+var ensureAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.status(401).end();
+    }
+};
+
 router.get('/products/:id', function (request, response, next) {
 	var id = request.params.id;
 	Reviews.findAll({

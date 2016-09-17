@@ -28,7 +28,7 @@ router.param('id', function (req, res, next, id) {
 		.catch(next);
 });
 
-router.get('/', function (req, res, next) {
+router.get('/', ensureAuthenticated, function (req, res, next) {
 	User.findAll()
 		.then(function (users) {
 			res.json(users);
@@ -78,7 +78,7 @@ router.put('/:id', function (req, res, next) {
 		.catch(next);
 });
 
-router.delete('/:id', function (req, res, next) {
+router.delete('/:id', ensureAuthenticated, function (req, res, next) {
 	req.user.destroy()
 		.then(function () {
 			res.status(204).end();
