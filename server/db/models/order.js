@@ -8,8 +8,8 @@ var Promise = require('bluebird');
 
 module.exports = db.define('order', {
 	price: {
-		allowNull: false,
 		type: Sequelize.DECIMAL,
+		defaultValue: 0,
 		set: function (value) {
 			this.setDataValue('price', value);
 		}
@@ -37,12 +37,7 @@ module.exports = db.define('order', {
 							instance.quantity++;
 							promiseArray.push(instance.save());
 						}
-						Promise.all(promiseArray)
-							.then(function (response) {
-								return;
-							}).catch(function (err) {
-								console.error(err);
-							})
+						return Promise.all(promiseArray)
 					})
 			},
 			updateCart: function (products) {
