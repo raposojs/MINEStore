@@ -12,6 +12,9 @@ module.exports = db.define('user', {
             isEmail: true
         }
     },
+    username: {
+        type: Sequelize.STRING
+    },
     password: {
         type: Sequelize.STRING
     },
