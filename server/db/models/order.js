@@ -103,5 +103,20 @@ module.exports = db.define('order', {
 						return pastOrders;
 					}).catch(console.error(err));
 			}
-		}
+		},
+		// hooks: {
+		// 	beforeValidate: function(instance){
+		// 		this.findOne({
+		// 			where: {
+		// 				userId: instance.attributes.userId,
+		// 				isCart: true
+		// 			}
+		// 		})
+		// 		.then(function(result){
+		// 			if(result) {
+		// 				return sequelize.Promise.reject('Cart Exists');
+		// 			}
+		// 		})
+		// 	}
+		// }
 	})
