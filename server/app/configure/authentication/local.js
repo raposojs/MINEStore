@@ -5,15 +5,16 @@ var LocalStrategy = require('passport-local').Strategy;
 module.exports = function (app, db) {
 
     var User = db.model('user');
+    var Order = db.model('order');
 
     // When passport.authenticate('local') is used, this function will receive
     // the email and password to run the actual authentication logic.
     var strategyFn = function (email, password, done) {
         User.findOne({
-                where: {
-                    email: email
-                }
-            })
+            where: {
+                email: email
+            }
+        })
             .then(function (user) {
                 // user.correctPassword is a method from the User schema.
                 if (!user || !user.correctPassword(password)) {
@@ -26,7 +27,7 @@ module.exports = function (app, db) {
             .catch(done);
     };
 
-    passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password'}, strategyFn));
+    passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, strategyFn));
 
     // A POST /login route is created to handle login.
     app.post('/login', function (req, res, next) {
@@ -45,9 +46,33 @@ module.exports = function (app, db) {
             req.logIn(user, function (loginErr) {
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
-                res.status(200).send({
-                    user: user.sanitize()
-                });
+                var findIfUserHasCart = Order.findOne({ where: { userId: user.id } });
+                // var updateCart = Order.update({
+                //     userId: user.id,
+                // }, {
+                //         where: {
+                //             sId: req.session.id
+                //         }
+                //     });
+
+                findIfUserHasCart
+                    .then(function (result) {
+                        console.log(result);
+                        if (!result) {
+                            Order.update({userId: user.id, sId: null}, { where : { sId: req.session.id}})
+                                .then(function (cart) {
+                                    req.cart = cart;
+                                    return res.status(200).send({
+                                        user: user.sanitize()
+                                    });
+                                })
+                        }
+                        return res.status(200).send({
+                            user: user.sanitize()
+                        })
+                    })
+                    .catch(next);
+
             });
 
         };
