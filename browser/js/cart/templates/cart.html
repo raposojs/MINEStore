@@ -1,98 +1,102 @@
+<body>
+	
+	<div 
+	class="container text-center">
 
-
-<!--<div style="text-align: center" ng-show="cart">
-    <ul class="cart-items" ng-repeat="product in products" style="list-style-type:none">
-        <li>{{product.name}} -- {{(product.price * 1).toFixed(2)}}</li>
-        <button ng-click="deleteItemFromCart(product.id, product.price)">Remove From Cart</button>
-<!-- <div>
-    <ul class="cart-items" ng-repeat="product in products">
-        <li>{{name}} -- {{price}}</li>
-        <button ng-click="removeItemFromCart(product)">Remove From Cart</button>
-    </ul>
-    <h4 class="total-price">Total Cost: {{(cart.price * 1).toFixed(2)}}</h4>
-    <h4 class="total-tax">Tax: {{(cart.price * tax).toFixed(2)}}</h4>
-    <h4 class="total-final">Total Final: {{(cart.price * (1+tax)).toFixed(2)}}</h4>
-    <button ng-click="checkout()">Checkout</button>
-    <button ng-click="updateCart()">Update</button>
-</div>-->
-
-
-
-
-
-
-	<body>
-		
-		<div class="container text-center">
-
-			<div class="col-md-5 col-sm-12">
-				<h1>This is your shopping cart...</h1>
-				<p>
-					Feel free to remove and edit your order! If you want more amazing minerals, go back to our catalog by pressing <b><a ui-sref="catalog" title="back to catalog">HERE</a></b> or use the navigation bar above. It was a pleasure having you in our mine! Come back often!
-				</p>
-				<br></br>
-				<img style="border-radius:10px"src="https://media.giphy.com/media/zrre5UnzEom6k/giphy.gif" height="200"></img>
-			</div>
+		<div 
+		class="col-md-5 col-sm-12">
+			<h1>
+				This is your shopping cart...
+			</h1>
 			
-			<div class="col-md-7 col-sm-12 text-left">
-				<ul>
-					<li class="row list-inline columnCaptions">
-						<span>QTY</span>
-						<span>ITEM</span>
-						<span>Price</span>
-					</li>
-					<li class="row" ng-repeat="product in products">
-						<span class="quantity">{{product.quantity}}</span>
-						<span class="itemName">{{product.name}}</span>
-						<span class="popbtn"><a class="arrow" ng-click="deleteItemFromCart(product.id, product.price)"></a></span>
-						<span class="price">${{product.price}}</span>
-					</li>
-					<!--<li class="row">
-						<span class="quantity">50</span>
-						<span class="itemName">Party Cups</span>
-						<span class="popbtn"><a class="arrow"></a></span>
-						<span class="price">$5.00</span>
-					</li>
-					<li class="row">
-						<span class="quantity">20</span>
-						<span class="itemName">Beer kegs</span>
-						<span class="popbtn"><a class="arrow"></a></span>
-						<span class="price">$919.99</span>				
-					</li>
-					<li class="row">
-						<span class="quantity">18</span>
-						<span class="itemName">Pound of beef</span>
-						<span class="popbtn"><a class="arrow"></a></span>
-						<span class="price">$269.45</span>
-					</li>
-					<li class="row">
-						<span class="quantity">1</span>
-						<span class="itemName">Bullet-proof vest</span>
-						<span class="popbtn"  data-parent="#asd" data-toggle="collapse" data-target="#demo"><a class="arrow"></a></span>
-						<span class="price">$450.00</span>				
-					</li>-->
-					<li class="row totals">
-						<span class="itemName">Total:</span>
-						<span class="price">${{(cart.price * 1).toFixed(2)}}</span>
-						<span class="order"> <a class="text-center" ng-click=checkOut()>ORDER</a></span>
-					</li>
-				</ul>
-			</div>
+			<p>
+				Feel free to remove and edit your order! If you want more amazing minerals, go back to our catalog by pressing <b><a ui-sref="catalog" title="back to catalog">HERE</a></b> or use the navigation bar above. It was a pleasure having you in our mine! Come back often!
+			</p>
 
-		</div>
+			<br></br>
 
-		<!-- The popover content -->
+			<img 
+			style="border-radius:10px"
+			src="https://media.giphy.com/media/zrre5UnzEom6k/giphy.gif" 
+			height="200">
+			</img>
 
-		<div id="popover" style="display: none">
-			<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="#"><span class="glyphicon glyphicon-remove"></span></a>
 		</div>
 		
-		<!-- JavaScript includes -->
+		<div 
+		class="col-md-7 col-sm-12 text-left">
+			<ul>
+				<li 
+				class="row list-inline columnCaptions">
+					<span>QTY</span>
+					<span>ITEM</span>
+					<span>Price</span>
+				</li>
+				<li 
+				class="row" 
+				ng-repeat="product in products">
+					<span 
+					class="quantity">{{product.quantity}}</span>
+					<span 
+					class="itemName">{{product.name}}</span>
+					<span 
+					class="popbtn">
+						<a 
+						class="arrow" 
+						ng-click="deleteItemFromCart(product.id, product.price)">
+						</a>
+					</span>
+					<span 
+					class="price">${{product.price}}</span>
+				</li>
+				<li 
+				class="row totals">
+					<span 
+					class="itemName"
+					ng-hide="cart.price===0">Your cart is empty</span>
+					<span 
+					class="itemName"
+					ng-show="cart.price===0">Total: {{cart.price}}</span>
+					<span 
+					class="price"
+					ng-show="cart.price===0">${{(cart.price * 1).toFixed(2)}}</span>
+					<span 
+					class="order"
+					ng-show="cart.price===0"> 
+						<a 
+						class="text-center" 
+						ng-click=checkOut()>ORDER</a>
+					</span>
+				</li>
+			</ul>
+		</div>
 
-		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/customjs.js"></script>
+	</div>
 
-	</body>
+	<!-- The popover content -->
+
+	<div 
+	id="popover" 
+	style="display: none">
+		<a 
+		href="#">
+			<span 
+			class="glyphicon glyphicon-pencil">
+			</span>
+		</a>
+		<a 
+		href="#">
+			<span 
+			class="glyphicon glyphicon-remove">
+			</span>
+		</a>
+	</div>
+	
+	<!-- JavaScript includes -->
+<!-- 
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/customjs.js"></script> -->
+
+</body>
 
