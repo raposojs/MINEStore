@@ -15,11 +15,11 @@
 
 			<br></br>
 
-			<img 
+<!-- 			<img 
 			style="border-radius:10px"
 			src="https://media.giphy.com/media/zrre5UnzEom6k/giphy.gif" 
 			height="200">
-			</img>
+			</img> -->
 
 		</div>
 		
@@ -42,8 +42,8 @@
 					<span 
 					class="popbtn">
 						<a 
-						class="arrow" 
 						ng-click="deleteItemFromCart(product.id, product.price)">
+						❌
 						</a>
 					</span>
 					<span 
@@ -53,16 +53,16 @@
 				class="row totals">
 					<span 
 					class="itemName"
-					ng-hide="cart.price===0">Your cart is empty</span>
+					ng-show="cart.price===0">Your cart is empty</span>
 					<span 
 					class="itemName"
-					ng-show="cart.price===0">Total: {{cart.price}}</span>
+					ng-show="cart.price!==0">Total:</span>
 					<span 
 					class="price"
-					ng-show="cart.price===0">${{(cart.price * 1).toFixed(2)}}</span>
+					ng-show="cart.price!==0">${{(cart.price * 1).toFixed(2)}}</span>
 					<span 
 					class="order"
-					ng-show="cart.price===0"> 
+					ng-show="cart.price!==0"> 
 						<a 
 						class="text-center" 
 						ng-click=checkOut()>ORDER</a>
