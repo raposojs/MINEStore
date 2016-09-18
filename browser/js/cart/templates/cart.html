@@ -15,11 +15,10 @@
 
 			<br></br>
 
-<!-- 			<img 
-			style="border-radius:10px"
-			src="https://media.giphy.com/media/zrre5UnzEom6k/giphy.gif" 
+			<img 
+			src="/js/common/images/editcart.png" 
 			height="200">
-			</img> -->
+			</img>
 
 		</div>
 		
@@ -53,16 +52,16 @@
 				class="row totals">
 					<span 
 					class="itemName"
-					ng-show="cart.price===0">Your cart is empty</span>
+					ng-show="cart.price <= 0">Your cart is empty</span>
 					<span 
 					class="itemName"
-					ng-show="cart.price!==0">Total:</span>
+					ng-show="cart.price > 0">Total:</span>
 					<span 
 					class="price"
-					ng-show="cart.price!==0">${{(cart.price * 1).toFixed(2)}}</span>
+					ng-show="cart.price > 0">${{(cart.price * 1).toFixed(2)}}</span>
 					<span 
 					class="order"
-					ng-show="cart.price!==0"> 
+					ng-show="cart.price > 0"> 
 						<a 
 						class="text-center" 
 						ng-click=checkOut()>ORDER</a>
@@ -72,31 +71,6 @@
 		</div>
 
 	</div>
-
-	<!-- The popover content -->
-
-	<div 
-	id="popover" 
-	style="display: none">
-		<a 
-		href="#">
-			<span 
-			class="glyphicon glyphicon-pencil">
-			</span>
-		</a>
-		<a 
-		href="#">
-			<span 
-			class="glyphicon glyphicon-remove">
-			</span>
-		</a>
-	</div>
-	
-	<!-- JavaScript includes -->
-<!-- 
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/customjs.js"></script> -->
 
 </body>
 
