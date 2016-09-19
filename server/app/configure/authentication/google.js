@@ -16,6 +16,12 @@ module.exports = function (app, db) {
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
+        // var info = {
+        //     name: profile.displayName,
+        //     // google may not provide an email, if so we'll just fake it
+        //     email: profile.emails ? profile.emails[0].value : [profile.username , 'fake-auther-email.com'].join('@'),
+        //     photo: profile.photos ? profile.photos[0].value : undefined
+        // };
 
         User.findOne({
                 where: {
@@ -23,6 +29,8 @@ module.exports = function (app, db) {
                 }
             })
             .then(function (user) {
+                // console.log(user);
+                // console.log(req.session);
                 if (user) {
                     return user;
                 } else {
@@ -44,6 +52,7 @@ module.exports = function (app, db) {
     passport.use(new GoogleStrategy(googleCredentials, verifyCallback));
 
     app.get('/auth/google', passport.authenticate('google', {
+        // scope: 'email'
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
             'https://www.googleapis.com/auth/userinfo.email'
@@ -51,9 +60,9 @@ module.exports = function (app, db) {
     }));
 
     app.get('/auth/google/callback',
-        passport.authenticate('google', {failureRedirect: '/login'}),
-        function (req, res) {
-            res.redirect('/');
-        });
+        passport.authenticate('google', {
+            successRedirect: '/',
+            failureRedirect: '/login'}
+            ));
 
 };

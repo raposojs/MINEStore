@@ -3,16 +3,10 @@ var router = require('express').Router(); // eslint-disable-line new-cap
 var User = require('../../../db/').model('user');
 module.exports = router;
 var _ = require('lodash');
+var utilities = require("../authUtility.js");
 
-var ensureAuthenticated = function (req, res, next) {
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        res.status(401).end();
-    }
-};
 
-router.param('id', function (req, res, next, id) {
+router.param('id', utilities.ensureAuthenticated, function (req, res, next, id) {
     if (typeof +id !== 'number') return next();
 	console.log('ID is', id);
 	User.findById(id)
@@ -28,7 +22,7 @@ router.param('id', function (req, res, next, id) {
 		.catch(next);
 });
 
-router.get('/', function (req, res, next) {
+router.get('/', utilities.isAdministrator, function (req, res, next) {
 	User.findAll()
 		.then(function (users) {
 			res.json(users);
@@ -36,7 +30,7 @@ router.get('/', function (req, res, next) {
 		.catch(next);
 });
 
-router.get('/secret-stash', ensureAuthenticated, function (req, res) {
+router.get('/secret-stash', utilities.isAdministrator, function (req, res) {
 
     var theStash = [
         'http://ep.yimg.com/ay/candy-crate/bulk-candy-store-2.gif',
@@ -56,7 +50,7 @@ router.get('/secret-stash', ensureAuthenticated, function (req, res) {
 
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/:id', utilities.verifyUser, function (req, res, next) {
 	res.json(req.user);
 });
 
@@ -68,7 +62,7 @@ router.post('/', function (req, res, next) {
 		.catch(next);
 });
 
-router.put('/:id', function (req, res, next) {
+router.put('/:id', utilities.verifyUser, function (req, res, next) {
 	delete req.body.id;
 	_.extend(req.user, req.body);
 	req.user.save()
@@ -78,7 +72,7 @@ router.put('/:id', function (req, res, next) {
 		.catch(next);
 });
 
-router.delete('/:id', function (req, res, next) {
+router.delete('/:id', utilities.isAdministrator, function (req, res, next) {
 	req.user.destroy()
 		.then(function () {
 			res.status(204).end();

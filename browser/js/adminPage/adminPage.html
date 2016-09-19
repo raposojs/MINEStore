@@ -14,7 +14,7 @@
 <script type="text/ng-template" id="addProduct">
     <legend>Add New Product to Catalog</legend>
 <!--<form id="newProduct" ng-submit="createUser()">-->
-<form name="newProduct" ng-controller="AdminCtrl">
+<form name="newProduct">
     <div class="form-group">
         <label class="control-label">Product Name</label>
         <input 
@@ -29,7 +29,7 @@
     <div class="form-group">
     <label>Category - </label>
     	<select style="margin-left:3px" ng-model="product.category">
-    		<option>>> Pick a category</option>
+    		<option> Pick a category</option>
     		<option>Rock</option>
     		<option>Mineral</option>
     		<option>Meteorite</option>
@@ -121,10 +121,48 @@
 <script type="text/ng-template" id="editUsers">
         <legend>Edit Users</legend>
 
+            <div class="form-group">
+              <form ng-submit="findUser()">
+
+                Find user by username:
+
+                <input 
+                type="text" 
+                ng-model="text" 
+                name="text" />
+
+                <input 
+                type="submit" 
+                id="submit" 
+                value="Find User" />
+
+                <!-- if user is found -->
+                <pre 
+                ng-show="selectedUser">
+
+                  <ul>ID: {{selectedUser.id}}</ul>
+                  <ul>Email: {{selectedUser.email}}</ul>
+                  <ul>Username: {{selectedUser.username}}</ul>
+                  <ul>Admin: <input type="checkbox"></input></ul>
+
+                </pre>
+
+                <!-- if user isn't found -->
+                <pre ng-show="error">{{error}}</pre>
+
+                </form>
+            </div>
+
+
+
         <button 
         type="submit" 
         class="btn btn-success" 
-        ng-click="getUsers()">Add to Catalog</button>
+        ng-click=saveInDb()>Save</button>
+
+
+
+
 </script>
 
 
