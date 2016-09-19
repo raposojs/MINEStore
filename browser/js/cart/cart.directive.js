@@ -23,7 +23,7 @@ app.directive('cart', function (CartFactory, $state) {
                 CartFactory.checkOut(scope.products)
                 .then(function(cart){
                     console.log('The Updated Cart is: \n', cart);
-                    $state.go('home');
+                    $state.go('checkout');
                     return cart;
                 }).catch(console.error.bind(console));
             }
