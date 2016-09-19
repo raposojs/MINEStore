@@ -17,28 +17,24 @@
   </script>
 
   <script type="text/ng-template" id="pastOrders">
-    <div id="viewTwo">
-      <h2>Past Orders</h2>
-      <p>Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu.</p>
-      <div class="col-md-7 col-sm-12 text-left">
-        <ul>
-          <li 
-          class="row list-inline columnCaptions">
-            <span>ORDER NUMBER</span>
-            <span>TOTAL PRICE</span>
-          </li>
-          <li 
-          class="row" 
-          ng-repeat="order in pastOrders">
-          <a ng-click="getCartById(order.id)">
-            <span 
-            class="orderNumber">{{order.id}}</span>
-            <span 
-            class="totalPrice">{{order.price}}</span>
-          </a>
-          </li>
-        </ul>
-      </div>
+    <div style="text-align:center; display:inline-block; margin: 0 10%;">
+      <table class="pure-table pure-table-horizontal">
+          <thead>
+              <tr>
+                  <th>Order ID #</th>
+                  <th>Date</th>
+                  <th>Total</th>
+              </tr>
+          </thead>
+
+          <tbody>
+              <tr ng-repeat="order in pastOrders">
+                  <td>{{order.id}}</td>
+                  <td>{{order.createdAt.slice(0,10)}}</td>
+                  <td>${{order.price}}</td>
+              </tr>
+          </tbody>
+      </table>
     </div>
   </script>
 
