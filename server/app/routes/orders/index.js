@@ -90,7 +90,7 @@ router.post('/', function (req, res, next) {
 })
 
 router.post('/add', function (req, res, next) {
-	req.cart.addProductToCart(req.body.product.id, req.body.product.price)
+	req.cart.addProductToCart(req.body.product.id, req.body.product)
 		.then(function (success) {
 			res.end();
 		}).catch(next)
@@ -98,14 +98,10 @@ router.post('/add', function (req, res, next) {
 
 router.post('/remove', function (req, res, next) {
 	//Request Body needs Product Id, Product Price, Quantity
-	req.cart.removeProduct(req.body.product.id)
-		.then(function (newOrder) {
-			req.cart.price = req.cart.price - (req.body.product.price * req.body.product.quantity);
-			req.cart.save()
-				.then(function (updatedOrder) {
-					res.json(updatedOrder);
-				})
-		}).catch(next);
+	req.cart.removeProductFromCart(req.body.product.id)
+		.then(function(){
+			console.log('removed successfully');
+		})
 })
 
 // DELETE => ORDER ID => 'orders/:id'
@@ -119,7 +115,7 @@ router.delete('/', function (req, res, next) {
 })
 
 router.put('/checkout', function (req, res, next) {
-	req.cart.checkOut(req.body.products)
+	req.cart.checkOut(req.body.cart)
 		.then(function () {
 			console.log('successfully checked out');
 			res.sendStatus(204);
