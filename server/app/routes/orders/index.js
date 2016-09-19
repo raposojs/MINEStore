@@ -147,7 +147,7 @@ router.delete('/', function (req, res, next) {
 })
 
 router.put('/checkout', function (req, res, next) {
-	req.cart.checkOut(req.body.products)
+	req.cart.checkOut(req.body.products, req.body.shipping)
 		.then(function () {
 			console.log('successfully checked out');
 			res.sendStatus(204);

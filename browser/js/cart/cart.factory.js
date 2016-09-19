@@ -53,9 +53,10 @@ app.factory('CartFactory', function ($http) {
                     return cart;
                 }).catch(console.error.bind(console));
         },
-        checkOut: function (products) {
+        checkOut: function (products, shipping) {
             var payload = {
                 products: products,
+                shipping: shipping,
             }
             return $http.put('/api/orders/checkout', payload)
                 .then(function (cart) {
