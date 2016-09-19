@@ -122,7 +122,7 @@ var seedProducts = function (userList) {
         {
             name: '101955 Bennu',
             category: 'Meteorite',
-            pictureURL: 'https://en.wikipedia.org/wiki/Meteorite#/media/File:NWA869Meteorite.jpg',
+            pictureURL: 'http://3.bp.blogspot.com/-4vTApLrr-50/VIS_DKIghSI/AAAAAAAAAG4/Rq8oGW68Xrg/s1600/479602main_eros_946-710.jpg',
             price: 1999.99,
             description: 'In 1986–87, a German team installing a network of seismic stations while prospecting for oil discovered about 65 meteorites on a flat, desert plain about 100 kilometres (62 mi) southeast of Dirj (Daraj), Libya. A few years later, a desert enthusiast saw photographs of meteorites being recovered by scientists in Antarctica, and thought that he had seen similar occurrences in northern Africa. In 1989, he recovered about 100 meteorites from several distinct locations in Libya and Algeria. Over the next several years, he and others who followed found at least 400 more meteorites. The find locations were generally in regions known as regs or hamadas: flat, featureless areas covered only by small pebbles and minor amounts of sand. Dark-colored meteorites can be easily spotted in these places. In the case of several meteorite fields, such as Dar el Gani, Dhofar, and others, favorable light-colored geology consisting of basic rocks (clays, dolomites, and limestones) makes meteorites particularly easy to identify.',
             rarity: 10,
