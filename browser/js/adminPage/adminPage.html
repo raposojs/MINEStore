@@ -1,23 +1,20 @@
-
 <!-- <div class="container"> -->
 
-    <div class="myaccount" id="login-form">
-        <div id="tabs">
-            <ul>
-                <li ng-repeat="tab in tabs" 
-                    ng-class="{active:isActiveTab(tab.url)}" 
-                    ng-click="onClickTab(tab)"
-                    class="havePointer">{{tab.title}}</li>
-            </ul>
-            <div id="mainView">
-                <div ng-include="currentTab"></div>
-            </div>
+<div class="myaccount" id="login-form">
+    <div id="tabs">
+        <ul>
+            <li ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="onClickTab(tab)" class="havePointer">{{tab.title}}</li>
+        </ul>
+        <div id="mainView">
+            <div ng-include="currentTab"></div>
         </div>
     </div>
+</div>
 
 <script type="text/ng-template" id="addProduct">
     <legend>Add New Product to Catalog</legend>
-<form name="newProduct" ng-submit="createUser()">
+<!--<form id="newProduct" ng-submit="createUser()">-->
+<form name="newProduct" ng-controller="AdminCtrl">
     <div class="form-group">
         <label class="control-label">Product Name</label>
         <input 
@@ -31,7 +28,7 @@
 
     <div class="form-group">
     <label>Category - </label>
-    	<select style="margin-left:3px">
+    	<select style="margin-left:3px" ng-model="product.category">
     		<option>>> Pick a category</option>
     		<option>Rock</option>
     		<option>Mineral</option>
@@ -77,7 +74,7 @@
 
     <div class="form-group">
     <label>Rarity 💎 - </label>
-    	<select style="margin-left:3px; padding-left:5px;">
+    	<select style="margin-left:3px; padding-left:5px;" ng-model="product.rarity">
     		<option>?</option>
     		<option>1</option>
     		<option>2</option>
@@ -115,19 +112,21 @@
        required>
    </div>
 
-    <button 
-    type="submit" 
-    class="btn btn-success" 
-    ng-disabled="registerForm.$invalid">Add to Catalog</button>
 
-    </script>
+    <button type="submit" class="btn btn-success"  ng-disabled="registerForm.$invalid"  ng-click="createProduct()">Add to Catalog</button>
+</form>
+</script>
 
-    <script type="text/ng-template" id="editUsers">
+
+<script type="text/ng-template" id="editUsers">
         <legend>Edit Users</legend>
 
         <button 
         type="submit" 
         class="btn btn-success" 
         ng-click="getUsers()">Add to Catalog</button>
+</script>
 
-    </script>
+
+
+</script>

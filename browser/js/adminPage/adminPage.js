@@ -17,3 +17,29 @@ app.config(function ($stateProvider) {
     });
 
 });
+
+
+// app.controller('AdminController', function($scope, SingleProductFactory, $state){
+//     $scope.checkScope = function(){
+//         console.dir($scope);
+//     };
+
+//     $scope.createProduct = function(){
+//         var productObj = {
+//             name: $scope.product.name,
+//             category: $scope.product.category,
+//             pictureUrl: $scope.product.pictureURL,
+//             price: +$scope.product.price,
+//             description: $scope.product.description,
+//             rarity: +$scope.product.rarity,
+//             location: $scope.product.location,
+//             stocks: +$scope.product.quantity
+//         }
+
+//         SingleProductFactory.createProduct(productObj)
+//         .then(function(productCreated){
+//             $state.go('catalog');
+//         })
+//         .catch(console.error.bind(console));
+//     }
+// })

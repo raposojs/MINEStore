@@ -24,6 +24,7 @@ router.get('/:productID', function (req, res, next) {
 
 
 router.post('/add', function (req, res, next) {
+	console.log('req.body', req.body)
 	Product.create(req.body)
 		.then(function (createdProduct) {
 			console.log("product has been created");
