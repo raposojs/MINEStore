@@ -1,4 +1,35 @@
 <section id="home">
-    <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting>
+    <section id="about">
+    <carousel interval="6000">
+    <h1 
+    class="overPic"
+    class="regularMouse">MINE</h1>
+        <slide ng-repeat="image in images">
+            <img height="300" ng-src="{{ image }}" />
+        </slide>
+    </carousel>
+    <!-- <div class="overPic"> -->
+		<!-- <h1><h1><b>M</b>inerals <b>I</b> <b>N</b>ever <b>E</b>ncounter</h1></h1> -->
+		
+	<!-- </div> -->
+    <div 
+    class="homeThumbs">
+
+    <img 
+    ui-sref="about" 
+    src="/js/common/images/aboutus.png" 
+    class="havePointer">
+
+    <img 
+    ui-sref="catalog" 
+    src="/js/common/images/catalog.png" 
+    class="havePointer">
+
+    <img 
+    ui-sref="cart" 
+    src="/js/common/images/yourcart.png" 
+    class="havePointer">
+
+    </div>
+</section>
 </section>

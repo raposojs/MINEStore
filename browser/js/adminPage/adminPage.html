@@ -1,0 +1,133 @@
+
+<!-- <div class="container"> -->
+
+    <div class="myaccount" id="login-form">
+        <div id="tabs">
+            <ul>
+                <li ng-repeat="tab in tabs" 
+                    ng-class="{active:isActiveTab(tab.url)}" 
+                    ng-click="onClickTab(tab)"
+                    class="havePointer">{{tab.title}}</li>
+            </ul>
+            <div id="mainView">
+                <div ng-include="currentTab"></div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/ng-template" id="addProduct">
+    <legend>Add New Product to Catalog</legend>
+<form name="newProduct" ng-submit="createUser()">
+    <div class="form-group">
+        <label class="control-label">Product Name</label>
+        <input 
+        type="text" 
+        ng-model="product.name" 
+        name="nameField" 
+        class="form-control" 
+        placeholder="Insert product name" 
+        required>
+    </div>
+
+    <div class="form-group">
+    <label>Category - </label>
+    	<select style="margin-left:3px">
+    		<option>>> Pick a category</option>
+    		<option>Rock</option>
+    		<option>Mineral</option>
+    		<option>Meteorite</option>
+    	</select>
+    </div>
+
+    <div class="form-group">
+        <label 
+        class="control-label">Picture URL</label>
+        <input 
+        type="text" 
+        ng-model="product.pictureURL" 
+        name="pictureUrlField" 
+        class="form-control" 
+        placeholder="Insert picture URL" 
+        required>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Price - </label>
+        <input 
+        style="margin-left:3px; width:80px;" 
+        type="text" 
+        ng-model="product.price" 
+        name="priceField" 
+        class="" 
+        placeholder="$" 
+        required>
+    </div>
+
+    <div class="form-group">
+        <label 
+        class="control-label">Description</label>
+        <textarea 
+        type="text" 
+        class="form-control" 
+        ng-model="product.description" 
+        name="descriptionField" 
+        placeholder="What should clients know about this product?" 
+        required /></textarea>
+    </div>
+
+    <div class="form-group">
+    <label>Rarity 💎 - </label>
+    	<select style="margin-left:3px; padding-left:5px;">
+    		<option>?</option>
+    		<option>1</option>
+    		<option>2</option>
+    		<option>3</option>
+    		<option>4</option>
+    		<option>5</option>
+    		<option>6</option>
+    		<option>7</option>
+    		<option>8</option>
+    		<option>9</option>
+    		<option>10</option>
+    	</select>
+    </div>
+
+   <div class="form-group">
+       <label class="control-label">Location</label>
+       <textarea 
+       type="text" 
+       class="form-control" 
+       ng-model="product.location" 
+       name="locationField" 
+       placeholder="Where was the item found?" 
+       required /></textarea>
+   </div>
+
+   <div class="form-group">
+       <label class="control-label">Quantity - </label>
+       <input 
+       style="margin-left:3px; width:80px;" 
+       type="text" 
+       ng-model="product.quantity" 
+       name="quantityField" 
+       class="" 
+       placeholder="How many?" 
+       required>
+   </div>
+
+    <button 
+    type="submit" 
+    class="btn btn-success" 
+    ng-disabled="registerForm.$invalid">Add to Catalog</button>
+
+    </script>
+
+    <script type="text/ng-template" id="editUsers">
+        <legend>Edit Users</legend>
+
+        <button 
+        type="submit" 
+        class="btn btn-success" 
+        ng-click="getUsers()">Add to Catalog</button>
+
+    </script>

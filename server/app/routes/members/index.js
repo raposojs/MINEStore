@@ -1,5 +1,6 @@
 'use strict';
 var router = require('express').Router(); // eslint-disable-line new-cap
+var User = require('../../../db/').model('user');
 module.exports = router;
 var _ = require('lodash');
 
@@ -10,6 +11,30 @@ var ensureAuthenticated = function (req, res, next) {
         res.status(401).end();
     }
 };
+
+router.param('id', function (req, res, next, id) {
+    if (typeof +id !== 'number') return next();
+	console.log('ID is', id);
+	User.findById(id)
+		.then(function (user) {
+			if (user) {
+				req.user = user;
+				next();
+				return null; // silence Bluebird warning re: non-returned promise in next
+			} else {
+				throw new Error(404);
+			}
+		})
+		.catch(next);
+});
+
+router.get('/', function (req, res, next) {
+	User.findAll()
+		.then(function (users) {
+			res.json(users);
+		})
+		.catch(next);
+});
 
 router.get('/secret-stash', ensureAuthenticated, function (req, res) {
 
@@ -30,3 +55,35 @@ router.get('/secret-stash', ensureAuthenticated, function (req, res) {
     res.send(_.shuffle(theStash));
 
 });
+
+router.get('/:id', function (req, res, next) {
+	res.json(req.user);
+});
+
+router.post('/', function (req, res, next) {
+	User.create(req.body)
+		.then(function (user) {
+			res.status(201).json(user);
+		})
+		.catch(next);
+});
+
+router.put('/:id', function (req, res, next) {
+	delete req.body.id;
+	_.extend(req.user, req.body);
+	req.user.save()
+		.then(function (updatedUser) {
+			res.json(updatedUser);
+		})
+		.catch(next);
+});
+
+router.delete('/:id', function (req, res, next) {
+	req.user.destroy()
+		.then(function () {
+			res.status(204).end();
+		})
+		.catch(next);
+});
+
+

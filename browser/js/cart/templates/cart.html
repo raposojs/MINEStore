@@ -1,0 +1,76 @@
+<body>
+	
+	<div 
+	class="container text-center">
+
+		<div 
+		class="col-md-5 col-sm-12">
+			<h1>
+				This is your shopping cart...
+			</h1>
+			
+			<p>
+				Feel free to remove and edit your order! If you want more amazing minerals, go back to our catalog by pressing <b><a ui-sref="catalog" title="back to catalog">HERE</a></b> or use the navigation bar above. It was a pleasure having you in our mine! Come back often!
+			</p>
+
+			<br></br>
+
+			<img 
+			src="/js/common/images/editcart.png" 
+			height="200">
+			</img>
+
+		</div>
+		
+		<div 
+		class="col-md-7 col-sm-12 text-left">
+			<ul>
+				<li 
+				class="row list-inline columnCaptions">
+					<span>QTY</span>
+					<span>ITEM</span>
+					<span>Price</span>
+				</li>
+				<li 
+				class="row" 
+				ng-repeat="product in products">
+					<span 
+					class="quantity">{{product.quantity}}</span>
+					<span 
+					class="itemName">{{product.name}}</span>
+					<span 
+					class="popbtn">
+						<a 
+						ng-click="deleteItemFromCart(product.id, product.price)">
+						❌
+						</a>
+					</span>
+					<span 
+					class="price">${{product.price}}</span>
+				</li>
+				<li 
+				class="row totals">
+					<span 
+					class="itemName"
+					ng-show="cart.price <= 0">Your cart is empty</span>
+					<span 
+					class="itemName"
+					ng-show="cart.price > 0">Total:</span>
+					<span 
+					class="price"
+					ng-show="cart.price > 0">${{(cart.price * 1).toFixed(2)}}</span>
+					<span 
+					class="order"
+					ng-show="cart.price > 0"> 
+						<a 
+						class="text-center" 
+						ng-click=checkOut()>ORDER</a>
+					</span>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+</body>
+

@@ -1,0 +1,59 @@
+<div class="container">
+
+  <div>
+    
+    <h3 class="searchQuery">
+      Search: 
+    </h3>
+    
+    <input class="searchQuery"
+           ng-model="searchQuery">
+
+    <h3 class="filter">
+      Filter by:
+      </h3>
+    
+    <select class="searchQuery"
+            ng-model="option"
+            ng-init="option = categories[0]"
+            ng-change="filter(option)" 
+            ng-options="key for key in categories">
+    </select>
+
+    <h3 class="sort">
+      Sort by:
+    </h3>
+
+    <select class="searchQuery"
+            ng-model="choice" 
+            ng-init="choice = sortBy[0]"
+            ng-options="key for key in sortBy">
+    </select>
+  
+  </div>
+
+	<div class="row">
+		<div class="col-md-4" 
+         ng-repeat="product in products | filter:searchQuery | orderBy:choice">
+
+      <div class="thumbnail">
+
+        <img class="thumbnail-image havePointer" 
+             src="{{product.pictureURL}}" 
+             alt="" 
+             ng-click=detail(product)>
+
+        <div class="caption">
+          <h4 class="pull-right">{{product.displayPrice}}</h4>
+          <h4><a href="#" ng-click=detail(product)>{{product.name}}</a></h4>
+
+          <button class="btn btn-primary btn-lg" id="detailbtn" ng-click=detail(product)>Detail</button>
+          <button class="btn btn-primary btn-lg" id="minebtn" ng-click="addToCart(product)"> Mine It! ⚒ </button>
+
+        </div>
+      </div>
+    </div>
+	</div>
+</div>
+
+

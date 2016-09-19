@@ -1,0 +1,163 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+	<h1 class="product-name">{{product.name}}</h1>
+	<h4><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> 16 reviews</h4>
+	<h5>{{product.category}} 💎 💎 💎 💎</h5>
+	<h2>{{product.displayPrice}}</h2>
+
+	<hr class="product-hr">
+
+	<div class="row">
+		<div class="col-md-5 image">
+			<img class="product-img" src="{{product.pictureURL}}">
+		</div>
+
+		<div class="col-md-7 product-body">
+			
+			<p class="product-article">{{product.description}}</p>
+			<hr>
+			<h3 class="stock-status" ng-show="product.stocks >= 1">In Stock</h3>
+			<p>{{product.stocks}} stocks left</p>
+			<button class="btn btn-success" ng-click="addToCart(product)">Mine It ⚒</button>
+			<button class="btn btn-primary">Add to my Wishlist</button>
+			<button class="btn btn-info" ng-click="openReviewCreate()">Write a review</button>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#service-three" data-toggle="tab">REVIEWS</a></li>
+		</ul>
+
+		<li ng-repeat="n in [].constructor(maxRating) track by $index">
+			{{n}}
+		</li>
+		
+		<div class="reviews">
+			<br>
+			<form name="reviewForm" ng-if="isWritingAReview" ng-submit="createAReview(reviewContent, ratedBy)" novalidate>
+				<ul class="rating">
+            <li ng-repeat="n in [].constructor(maxRating) track by $index">
+                <span ng-mouseover="rateBy($index+1)" ng-show="ratedBy > $index" class="filled">&#9733;</span>
+                <span ng-mouseover="rateBy($index+1)" ng-show="ratedBy <= $index">&#9733;</span>
+            </li>
+        </ul>
+
+
+				<!-- how do we get stars from clicking on the stars -->
+				<label for="reviewText">Text</label>
+				<textarea class="form-control review-text" name="reviewText" ng-model="reviewContent"></textarea>
+				<button class="btn btn-primary">Submit</button>
+			</form>
+			<hr ng-show="isWritingAReview">
+			<h4 ng-show="reviews.length">Avg: {{avgReviews}} ({{reviews.length}} reviews)</h4>
+
+			<!-- ng-repeat="review in reviews" -->
+			<div class="product-rating" ng-repeat="review in reviews">
+				<div class="container">
+					<div class="row review-row">
+						<div class="col-md-2">
+								<img src="http://placekitten.com/g/130/100"/>
+						</div>
+						<div class="col-md-10">
+							<ul class="rating" >
+			            <li ng-repeat="n in [].constructor(maxRating) track by $index">
+			                <span class="filled" ng-show="$index <= review.stars">&#9733;</span>
+			                <span ng-show="$index > review.stars">&#9733;</span>
+			            </li>
+			        </ul>
+							<p>{{review.reviewContent}}</p>
+							<p>Last updated: {{review.updatedAt}}</p>
+							<button class="btn btn-sm btn-success" ng-click="editReview(review)">Edit</button>
+							<button class="btn btn-sm btn-warning" ng-click="deleteReview(review)">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- ng-repeat ends -->
+
+		</div>
+	</div>
+</div>
+
+
+
+<style>
+.product-name {
+	font-size: 7vh;
+}
+
+.product-img {
+	width: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	box-shadow: 10px 14px 92px -12px rgba(0,0,0,0.75);
+	border-radius: 2px;
+}
+
+hr.product-hr {
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	margin-bottom: 5vh;
+}
+
+i.gold {
+	color: #FFBF00;
+}
+
+.product-article {
+	border-left: solid 10px rgba(0, 0, 0, 0.2);
+	padding-left: 3vh;
+}
+
+.product-body {
+	margin-bottom: 3vh;
+}
+
+.review-row {
+	margin-top: 2vh;
+}
+
+.review-row img {
+	box-shadow: 10px 14px 92px -12px rgba(0,0,0,0.75);
+}
+
+hr.review-hr {
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.review-rating {
+	margin-top: 0;
+}
+
+
+.stock-status {
+	color: #449D44;
+}
+
+
+
+
+/* review stars ratings */
+.rating {
+            color: #a9a9a9;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.rating {
+            display: inline-block;
+        }
+
+        .rating li {
+            list-style-type: none;
+            display: inline-block;
+            padding: 1px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .rating .filled {
+            color: #FFBF00;
+        }
+</style>

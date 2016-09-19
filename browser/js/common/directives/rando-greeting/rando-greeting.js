@@ -1,11 +1,8 @@
-app.directive('randoGreeting', function (RandomGreetings) {
+app.directive('randoGreeting', function () {
 
     return {
         restrict: 'E',
         templateUrl: 'js/common/directives/rando-greeting/rando-greeting.html',
-        link: function (scope) {
-            scope.greeting = RandomGreetings.getRandomGreeting();
-        }
     };
 
 });

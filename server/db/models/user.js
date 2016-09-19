@@ -5,8 +5,15 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
-module.exports = db.define('user', {
+var Users = db.define('user', {
     email: {
+        type: Sequelize.STRING,
+        unique: true,
+        validate: {
+            isEmail: true
+        }
+    },
+    username: {
         type: Sequelize.STRING
     },
     password: {
@@ -59,3 +66,5 @@ module.exports = db.define('user', {
         }
     }
 });
+
+module.exports=Users;
