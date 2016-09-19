@@ -1,4 +1,4 @@
-app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct, CartFactory) {
+app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct, CartFactory, SingleProductFactory) {
 	$scope.product = theProduct;
 	$scope.isWritingAReview = false;
 	$scope.isEditingAReview = false;

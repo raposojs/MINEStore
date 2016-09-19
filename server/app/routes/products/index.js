@@ -24,6 +24,7 @@ router.get('/:productID', function (req, res, next) {
 });
 
 
+
 router.post('/add', utilities.isAdministrator, function (req, res, next) {
 	Product.create(req.body)
 		.then(function (createdProduct) {
