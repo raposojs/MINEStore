@@ -5,7 +5,7 @@
 <!--     <alert type="danger" ng-show="error">
         {{ error }}
     </alert> -->
-
+    <button ng-click="checkScope()">FOR CHECKING SCOPE</button>
     <legend class="">Add New Product to Catalog</legend>
 
     <div class="form-group">
@@ -15,7 +15,7 @@
 
     <div class="form-group">
     <label>Category - </label>
-    	<select style="margin-left:3px">
+    	<select style="margin-left:3px" ng-model="product.category">
     		<option>>> Pick a category</option>
     		<option>Rock</option>
     		<option>Mineral</option>
@@ -40,7 +40,7 @@
 
     <div class="form-group">
     <label>Rarity 💎 - </label>
-    	<select style="margin-left:3px; padding-left:5px;">
+    	<select style="margin-left:3px; padding-left:5px;" ng-model="product.rarity">
     		<option>?</option>
     		<option>1</option>
     		<option>2</option>
@@ -65,7 +65,7 @@
        <input style="margin-left:3px; width:80px;" type="text" ng-model="product.quantity" name="quantityField" class="" placeholder="How many?" required>
    </div>
 
-    <button type="submit" class="btn btn-success" ng-disabled="registerForm.$invalid">Add to Catalog</button>
+    <button type="submit" class="btn btn-success" ng-disabled="registerForm.$invalid" ng-click="createProduct()">Add to Catalog</button>
 </form>
 </div>
 
