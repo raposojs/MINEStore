@@ -160,6 +160,34 @@
         class="btn btn-success" 
         ng-click=saveInDb()>Save</button>
 
+</script>
+
+
+<!-- ORDERS -->
+<script type="text/ng-template" id="adminOrders">
+  <legend>Order Info</legend>
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>price</th>
+        <th>address</th>
+        <th>status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="order in orders.data">
+        <td>{{order.id}}</td>
+        <td>{{order.price}}</td>
+        <td>{{order.address}}</td>
+        <td>{{order.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</script>
+
+
 
 
 
@@ -167,4 +195,14 @@
 
 
 
-</script>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,10 +1,13 @@
-app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users) {
+app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, orders) {
 	$scope.tabs = [{
 		title: 'Add Product',
 		url: 'addProduct'
 	}, {
 			title: 'Edit Users',
 			url: 'editUsers'
+		}, {
+			title: 'Order Info',
+			url: 'adminOrders'
 		}];
 
 	$scope.currentTab = 'addProduct';
@@ -18,8 +21,6 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 	}
 
 	$scope.createProduct = function () {
-		console.log($scope);
-
         var productObj = {
             name: $scope.product.name,
             category: $scope.product.category,
@@ -63,6 +64,10 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 	      	$scope.error = "Username " + '"' + this.text + '"' + " does not exist" 
 	      }
 	    };
+
+
+	    // orders admin page
+	    $scope.orders = orders;
 
 
 })
