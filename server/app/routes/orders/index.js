@@ -126,6 +126,7 @@ router.post('/add', function (req, res, next) {
 
 router.post('/remove', function (req, res, next) {
 	//Request Body needs Product Id, Product Price, Quantity
+	console.log(req.cart.price + "///" +  req.body.product.price  + "///" + req.body.product.quantity);
 	req.cart.removeProduct(req.body.product.id)
 		.then(function (newOrder) {
 			req.cart.price = req.cart.price - (req.body.product.price * req.body.product.quantity);

@@ -67,6 +67,7 @@ module.exports = db.define('order', {
 				var self = this;
 				self.isCart = false;
 				self.address = frontAddress;
+				self.status = "Created";
 				var cannotProcess = false;
 
 				return this.getProducts()

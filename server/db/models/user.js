@@ -21,7 +21,7 @@ var Users = db.define('user', {
     },
     isAdmin: {
         type: Sequelize.BOOLEAN,
-        value: false
+        defaultValue: false
     },
     salt: {
         type: Sequelize.STRING
