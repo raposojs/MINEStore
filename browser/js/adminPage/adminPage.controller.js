@@ -1,10 +1,13 @@
-app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, AdminFactory) {
+app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users,orders, AdminFactory) {
 	$scope.tabs = [{
 		title: 'Add Product',
 		url: 'addProduct'
 	}, {
 			title: 'Edit Users',
 			url: 'editUsers'
+		}, {
+			title: 'Order Info',
+			url: 'adminOrders'
 		}];
 
 	$scope.currentTab = 'addProduct';
@@ -19,8 +22,6 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 	}
 
 	$scope.createProduct = function () {
-		console.log($scope);
-
         var productObj = {
             name: $scope.product.name,
             category: $scope.product.category,
@@ -74,6 +75,10 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 			console.log(user);
 		}).catch(console.error.bind(console));
 	}
+
+
+	    // orders admin page
+	    $scope.orders = orders;
 
 
 })
