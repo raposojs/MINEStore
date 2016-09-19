@@ -18,33 +18,55 @@
 
   <script type="text/ng-template" id="pastOrders">
     <div>
-      <table class="pure-table pure-table-horizontal">
-          <thead>
-              <tr>
-                  <th>Details</th>
-                  <th>Order ID #</th>
-                  <th>Date</th>
-                  <th>Total</th>
-              </tr>
-          </thead>
-
-          <tbody>
-              <tr ng-repeat-start="order in pastOrders">
-              <td>
-                <button ng-if="order.expanded" ng-click="order.expanded = false">-</button>
-                <button ng-if="!order.expanded" ng-click="order.expanded = true">+</button>
-              </td>
-                  <td>{{order.id}}</td>
-                  <td>{{order.createdAt.slice(0,10)}}</td>
-                  <td>${{order.price}}</td>
-              </tr>
-              <tr ng-if="order.expanded" ng-repeat-end="">
-                <td colspan="3">
-                  {{cart}}
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>Details</th>
+                <th>Order ID #</th>
+                <th>Date</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat-start="order in pastOrders">
+                <td>
+                    <button ng-click="expanded = !expanded ; getCartById(order.id)" expand>
+                        <span ng-bind="expanded ? '-' : '+'"></span>
+                    </button>
                 </td>
-              </tr>
-          </tbody>
-      </table>
+                <td ng-bind="order.id"></td>
+                <td ng-bind="order.createdAt.slice(0,10)"></td>
+                <td ng-bind="'$' + order.price"></td>
+            </tr>
+            <tr ng-repeat-end ng-show="expanded">
+                <td></td>
+                <td colspan="6">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:15%;">Item</th>
+                                <th style="width:15%;">Name</th>
+                                <th style="width:15%;">Quantity</th>
+                                <th style="width:15%;">Category</th>
+                                <th style="width:15%;">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="product in thisCart.products">
+                                <td><img 
+                                src="{{product.pictureURL}}"
+                                 style="width:128px;height:128px;"></td>
+                                <td style="width:15%;" ng-bind="product.name"></td>
+                                <td style="width:15%;" ng-bind="1"></td>
+                                <td style="width:15%;" ng-bind="product.category"></td>
+                                <td style="width:15%;" ng-bind="'$' + product.price"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     </div>
   </script>
 
