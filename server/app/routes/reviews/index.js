@@ -79,15 +79,10 @@ router.delete('/:id', utilities.isAdministrator, function (request, response, ne
 	Reviews.findById(id)
 		.then(function (review) {
 			if (review) {
-				return review.destroy({ force: true })
-			}
-			else {
-				return
-			}
-		})
-		.then(function (x) {
-			if (x) {
-				response.sendStatus(204);
+				return review.destroy()
+				.then(function(){
+					response.sendStatus(204);
+				})
 			}
 			else {
 				response.sendStatus(404);
