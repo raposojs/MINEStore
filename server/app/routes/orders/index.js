@@ -3,7 +3,33 @@ var Promise = require('bluebird');
 module.exports = router;
 
 var Order = require('../../../db/models/order.js')
+var Product = require('../../../db/models/product.js')
 var OrderedProduct = require('../../../db/models/orderedProducts.js');
+
+
+
+//GET ALL PREVIOUS orders
+router.get('/pastOrders', function(req, res, next){
+	//This route assumes that only logged in users have orders
+	
+	// //Testing
+	// req.user = {};
+	// req.user.id = 4
+
+	Order.getPastOrders(req.user.id)
+	.then(function(pastOrders){
+		res.json(pastOrders);
+	}).catch(next);
+})
+
+router.get('/:orderId', function(req, res, next){
+	Order.findById(req.params.orderId, {
+		include: [{model: Product}]
+	})
+	.then(function(order){
+		res.json(order);
+	}).catch(next);
+})
 
 //GETS THE CURRENT CART FOR THE USER
 router.use('/*', function (req, res, next) {

@@ -1,4 +1,4 @@
-app.controller('TabsCtrl', function($scope){
+app.controller('TabsCtrl', function($scope, CartFactory, $state){
 	$scope.tabs = [{
 	        title: 'About You',
 	        url: 'aboutYou'
@@ -18,5 +18,28 @@ app.controller('TabsCtrl', function($scope){
 	
 	$scope.isActiveTab = function(tabUrl) {
 	    return tabUrl == $scope.currentTab;
+	}
+
+	CartFactory.pastOrders()
+	.then(function(pastOrders){
+		$scope.pastOrders = pastOrders.data
+	}).catch(console.error.bind(console));
+
+	$scope.getCartById = function(id){
+		CartFactory.getCartById(id)
+		.then(function(cart){
+			console.log('cart', cart);
+			/*cart data structure
+			Cart level is essentially the order model, but it has a property products
+			which houses all the products.
+
+			Inside each products, there is an object/property OrderedProduct that houses the
+			quantity of each object. 
+
+			Hope this helps, format however!
+
+			- Ten
+			*/
+		}).catch(console.error.bind(console));
 	}
 })

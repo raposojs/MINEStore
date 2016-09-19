@@ -24,45 +24,18 @@
         <ul>
           <li 
           class="row list-inline columnCaptions">
-            <span>QTY</span>
-            <span>ITEM</span>
-            <span>Price</span>
+            <span>ORDER NUMBER</span>
+            <span>TOTAL PRICE</span>
           </li>
           <li 
           class="row" 
-          ng-repeat="product in products">
+          ng-repeat="order in pastOrders">
+          <a ng-click="getCartById(order.id)">
             <span 
-            class="quantity">{{product.quantity}}</span>
+            class="orderNumber">{{order.id}}</span>
             <span 
-            class="itemName">{{product.name}}</span>
-            <span 
-            class="popbtn">
-              <a 
-              ng-click="deleteItemFromCart(product.id, product.price)">
-              ❌
-              </a>
-            </span>
-            <span 
-            class="price">${{product.price}}</span>
-          </li>
-          <li 
-          class="row totals">
-            <span 
-            class="itemName"
-            ng-show="cart.price <= 0">Your cart is empty</span>
-            <span 
-            class="itemName"
-            ng-show="cart.price > 0">Total:</span>
-            <span 
-            class="price"
-            ng-show="cart.price > 0">${{(cart.price * 1).toFixed(2)}}</span>
-            <span 
-            class="order"
-            ng-show="cart.price > 0"> 
-              <a 
-              class="text-center" 
-              ng-click=checkOut()>ORDER</a>
-            </span>
+            class="totalPrice">{{order.price}}</span>
+          </a>
           </li>
         </ul>
       </div>
