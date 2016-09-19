@@ -20,12 +20,13 @@ app.directive('cart', function (CartFactory, $state) {
             scope.checkOut = function () {
                 //Assume products, quantities are on scope (can be through ng-model)
                 var products = scope.products;
-                CartFactory.checkOut(scope.products)
-                .then(function(cart){
-                    console.log('The Updated Cart is: \n', cart);
-                    $state.go('checkout');
-                    return cart;
-                }).catch(console.error.bind(console));
+                $state.go('checkout', products);
+                // CartFactory.checkOut(scope.products)
+                // .then(function(cart){
+                //     console.log('The Updated Cart is: \n', cart);
+                //     $state.go('checkout');
+                //     return cart;
+                // }).catch(console.error.bind(console));
             }
 
             scope.deleteItemFromCart = function (productId, productPrice, quantity) {

@@ -63,9 +63,10 @@ module.exports = db.define('order', {
 						console.error(err)
 					});
 			},
-			checkOut: function (frontProducts) {
+			checkOut: function (frontProducts, frontAddress) {
 				var self = this;
 				self.isCart = false;
+				self.address = frontAddress;
 				var cannotProcess = false;
 
 				return this.getProducts()
