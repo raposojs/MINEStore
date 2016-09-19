@@ -2,7 +2,7 @@
 <!-- <div class="container"> -->
 
     <div class="myaccount" id="login-form">
-        <div id="tabs" ng-controller="AdminCtrl">
+        <div id="tabs">
             <ul>
                 <li ng-repeat="tab in tabs" 
                     ng-class="{active:isActiveTab(tab.url)}" 
@@ -124,4 +124,10 @@
 
     <script type="text/ng-template" id="editUsers">
         <legend>Edit Users</legend>
+
+        <button 
+        type="submit" 
+        class="btn btn-success" 
+        ng-click="getUsers()">Add to Catalog</button>
+
     </script>

@@ -1,4 +1,4 @@
-app.controller('AdminCtrl', function($scope){
+app.controller('AdminCtrl', function($scope, $http, users){
 	$scope.tabs = [{
 	        title: 'Add Product',
 	        url: 'addProduct'
@@ -16,4 +16,13 @@ app.controller('AdminCtrl', function($scope){
 	$scope.isActiveTab = function(tabUrl) {
 	    return tabUrl == $scope.currentTab;
 	}
+
+	$scope.getUsers = function(){
+		console.log($scope.members)
+	}
+
+	$scope.getUsers = function(){
+		console.log(users)
+	}
+
 })
