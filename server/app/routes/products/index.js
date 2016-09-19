@@ -1,6 +1,7 @@
 'use strict';
 var router = require('express').Router(); // eslint-disable-line new-cap
 var Product = require('../../../db/models/product.js');
+var utilities = require("../authUtility.js");
 
 module.exports = router;
 
@@ -23,8 +24,8 @@ router.get('/:productID', function (req, res, next) {
 });
 
 
-router.post('/add', function (req, res, next) {
-	console.log('req.body', req.body)
+
+router.post('/add', utilities.isAdministrator, function (req, res, next) {
 	Product.create(req.body)
 		.then(function (createdProduct) {
 			console.log("product has been created");
@@ -35,7 +36,7 @@ router.post('/add', function (req, res, next) {
 });
 
 
-router.put('/:productID', function (req, res, next) {
+router.put('/:productID', utilities.isAdministrator, function (req, res, next) {
     Product.update(req.body, { where: { id: req.params.productID } })
 		.then(function (updatedProduct) {
 			res.status(204).end();
@@ -44,7 +45,7 @@ router.put('/:productID', function (req, res, next) {
 });
 
 
-router.delete('/:productID', function (req, res, next) {
+router.delete('/:productID', utilities.isAdministrator, function (req, res, next) {
     Product.destroy({
 		where: { id: req.params.productID }
 	})

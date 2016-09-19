@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var Reviews = require("../../../db/models/reviews.js");
+var utilities = require("../authUtility.js");
+
 
 router.get('/products/:id', function (request, response, next) {
 	var id = request.params.id;
@@ -36,7 +38,7 @@ router.get('/users/:id', function (request, response, next) {
 		.catch(next);
 })
 
-router.post('/products/:id', function (request, response, next) {
+router.post('/products/:id', utilities.ensureAuthenticated, function (request, response, next) {
 
 	var id = request.params.id;
 	var body = request.body;
@@ -72,7 +74,7 @@ router.put('/:id', function (request, response, next) {
 		.catch(next)
 })
 
-router.delete('/:id', function (request, response, next) {
+router.delete('/:id', utilities.isAdministrator, function (request, response, next) {
 	var id = request.params.id;
 	Reviews.findById(id)
 		.then(function (review) {

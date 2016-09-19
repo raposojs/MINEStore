@@ -19,6 +19,10 @@ var Users = db.define('user', {
     password: {
         type: Sequelize.STRING
     },
+    isAdmin: {
+        type: Sequelize.BOOLEAN,
+        value: false
+    },
     salt: {
         type: Sequelize.STRING
     },

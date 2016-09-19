@@ -1,6 +1,8 @@
 var router = require('express').Router();
 var Promise = require('bluebird');
+var utilities = require("../authUtility.js");
 module.exports = router;
+
 
 var Order = require('../../../db/models/order.js')
 var Product = require('../../../db/models/product.js')
