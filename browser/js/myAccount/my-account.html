@@ -1,16 +1,13 @@
 <div class="myaccount">
-    <div id="tabs" ng-controller="TabsCtrl">
-        <ul>
-            <li ng-repeat="tab in tabs" 
-                ng-class="{active:isActiveTab(tab.url)}" 
-                ng-click="onClickTab(tab)"
-                class="havePointer">{{tab.title}}</li>
-        </ul>
-        <div id="mainView">
-            <div ng-include="currentTab"></div>
-        </div>
+  <div id="tabs" ng-controller="TabsCtrl">
+    <ul>
+      <li ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="onClickTab(tab)" class="havePointer">{{tab.title}}</li>
+    </ul>
+    <div id="mainView">
+      <div ng-include="currentTab"></div>
     </div>
-    <script type="text/ng-template" id="aboutYou">
+  </div>
+  <script type="text/ng-template" id="aboutYou">
     <div id="viewOne">
       <h2>My Account</h2>
       <ul><h4>Username</h4></ul>
@@ -18,14 +15,60 @@
       <ul><h4>ETC</h4></ul>
     </div>
   </script>
-  
+
   <script type="text/ng-template" id="pastOrders">
     <div id="viewTwo">
       <h2>Past Orders</h2>
       <p>Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu.</p>
+      <div class="col-md-7 col-sm-12 text-left">
+        <ul>
+          <li 
+          class="row list-inline columnCaptions">
+            <span>QTY</span>
+            <span>ITEM</span>
+            <span>Price</span>
+          </li>
+          <li 
+          class="row" 
+          ng-repeat="product in products">
+            <span 
+            class="quantity">{{product.quantity}}</span>
+            <span 
+            class="itemName">{{product.name}}</span>
+            <span 
+            class="popbtn">
+              <a 
+              ng-click="deleteItemFromCart(product.id, product.price)">
+              ❌
+              </a>
+            </span>
+            <span 
+            class="price">${{product.price}}</span>
+          </li>
+          <li 
+          class="row totals">
+            <span 
+            class="itemName"
+            ng-show="cart.price <= 0">Your cart is empty</span>
+            <span 
+            class="itemName"
+            ng-show="cart.price > 0">Total:</span>
+            <span 
+            class="price"
+            ng-show="cart.price > 0">${{(cart.price * 1).toFixed(2)}}</span>
+            <span 
+            class="order"
+            ng-show="cart.price > 0"> 
+              <a 
+              class="text-center" 
+              ng-click=checkOut()>ORDER</a>
+            </span>
+          </li>
+        </ul>
+      </div>
     </div>
   </script>
-  
+
   <script type="text/ng-template" id="settings">
     <div id="viewThree">
       <h2>Settings</h2>
