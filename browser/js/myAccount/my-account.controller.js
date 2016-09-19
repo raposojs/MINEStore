@@ -42,4 +42,7 @@ app.controller('TabsCtrl', function($scope, CartFactory, $state){
 			*/
 		}).catch(console.error.bind(console));
 	}
+
+
+
 })
