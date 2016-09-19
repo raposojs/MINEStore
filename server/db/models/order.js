@@ -21,24 +21,28 @@ module.exports = db.define('order', {
 }, {
 		instanceMethods: {
 			addProductToCart: function (productId, productPrice) {
-				var self = this;
 				return OrderedProducts.findOrCreate({
 					where: {
-						productId: productId,
-						orderId: this.id
+						orderId: this.id,
+						productId: product.id
 					}
 				})
-					.then(function (instanceCreated) {
-						var instance = instanceCreated[0]; //Instance
-						var created = instanceCreated[1]; // True or false
-						self.price = +self.price + +productPrice;
-						var promiseArray = [self.save()];
-						if (!created) { //Update Quantity if it Found
-							instance.quantity++;
-							promiseArray.push(instance.save());
-						}
-						return Promise.all(promiseArray)
-					})
+					.spread(function(instance, created){
+						if(created){instance.setUnitPrice(product.price);	};
+						instance.quantity ++;
+						instance.save();
+					});
+			},
+			removeProductFromCart: function(productId){
+				return OrderedProducts.findOne({
+					where: {
+						orderId: this.id,
+						productId: productId
+					}
+				})
+				.then(function(product){
+					product.destroy();
+				});
 			},
 			updateCart: function (products) {
 				var self = this;
@@ -63,31 +67,30 @@ module.exports = db.define('order', {
 						console.error(err)
 					});
 			},
-			checkOut: function (frontProducts) {
-				var self = this;
-				self.isCart = false;
-				var cannotProcess = false;
+			checkOut: function (cart) {
+				// 1. order => fetch an order/isCart = true;
+				// 2. order-product items => items.qty => reduce stocks in product table
+				var order = this;
 
-				return this.getProducts()
-					.then(function (products) {
-						var promisedReducedStock = products.map(function (product, index) {
-							if (frontProducts[index].quantity > product.stocks) {
-								cannotProcess = true;
-							}
-							console.log('PRODUCT QUANTITY', +frontProducts[index].quantity);
-							return product.reduceStock(+frontProducts[index].quantity) //INSTANCE METHOD TODO
+				return OrderedProducts.findAll({
+					where: {
+						orderId: cart.id
+					},
+					include: [{model: Product}]
+				})
+					.then(function(itemsInCheckOut){
+						//fetched items in check-out
+						//each item's quantity should be deducted on the product.quantity
+						var reducingStocksPromise = itemsInCheckOut.map(function(orderedProduct){
+							return orderedProduct.product.reduceStock(orderedProduct.quantity)
 						})
-						if (cannotProcess) return;
-						promisedReducedStock.push(self.save());
-						Promise.all(promisedReducedStock)
-							.then(function (success) {
-								console.log('Successfully Reduced Stock and Checked Out');
-								return;
-							}).catch(function (err) {
-								console.error(err)
-							});
+
+						return Promise.all(reducingStocksPromise)
 					})
-			}
+					.then(function(){
+						order.isCart = false;
+					})
+				}
 		},
 		classMethods: {
 			getPastOrders: function () {

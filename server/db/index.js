@@ -13,6 +13,10 @@ var OrderedProducts = require('./models/orderedProducts');
 // e.g. User.hasMany(Reports)
 Product.belongsToMany(Order, {through: OrderedProducts});
 Order.belongsToMany(Product, {through: OrderedProducts});
+
+//add association ordered-product to product
+OrderedProducts.belongsTo(Product);
+
 Review.belongsTo(Product);
 Review.belongsTo(User);
 Order.belongsTo(User);
