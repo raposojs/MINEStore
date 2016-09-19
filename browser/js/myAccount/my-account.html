@@ -17,10 +17,11 @@
   </script>
 
   <script type="text/ng-template" id="pastOrders">
-    <div style="text-align:center; display:inline-block; margin: 0 10%;">
+    <div>
       <table class="pure-table pure-table-horizontal">
           <thead>
               <tr>
+                  <th>Details</th>
                   <th>Order ID #</th>
                   <th>Date</th>
                   <th>Total</th>
@@ -28,10 +29,19 @@
           </thead>
 
           <tbody>
-              <tr ng-repeat="order in pastOrders">
+              <tr ng-repeat-start="order in pastOrders">
+              <td>
+                <button ng-if="order.expanded" ng-click="order.expanded = false">-</button>
+                <button ng-if="!order.expanded" ng-click="order.expanded = true">+</button>
+              </td>
                   <td>{{order.id}}</td>
                   <td>{{order.createdAt.slice(0,10)}}</td>
                   <td>${{order.price}}</td>
+              </tr>
+              <tr ng-if="order.expanded" ng-repeat-end="">
+                <td colspan="3">
+                  {{cart}}
+                </td>
               </tr>
           </tbody>
       </table>
