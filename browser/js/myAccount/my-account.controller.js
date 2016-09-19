@@ -40,6 +40,7 @@ app.controller('TabsCtrl', function($scope, CartFactory, $state){
 
 			- Ten
 			*/
+			$scope.thisCart = cart
 		}).catch(console.error.bind(console));
 	}
 
