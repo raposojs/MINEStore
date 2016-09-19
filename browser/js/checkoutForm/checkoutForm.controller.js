@@ -1,5 +1,5 @@
-app.controller('CheckoutCtrl', function($scope, CartFactory, cart){
-    // console.log(cart);
-    $scope.value = cart;
+app.controller('CheckoutCtrl', function($scope, CartFactory){
+    console.log(CartFactory);
+    // $scope.value = cart;
 
 })
