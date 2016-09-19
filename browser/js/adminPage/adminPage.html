@@ -13,8 +13,7 @@
 
 <script type="text/ng-template" id="addProduct">
     <legend>Add New Product to Catalog</legend>
-<!--<form id="newProduct" ng-submit="createUser()">-->
-<form name="newProduct">
+    <form id="newProduct">
     <div class="form-group">
         <label class="control-label">Product Name</label>
         <input 
@@ -114,7 +113,7 @@
 
 
     <button type="submit" class="btn btn-success"  ng-disabled="registerForm.$invalid"  ng-click="createProduct()">Add to Catalog</button>
-</form>
+        </form>
 </script>
 
 
@@ -143,7 +142,7 @@
                   <ul>ID: {{selectedUser.id}}</ul>
                   <ul>Email: {{selectedUser.email}}</ul>
                   <ul>Username: {{selectedUser.username}}</ul>
-                  <ul>Admin: <input type="checkbox"></input></ul>
+                  <ul>Admin: <input type="checkbox" ng-model="selectedUser.isAdmin"></input></ul>
 
                 </pre>
 
@@ -158,12 +157,10 @@
         <button 
         type="submit" 
         class="btn btn-success" 
-        ng-click=saveInDb()>Save</button>
+        ng-click=saveUser(selectedUser)>Save</button>
+        <button type="submit" class="btn btn-success" ng-click="deleteUser(selectedUser.id)">Delete User</button>
+        <button type="submit" class="btn btn-success" ng-click="resetPassword(selectedUser)">Reset Password</button>
 
-
-
-
-</script>
 
 
 
