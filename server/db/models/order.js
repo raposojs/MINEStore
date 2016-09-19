@@ -90,18 +90,18 @@ module.exports = db.define('order', {
 			}
 		},
 		classMethods: {
-			getPastOrders: function () {
+			getPastOrders: function (userId) {
 				//Find all orders for a user in which it is not a cart
 				return this.findAll({
 					where: {
-						userId: this.userId,
+						userId: userId,
 						isCart: false
 					}
 				})
 					.then(function (pastOrders) {
 						if (!pastOrders) return null
 						return pastOrders;
-					}).catch(console.error(err));
+					})
 			}
 		},
 		// hooks: {

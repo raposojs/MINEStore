@@ -61,14 +61,18 @@ app.factory('CartFactory', function ($http) {
                 .then(function (cart) {
                     return cart;
                 }).catch(console.error.bind(console));
+        },
+        pastOrders: function(){
+            return $http.get('/api/orders/pastOrders')
+                .then(function(pastOrders){
+                    return pastOrders;
+                })
+        },
+        getCartById: function(id){
+            return $http.get('/api/orders/' + id)
+            .then(function(order){
+                return order.data
+            })
         }
-        // clearCart: function () {
-        //     //TODO: destroy cart
-        //     return $http.delete('/api/orders/' + id)
-        //         .then(function (success) {
-        //             if (success) return {};
-        //             throw new Error('Successfully deleted');
-        //         }).catch(console.error.bind(console));
-        // }
     };
 })
