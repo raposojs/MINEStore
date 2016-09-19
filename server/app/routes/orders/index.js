@@ -24,6 +24,19 @@ router.get('/pastOrders', function(req, res, next){
 	}).catch(next);
 })
 
+
+
+//Admin route -> fetching all shipped orders
+router.get('/all', utilities.isAdministrator, function(req, res, next){
+	Order.findAll({isCart: false})
+		.then(function(orders){
+			res.send(orders);
+		})
+		.catch(next);
+})
+
+
+
 router.get('/:orderId', function(req, res, next){
 	Order.findById(req.params.orderId, {
 		include: [{model: Product}]
@@ -32,6 +45,11 @@ router.get('/:orderId', function(req, res, next){
 		res.json(order);
 	}).catch(next);
 })
+
+
+
+
+
 
 //GETS THE CURRENT CART FOR THE USER
 router.use('/*', function (req, res, next) {
@@ -78,9 +96,7 @@ router.use('/*', function (req, res, next) {
 	}
 })
 
-// router.get('/all', function(req, res ,next){
-// 	res.json({allCart: cart, allProducts: products});
-// })
+
 router.use('/*', function (req, res, next) {
 	OrderedProduct.findAll({
 		where: {
@@ -98,10 +114,15 @@ router.use('/*', function (req, res, next) {
 })
 
 
+
+
+
 // GET => ORDER ID => 'orders/:id'
 router.get('/', function (req, res, next) {
 	res.json({ cart: req.cart, products: req.products, quantities: req.quantities });
 });
+
+
 
 
 // POST => ORDER ID => 'orders/:id'
