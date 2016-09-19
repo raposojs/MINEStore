@@ -55,6 +55,8 @@ router.get('/:id', utilities.verifyUser, function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+	console.log(req.body);
+	req.body.isAdmin=false;
 	User.create(req.body)
 		.then(function (user) {
 			res.status(201).json(user);
