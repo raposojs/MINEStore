@@ -42,8 +42,6 @@ router.post('/products/:id', utilities.ensureAuthenticated, function (request, r
 
 	var id = request.params.id;
 	var body = request.body;
-	console.log(id);
-	console.log(body);
 	Reviews.create({
 		reviewContent: body.reviewContent,
 		stars: body.stars,

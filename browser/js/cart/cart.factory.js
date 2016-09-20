@@ -3,7 +3,6 @@ app.factory('CartFactory', function ($http) {
         getCart: function () {
             return $http.get('/api/orders/')
                 .then(function (cart) {
-                    console.log('==cart is from getCart==', cart);
                     //cart is returned with price and products
                     if (!cart || !cart.data) return null;
                     return cart.data;

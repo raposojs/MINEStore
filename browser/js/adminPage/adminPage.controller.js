@@ -1,4 +1,4 @@
-app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, orders) {
+app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users,orders, AdminFactory) {
 	$scope.tabs = [{
 		title: 'Add Product',
 		url: 'addProduct'
@@ -11,6 +11,7 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 		}];
 
 	$scope.currentTab = 'addProduct';
+	$scope.product = {};
 
 	$scope.onClickTab = function (tab) {
 		$scope.currentTab = tab.url;
@@ -34,7 +35,6 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 
         SingleProductFactory.createProduct(productObj)
 			.then(function (productCreated) {
-				console.log(productCreated);
 				$state.go('catalog');
 			})
 			.catch(console.error.bind(console));
@@ -44,26 +44,35 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
     $scope.selectedUser = null;
     $scope.error = null;
 
-    $scope.findUser = function() {
-    	if(!this.text){
-    		$scope.selectedUser = null;
-    		$scope.error = null;
-    		return;
-    	}
+    $scope.findUser = function () {
+		if (!this.text) {
+			$scope.selectedUser = null;
+			$scope.error = null;
+			return;
+		}
 
-	    $scope.selectedUser = null;
-	    $scope.error = null;
-	      for(var i = 0; i < users.data.length; i++){
-	      	if(this.text === users.data[i].username){
-	      		$scope.error = null;
-	      		$scope.selectedUser = users.data[i]
-	      		$scope.display = this.text
-	      	}
-	      }
-	      if(!$scope.selectedUser){
-	      	$scope.error = "Username " + '"' + this.text + '"' + " does not exist" 
-	      }
-	    };
+		$scope.selectedUser = null;
+		$scope.error = null;
+		for (var i = 0; i < users.data.length; i++) {
+			if (this.text === users.data[i].username) {
+				$scope.error = null;
+				$scope.selectedUser = users.data[i]
+				$scope.display = this.text
+			}
+		}
+		if (!$scope.selectedUser) {
+			$scope.error = "Username " + '"' + this.text + '"' + " does not exist"
+		}
+	};
+
+	$scope.deleteUser = AdminFactory.deleteUser;
+	$scope.saveUser = AdminFactory.saveUser;
+	$scope.resetPassword = function(user){
+		user.password = "123456";
+		AdminFactory.saveUser(user)
+		.then(function(user){
+		}).catch(console.error.bind(console));
+	}
 
 
 	    // orders admin page
