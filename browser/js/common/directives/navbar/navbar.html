@@ -2,7 +2,8 @@
     <div class="container">
         <div class="navbar-header">
             <minestore-logo 
-            ui-sref="home"></minestore-logo>
+            ui-sref="home"
+            style="cursor:pointer"></minestore-logo>
         </div>
         <ul 
         class="nav navbar-nav">
@@ -14,6 +15,7 @@
                 ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
+        <cart-image style="cursor:pointer"></cart-image>
         <button 
         ng-show="!user" 
         ui-sref="login" 

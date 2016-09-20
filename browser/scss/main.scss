@@ -66,6 +66,15 @@ body {
 //   width: 100%;
 // }
 
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  text-align: center;
+}
+
 .thumbnail img {
   
   object-fit: cover;
