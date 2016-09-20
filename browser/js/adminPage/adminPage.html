@@ -175,14 +175,20 @@
         <th>price</th>
         <th>address</th>
         <th>status</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="order in orders.data">
+      <tr ng-repeat="order in orders">
         <td>{{order.id}}</td>
         <td>{{order.price}}</td>
         <td>{{order.address}}</td>
         <td>{{order.status}}</td>
+        <td><button>Process</button></td>
+        <td><button>Cancel</button></td>
+        <td><button>Completed</button></td>
       </tr>
     </tbody>
   </table>

@@ -46,6 +46,18 @@ router.get('/:orderId', function(req, res, next){
 	}).catch(next);
 })
 
+// router.put('/setStatus/', function(req, res, next){
+// 	var id = req.query.id;
+// 	var status = req.query.status;
+// 	Order.findById(id)
+// 	.then(function(order){
+// 		order.setStatus(req.query.status)
+// 		.then(function(success){
+// 			res.sendStatus(204);
+// 		})
+// 	}).catch(next);
+// })
+
 
 
 

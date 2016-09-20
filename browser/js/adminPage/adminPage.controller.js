@@ -84,9 +84,16 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 		}).catch(console.error.bind(console));
 	}
 
-
 	    // orders admin page
-	    $scope.orders = orders;
+	    $scope.orders = orders.data.map(function(order){
+			var orderAddress = JSON.parse(order.address);
+			if(orderAddress) order.address = orderAddress.name + ' ' + orderAddress.address + ' ' + orderAddress.extension + ', ' + orderAddress.cityState + ' ' + orderAddress.zip;
+			return order;
+		})
+
+		$scope.orders = $scope.orders.filter(function(order){
+			return order.isCart === false;
+		})
 
 
 })
