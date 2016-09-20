@@ -1,11 +1,14 @@
-app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users) {
+app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, products) {
 	$scope.tabs = [{
 		title: 'Add Product',
 		url: 'addProduct'
-	}, {
-			title: 'Edit Users',
-			url: 'editUsers'
-		}];
+	},{
+		title: 'Edit Product',
+		url: "editProduct"
+	},{
+		title: 'Edit Users',
+		url: 'editUsers'
+	}];
 
 	$scope.currentTab = 'addProduct';
 
