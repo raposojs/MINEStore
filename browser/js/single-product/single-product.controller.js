@@ -1,4 +1,4 @@
-app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct, CartFactory, SingleProductFactory) {
+app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct, CartFactory, SingleProductFactory, Notification) {
 	
 	
 	$scope.product = theProduct;
@@ -77,7 +77,7 @@ app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct,
 	$scope.addToCart = function (product) {
 		CartFactory.addItemToCart(product.id, product.price)
 			.then(function (cart) {
-				$state.go('cart');
+				// $state.go('cart');
 				return cart;
 			}).catch(console.error.bind(console));
 	}
@@ -102,6 +102,10 @@ app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct,
 			ret += '💩'
 		}
 		return ret
+	}
+
+	$scope.notification = function(msg){
+		return Notification.success(msg + ' has been added to your cart!')	
 	}
 
 })
