@@ -82,6 +82,7 @@
         <div ng-messages="registerForm.emailField.$error" role="alert" ng-hide="registerForm.emailField.$pristine">
           <p  ng-message="required" class="help-block">Please provide your E-mail</p>
           <p  ng-message="email" class="help-block">Please provide a valid E-mail address</p>
+          <p ng-show="isTaken" class="help-block">E-</p>
         </div>
         
     </div>

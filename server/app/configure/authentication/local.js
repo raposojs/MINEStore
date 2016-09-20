@@ -72,7 +72,7 @@ module.exports = function (app, db) {
                             })
                         }
                     })
-                    .catch(next);
+                    .catch(next)
 
             });
 

@@ -44,13 +44,16 @@ router.get('/secret-stash', utilities.isAdministrator, function (req, res) {
 
 });
 
-router.get('/checkEmail', function(req, res, next){
-	User.findOne({email: req.body.email})
+router.post('/checkEmail', function(req, res, next){
+	User.findAll({where: req.body})
 		.then(function(user){
-			res.send(user);
+			res.send(!!user.length); 
 		})
-		.catch(next);
-		
+		.catch(next)
+});
+
+router.get('/:id', utilities.verifyUser, function (req, res, next) {
+	res.json(req.user);
 });
 
 
