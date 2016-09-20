@@ -8,7 +8,7 @@ app.factory('AdminFactory', function($http){
                 })
         },
         deleteUser: function(userId){
-            return $http.delete('/api/members/' + user.id)
+            return $http.delete('/api/members/' + userId)
                 .then(function(user){
                     return user;
                 })

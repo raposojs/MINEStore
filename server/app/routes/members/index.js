@@ -7,6 +7,7 @@ var utilities = require("../authUtility.js");
 
 
 router.param('id', utilities.ensureAuthenticated, function (req, res, next, id) {
+	console.log('ID IS', id);
     if (typeof +id !== 'number') return next();
 	User.findById(id)
 		.then(function (user) {
@@ -53,9 +54,21 @@ router.get('/:id', utilities.verifyUser, function (req, res, next) {
 	res.json(req.user);
 });
 
+
+router.get('/checkEmail', function(req, res, next){
+	User.findOne({email: req.body.email})
+		.then(function(user){
+			res.send(user);
+		})
+		.catch(next);
+		
+});
+
+
+
 router.post('/', function (req, res, next) {
 	console.log(req.body);
-	req.body.isAdmin=false;
+	req.body.isAdmin = false;
 	User.create(req.body)
 		.then(function (user) {
 			res.status(201).json(user);
@@ -64,17 +77,29 @@ router.post('/', function (req, res, next) {
 });
 
 router.put('/:id', utilities.adminOrUser, function (req, res, next) {
-	delete req.body.id;
-	_.extend(req.user, req.body);
-	req.user.save()
-		.then(function (updatedUser) {
-			res.json(updatedUser);
+	// User.update(req.body, {
+	// 	where: {
+	// 		id: req.params.id
+	// 	}
+	// })
+
+
+	User.findById(req.params.id)
+		.then(function (user) {
+			user.update(req.body)
+				.then(function (updatedUser) {
+					res.json(updatedUser);
+				})
 		})
 		.catch(next);
 });
 
 router.delete('/:id', utilities.isAdministrator, function (req, res, next) {
-	req.user.destroy()
+	User.destroy({
+		where: {
+			id: req.params.id
+		}
+	})
 		.then(function () {
 			res.status(204).end();
 		})

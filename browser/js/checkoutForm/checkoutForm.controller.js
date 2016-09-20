@@ -1,4 +1,4 @@
-app.controller('CheckoutCtrl', function ($scope, CartFactory, cart) {
+app.controller('CheckoutCtrl', function ($scope, CartFactory, cart, $state) {
     $scope.value = cart.cart.price;
 
     $scope.cart = cart.cart;

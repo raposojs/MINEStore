@@ -1,8 +1,5 @@
 app.controller('TabsCtrl', function($scope, CartFactory, $state){
 	$scope.tabs = [{
-	        title: 'About You',
-	        url: 'aboutYou'
-	    }, {
 	        title: 'Past Orders',
 	        url: 'pastOrders'
 	    }, {
@@ -10,7 +7,7 @@ app.controller('TabsCtrl', function($scope, CartFactory, $state){
 	        url: 'settings'
 	}];
 
-	$scope.currentTab = 'aboutYou';
+	$scope.currentTab = 'pastOrders';
 
 	$scope.onClickTab = function (tab) {
 	    $scope.currentTab = tab.url;
@@ -40,7 +37,14 @@ app.controller('TabsCtrl', function($scope, CartFactory, $state){
 
 			- Ten
 			*/
-			$scope.thisCart = cart
+			for(var i =0 ; i < $scope.pastOrders.length ; i++){
+				if($scope.pastOrders[i].id === id){
+					$scope.pastOrders[i].details = cart;
+					console.log('index i', $scope.pastOrders[i].details);
+					break;
+				}
+			}
+			$scope.thisCart = cart;
 		}).catch(console.error.bind(console));
 	}
 
