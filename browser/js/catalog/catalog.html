@@ -47,8 +47,24 @@
           <h4 class="pull-right">{{product.displayPrice}}</h4>
           <h4><a href="#" ng-click=detail(product)>{{product.name}}</a></h4>
 
-          <button class="btn btn-primary btn-lg" id="detailbtn" ng-click=detail(product)>Detail</button>
-          <button class="btn btn-primary btn-lg" id="minebtn" ng-click="addToCart(product)"> Mine It! ⚒ </button>
+          <button 
+          class="btn btn-primary btn-lg" 
+          id="detailbtn" 
+          ng-click=detail(product)>Detail</button>
+          <button 
+          class="btn btn-primary btn-lg" 
+          id="minebtn" 
+          ng-click="addToCart(product)" 
+          ng-hide="product.stocks <= 0"
+          style="float:right"> Mine It! ⚒ </button>
+
+          <!-- OUT OF STOCK -->
+          <button 
+          class="btn btn-primary btn-lg" 
+          id="outofstock" 
+          ng-disabled="true" 
+          ng-show="product.stocks <= 0"
+          style="float:right"> Out of Stock </button>
 
         </div>
       </div>

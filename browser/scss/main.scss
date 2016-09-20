@@ -58,7 +58,14 @@ body {
 	color: #ffffff;
 	background-color: #009900;
 	border: solid 1px rgba(0, 0, 0, 0.3);
-  float: right;
+  // float: right;
+}
+
+#outofstock {
+    color: #ffffff;
+    background-color: red;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    // float: right;
 }
 
 // .thumbnail {

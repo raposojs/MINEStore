@@ -2,8 +2,11 @@
 
 <div class="container">
 	<h1 class="product-name">{{product.name}}</h1>
-	<h4><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> 16 reviews</h4>
-	<h5>{{product.category}} 💎 💎 💎 💎</h5>
+	<!-- <h4><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"> -->
+	<h4> {{reviews.length}} reviews</h4>
+	<h4>{{avgStars(avgReviews)}}</h4>
+	<h4>Category - {{product.category}}</h4>
+	<h4>Rarity - {{rarity(product.rarity)}}</h4>
 	<h2>{{product.displayPrice}}</h2>
 
 	<hr class="product-hr">
@@ -20,8 +23,8 @@
 			<hr>
 			<h3 class="stock-status" ng-show="product.stocks >= 1">In Stock</h3>
 			<p>{{product.stocks}} stocks left</p>
-			<button class="btn btn-success" ng-click="addToCart(product)">Mine It ⚒</button>
-			<button class="btn btn-primary">Add to my Wishlist</button>
+			<button class="btn btn-primary" id="minebtn" ng-click="addToCart(product)" ng-hide="product.stocks <= 0"> Mine It! ⚒ </button>
+			<button class="btn btn-primary" id="outofstock" ng-disabled="true" ng-show="product.stocks <= 0"> Out of Stock </button>
 			<button class="btn btn-info" ng-click="openReviewCreate()">Write a review</button>
 		</div>
 	</div>
@@ -35,7 +38,9 @@
 		<div class="reviews">
 			<br>
 			<form name="reviewForm" ng-if="isWritingAReview" ng-submit="createAReview(reviewContent, ratedBy)" novalidate>
-				<ul class="rating">
+			<label for="reviewText">Write your review!</label>
+			<br>
+				Rating - <ul class="rating">
             <li ng-repeat="n in [].constructor(maxRating) track by $index">
                 <span ng-mouseover="rateBy($index+1)" ng-show="ratedBy > $index" class="filled">&#9733;</span>
                 <span ng-mouseover="rateBy($index+1)" ng-show="ratedBy <= $index">&#9733;</span>
@@ -44,7 +49,7 @@
 
 
 				<!-- how do we get stars from clicking on the stars -->
-				<label for="reviewText">Text</label>
+				
 				<textarea 
 				class="form-control review-text" 
 				name="reviewText" 
@@ -77,8 +82,9 @@
 			                ng-show="$index > review.stars">&#9733;</span>
 			            </li>
 			        </ul>
+			        		<p></p>
 							<p>{{review.reviewContent}}</p>
-							<p>Last updated: {{review.updatedAt.slice(0,10) + " @ " + review.updatedAt.slice(11,-5)}}</p>
+							<p><i>Last updated: {{review.updatedAt.slice(0,10) + " @ " + review.updatedAt.slice(11,-5)}}</i></p>
 							<button 
 							class="btn btn-sm btn-success" 
 							ng-click="editReview(review)">Edit</button>
