@@ -54,6 +54,18 @@ router.get('/:id', utilities.verifyUser, function (req, res, next) {
 	res.json(req.user);
 });
 
+
+router.get('/checkEmail', function(req, res, next){
+	User.findOne({email: req.body.email})
+		.then(function(user){
+			res.send(user);
+		})
+		.catch(next);
+		
+});
+
+
+
 router.post('/', function (req, res, next) {
 	console.log(req.body);
 	req.body.isAdmin = false;
