@@ -7,6 +7,7 @@ app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct,
 
 	$http.get('/api/reviews/products/' + theProduct.id)
 		.then(function (reviews) {
+			console.log(reviews.data);
 			//array of reviews fetched from the server
 			$scope.reviews = reviews.data;
 			var total = 0;
