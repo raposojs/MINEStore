@@ -50,18 +50,30 @@ router.get('/secret-stash', utilities.isAdministrator, function (req, res) {
 
 });
 
+router.get('/checkEmail', function(req, res, next){
+	User.findOne({email: req.body.email})
+		.then(function(user){
+			res.send(user);
+		})
+		.catch(next);
+		
+});
+
+
 router.get('/:id', utilities.verifyUser, function (req, res, next) {
 	res.json(req.user);
 });
 
 router.post('/', function (req, res, next) {
-	console.log(req.body);
-	req.body.isAdmin=false;
+	req.body.isAdmin = false;
 	User.create(req.body)
 		.then(function (user) {
 			res.status(201).json(user);
 		})
-		.catch(next);
+		.catch(function(err){
+			console.log(err.Error);
+			res.end();
+		});
 });
 
 router.put('/:id', utilities.verifyUser, function (req, res, next) {
