@@ -89,6 +89,7 @@ app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct,
 
 	$scope.avgStars = function(avg){
 		var ret = ""
+		avg = Math.round(avg)
 		for(var i = 0; i < avg; i++){
 			// ret += '<i class="fa fa-star gold"></i>'
 			ret += '⭐'
