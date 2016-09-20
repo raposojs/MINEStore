@@ -2,29 +2,28 @@
 var router = require('express').Router(); // eslint-disable-line new-cap
 
 var nodemailer = require('nodemailer');
-var smtpTransport = nodemailer.createTransport("SMTP", {
-    service: 'Gmail',
-    auth: {
-        user: 'customerservice.mine@gmail.com',
-        pass: 'MINE1234'
-    }
-});
+var smtpTransport = require('nodemailer-smtp-transport');
+
+
+var transporter = nodemailer.createTransport(smtpTransport({
+	service: 'gmail',
+	auth: {
+    user: 'customerservice.mine@gmail.com',
+    pass: 'MineralsINeverEncountered'
+   }
+}));
+
 
 module.exports = router;
 
 
-router.get('/sendemail', function (req, res, next) {
+router.post('/sendemail', function (req, res, next) {
+	var mailOptions = req.body;
 
-	var mailOptions = {
-		to: req.query.to,
-		subject: req.query.subject,
-		text: req.query.text
-	};
-
-	smtpTransport.sendMail(mailOptions, function(err, res){
+	transporter.sendMail(mailOptions, function(err, response){
 		if (err){ res.send(err)}
 		else {
-			console.log('Message sent: ' + res.message);
+			console.log('Message sent: ' + response.message);
 			res.status(201).end();
 		}
 	});
