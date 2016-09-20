@@ -71,7 +71,7 @@ module.exports = function (app, db) {
                             user: user.sanitize()
                         })
                     })
-                    .catch(next);
+                    .catch(next)
 
             });
 
