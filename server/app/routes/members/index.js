@@ -22,13 +22,7 @@ router.param('id', utilities.ensureAuthenticated, function (req, res, next, id) 
 		.catch(next);
 });
 
-router.get('/', utilities.isAdministrator, function (req, res, next) {
-	User.findAll()
-		.then(function (users) {
-			res.json(users);
-		})
-		.catch(next);
-});
+
 
 router.get('/secret-stash', utilities.isAdministrator, function (req, res) {
 
@@ -46,13 +40,11 @@ router.get('/secret-stash', utilities.isAdministrator, function (req, res) {
         'http://www.dailymobile.net/wp-content/uploads/2014/10/lollipops.jpg'
     ];
 
-    res.send(_.shuffle(theStash));
+    res.send(_.shuffle(theStash))
 
 });
 
 router.post('/checkEmail', function(req, res, next){
-	//console.log(req.body)
-	//console.log('--------------------------',req.body.email);
 	User.findAll({where: req.body})
 		.then(function(user){
 			res.send(!!user.length); 
@@ -63,6 +55,22 @@ router.post('/checkEmail', function(req, res, next){
 router.get('/:id', utilities.verifyUser, function (req, res, next) {
 	res.json(req.user);
 });
+
+
+router.get('/:id', utilities.verifyUser, function (req, res, next) {
+	res.json(req.user);
+});
+
+
+router.get('/', utilities.isAdministrator, function (req, res, next) {
+	User.findAll()
+		.then(function (users) {
+			res.json(users);
+		})
+		.catch(next);
+});
+
+
 
 
 

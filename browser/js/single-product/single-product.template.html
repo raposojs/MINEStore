@@ -69,10 +69,9 @@
 			<div class="product-rating" ng-repeat="review in reviews">
 				<div class="container">
 					<div class="row review-row">
-<!-- 						<div class="col-md-2">
-								<img src="http://placekitten.com/g/130/100"/>
-						</div> -->
 						<div class="col-md-10">
+						<b>User ID: {{review.userId}}</b>
+						<br>
 							<ul class="rating" >
 			            <li ng-repeat="n in [].constructor(maxRating) track by $index">
 			                <span 
@@ -82,7 +81,6 @@
 			                ng-show="$index > review.stars">&#9733;</span>
 			            </li>
 			        </ul>
-			        		<p></p>
 							<p>{{review.reviewContent}}</p>
 							<p><i>Last updated: {{review.updatedAt.slice(0,10) + " @ " + review.updatedAt.slice(11,-5)}}</i></p>
 							<button 
