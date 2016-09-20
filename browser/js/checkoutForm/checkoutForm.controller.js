@@ -13,6 +13,16 @@ app.controller('CheckoutCtrl', function ($scope, CartFactory, cart, $state) {
 
     $scope.checkOut = function () {
         var shipping = JSON.stringify($scope.shipping);
+
+        var email = {
+            from: 'Mine_customerService@MINE.com',
+            to: $scope.shipping.email,
+            subject: 'confirmation-letter',
+            text: 'your order has been checked-out.'
+        };
+
+        CartFactory.sendConfirmationEmail(email);
+
         CartFactory.checkOut(cart.products, shipping)
             .then(function (cart) {
                 $state.go('confirmation');

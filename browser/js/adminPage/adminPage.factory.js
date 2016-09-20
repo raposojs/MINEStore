@@ -12,6 +12,15 @@ app.factory('AdminFactory', function($http){
                 .then(function(user){
                     return user;
                 })
+        },
+        editProduct: function(id, updates){
+            return $http.put('/api/products/'+ id, updates)
+            .then(function(product){
+                console.log("Successful edit!");
+                if (product){
+                    return product;
+                }
+            });
         }
     }
 })
