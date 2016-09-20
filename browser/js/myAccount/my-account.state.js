@@ -8,6 +8,11 @@ app.config(function ($stateProvider) {
         // that controls access to this state. Refer to app.js.
         data: {
             authenticate: true
+        },
+        resolve: {
+            adminstatus: function(AuthService){
+                return AuthService.getLoggedInUser()
+            }
         }
     });
 

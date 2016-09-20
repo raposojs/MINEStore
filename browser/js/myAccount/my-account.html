@@ -1,7 +1,8 @@
 <div class="myaccount">
-  <div id="tabs" ng-controller="TabsCtrl">
+  <div id="tabs">
     <ul>
       <li ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="onClickTab(tab)" class="havePointer">{{tab.title}}</li>
+      <li ui-sref="admin" class="havePointer" ng-show="isAdm">Admin</li>
     </ul>
     <div id="mainView">
       <div ng-include="currentTab"></div>
@@ -22,7 +23,7 @@
         <tbody ng-repeat="order in pastOrders">
                 <tr>
                     <td>
-                        <button ng-click="expanded = !expanded ; getCartById(order.id)" class="btn"expand>
+                        <button ng-click="expanded = !expanded ; getCartById(order.id) ; setUser()" class="btn"expand>
                             <span ng-bind="expanded ? '-' : '+'"></span>
                         </button>
                     </td>

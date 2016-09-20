@@ -1,4 +1,6 @@
 app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct, CartFactory, SingleProductFactory) {
+	
+	
 	$scope.product = theProduct;
 	$scope.isWritingAReview = false;
 	$scope.isEditingAReview = false;
@@ -28,11 +30,12 @@ app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct,
 		$scope.isWritingAReview = true;
 	};
 
-	$scope.createAReview = function (content, stars) {
+	$scope.createAReview = function (content, stars, author) {
 
 		var reviewObj = {
 			reviewContent: content,
-			stars: stars
+			stars: stars,
+			author: "PLACEHOLDER"
 		};
 
 		if ($scope.isWritingAReview && !$scope.isEditingAReview) {
@@ -100,6 +103,5 @@ app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct,
 		}
 		return ret
 	}
-
 
 })
