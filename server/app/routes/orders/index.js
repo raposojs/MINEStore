@@ -11,25 +11,30 @@ var OrderedProduct = require('../../../db/models/orderedProducts.js');
 
 
 //GET ALL PREVIOUS orders
-router.get('/pastOrders', function(req, res, next){
+router.get('/pastOrders', function (req, res, next) {
 	//This route assumes that only logged in users have orders
-	
+
 	// //Testing
 	// req.user = {};
 	// req.user.id = 4
 
 	Order.getPastOrders(req.user.id)
-	.then(function(pastOrders){
-		res.json(pastOrders);
-	}).catch(next);
+		.then(function (pastOrders) {
+			res.json(pastOrders);
+		}).catch(next);
 })
 
 
 
 //Admin route -> fetching all shipped orders
-router.get('/all', utilities.isAdministrator, function(req, res, next){
-	Order.findAll({isCart: false})
-		.then(function(orders){
+router.get('/all', utilities.isAdministrator, function (req, res, next) {
+	Order.findAll({
+		where: {
+			isCart: false
+		},
+		order: 'id DESC'
+	})
+		.then(function (orders) {
 			res.send(orders);
 		})
 		.catch(next);
@@ -37,13 +42,26 @@ router.get('/all', utilities.isAdministrator, function(req, res, next){
 
 
 
-router.get('/:orderId', function(req, res, next){
+router.get('/:orderId', function (req, res, next) {
 	Order.findById(req.params.orderId, {
-		include: [{model: Product}]
+		include: [{ model: Product }]
 	})
-	.then(function(order){
-		res.json(order);
-	}).catch(next);
+		.then(function (order) {
+			res.json(order);
+		}).catch(next);
+})
+
+router.put('/setStatus/', function (req, res, next) {
+	var id = req.query.id;
+	var status = req.query.status;
+	Order.findById(+id)
+		.then(function (order) {
+			order.status = req.query.status;
+			order.save()
+				.then(function (success) {
+					res.sendStatus(204);
+				})
+		}).catch(next);
 })
 
 
@@ -147,7 +165,7 @@ router.post('/add', function (req, res, next) {
 
 router.post('/remove', function (req, res, next) {
 	//Request Body needs Product Id, Product Price, Quantity
-	console.log(req.cart.price + "///" +  req.body.product.price  + "///" + req.body.product.quantity);
+	console.log(req.cart.price + "///" + req.body.product.price + "///" + req.body.product.quantity);
 	req.cart.removeProduct(req.body.product.id)
 		.then(function (newOrder) {
 			req.cart.price = req.cart.price - (req.body.product.price * req.body.product.quantity);
