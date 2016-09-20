@@ -27,9 +27,10 @@
 
     <div class="form-group">
     <label>Category - </label>
-    	<select style="margin-left:3px" ng-model="product.category">
-    		<option> Pick a category</option>
-    		<option>Rock</option>
+    	<select 
+      ng-model="product.category">
+    		<option value=""> --Select category--</option>
+        <option>Rock</option>
     		<option>Mineral</option>
     		<option>Meteorite</option>
     	</select>
@@ -74,7 +75,7 @@
     <div class="form-group">
     <label>Rarity 💎 - </label>
     	<select style="margin-left:3px; padding-left:5px;" ng-model="product.rarity">
-    		<option>?</option>
+    		<option value="">?</option>
     		<option>1</option>
     		<option>2</option>
     		<option>3</option>
@@ -167,7 +168,7 @@
 <!-- ORDERS -->
 <script type="text/ng-template" id="adminOrders">
   <legend>Order Info</legend>
-  <table>
+  <table class="pure-table pure-table-horizontal">
     <thead>
       <tr>
         <th>id</th>

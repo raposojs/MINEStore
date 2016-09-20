@@ -1,8 +1,5 @@
 app.controller('TabsCtrl', function($scope, CartFactory, $state){
 	$scope.tabs = [{
-	        title: 'About You',
-	        url: 'aboutYou'
-	    }, {
 	        title: 'Past Orders',
 	        url: 'pastOrders'
 	    }, {
@@ -10,7 +7,7 @@ app.controller('TabsCtrl', function($scope, CartFactory, $state){
 	        url: 'settings'
 	}];
 
-	$scope.currentTab = 'aboutYou';
+	$scope.currentTab = 'pastOrders';
 
 	$scope.onClickTab = function (tab) {
 	    $scope.currentTab = tab.url;
