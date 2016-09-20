@@ -37,7 +37,14 @@ app.controller('TabsCtrl', function($scope, CartFactory, $state){
 
 			- Ten
 			*/
-			$scope.thisCart = cart
+			for(var i =0 ; i < $scope.pastOrders.length ; i++){
+				if($scope.pastOrders[i].id === id){
+					$scope.pastOrders[i].details = cart;
+					console.log('index i', $scope.pastOrders[i].details);
+					break;
+				}
+			}
+			$scope.thisCart = cart;
 		}).catch(console.error.bind(console));
 	}
 

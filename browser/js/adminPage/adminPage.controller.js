@@ -65,12 +65,22 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 		}
 	};
 
-	$scope.deleteUser = AdminFactory.deleteUser;
+	$scope.deleteUser = function(userId){
+		AdminFactory.deleteUser(userId)
+		.then(function(success){
+			$scope.selectedUser = null;
+			users.data = users.data.map(function(user){
+				return user.id !== userId;
+			})
+		})
+		.catch(console.error.bind(console))
+	}
 	$scope.saveUser = AdminFactory.saveUser;
 	$scope.resetPassword = function(user){
 		user.password = "123456";
 		AdminFactory.saveUser(user)
-		.then(function(user){
+		.then(function(savedUser){
+			console.log('USER IS', savedUser);
 		}).catch(console.error.bind(console));
 	}
 
