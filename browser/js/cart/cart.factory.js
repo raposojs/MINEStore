@@ -73,6 +73,9 @@ app.factory('CartFactory', function ($http) {
             .then(function(order){
                 return order.data
             })
+        },
+        sendConfirmationEmail: function(email){
+            return $http.post('/api/utils/sendemail/', email);
         }
     };
 })
