@@ -1,14 +1,17 @@
-app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users,orders, AdminFactory) {
+app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, products, orders, AdminFactory) {
 	$scope.tabs = [{
 		title: 'Add Product',
 		url: 'addProduct'
-	}, {
-			title: 'Edit Users',
-			url: 'editUsers'
-		}, {
-			title: 'Order Info',
-			url: 'adminOrders'
-		}];
+	},{
+		title: 'Edit Product',
+		url: "editProduct"
+	},{
+		title: 'Edit Users',
+		url: 'editUsers'
+	},{
+		title: 'Order Info',
+		url: 'adminOrders'
+	}];
 
 	$scope.currentTab = 'addProduct';
 	$scope.product = {};
@@ -65,6 +68,33 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 		}
 	};
 
+	$scope.currentProduct=null;
+	$scope.editProduct=function(id, updates){
+		AdminFactory.editProduct(id, updates)
+		.then(function(){
+			$scope.message="Product Successfully updated."
+		})
+	}
+	$scope.findProduct=function(){
+		$scope.currentProduct=null;
+		$scope.message=null;
+		$scope.error=null;
+		console.log("hello");
+		if (!this.productText){
+			return
+		}
+		for (var i=0; i<products.length; i++){
+			if (this.productText===products[i].name){
+				$scope.currentProduct=products[i];
+				$scope.display=this.productText;
+			}
+		}
+		if (!$scope.currentProduct){
+			$scope.error="The product you entered does not exist.";
+		}
+		console.log($scope.currentProduct);
+	};
+
 	$scope.deleteUser = function(userId){
 		AdminFactory.deleteUser(userId)
 		.then(function(success){
@@ -75,6 +105,7 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 		})
 		.catch(console.error.bind(console))
 	}
+
 	$scope.saveUser = AdminFactory.saveUser;
 	$scope.resetPassword = function(user){
 		user.password = "123456";

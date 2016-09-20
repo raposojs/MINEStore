@@ -12,6 +12,12 @@ app.config(function ($stateProvider) {
         resolve: {
         	users: function($http){
         		return $http.get('api/members')
+        	}, 
+            products: function($http){
+                return $http.get('api/products')
+                .then(function(products){
+                    return products.data;
+                })
         	},
             orders: function($http){
                 return $http.get('/api/orders/all')
