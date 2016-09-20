@@ -26,7 +26,7 @@
             <div>
                 <p class='havePointer' ui-sref='myAccount'>Welcome, {{ user.username }}!</p>
             </div>
-            <a ng-click="logout()">Logout</a>
+            <a ng-click="logout(user.username)">Logout</a>
         </div>
     </div>
 </nav>
