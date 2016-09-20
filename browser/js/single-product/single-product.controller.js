@@ -79,5 +79,26 @@ app.controller('SingleProductCtrl', function ($scope, $state, $http, theProduct,
 			}).catch(console.error.bind(console));
 	}
 
+	$scope.rarity = function(productRarity){
+		var ret = ""
+		for(var i = 0; i < productRarity; i++){
+			ret += "💎"
+		}
+		return ret
+	}
+
+	$scope.avgStars = function(avg){
+		var ret = ""
+		for(var i = 0; i < avg; i++){
+			// ret += '<i class="fa fa-star gold"></i>'
+			ret += '⭐'
+		}
+		for(var x = 0; x < 5-avg; x++){
+			// ret+= '<i class="fa fa-star-o">'
+			ret += '💩'
+		}
+		return ret
+	}
+
 
 })
