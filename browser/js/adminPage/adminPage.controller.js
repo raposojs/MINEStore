@@ -1,4 +1,4 @@
-app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, products, orders, AdminFactory) {
+app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, products, orders, AdminFactory, CartFactory) {
 	$scope.tabs = [{
 		title: 'Add Product',
 		url: 'addProduct'
@@ -13,7 +13,7 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 			url: 'adminOrders'
 		}];
 
-	if(!$scope.currentTab){
+	if (!$scope.currentTab) {
 		$scope.currentTab = 'addProduct';
 	}
 	$scope.product = {};
@@ -120,7 +120,10 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 	// orders admin page
 	$scope.orders = orders.data.map(function (order) {
 		var orderAddress = JSON.parse(order.address);
-		if (orderAddress) order.address = orderAddress.name + ' ' + orderAddress.address + ' ' + orderAddress.extension + ', ' + orderAddress.cityState + ' ' + orderAddress.zip;
+		if (orderAddress) {
+			order.address = orderAddress.name + ' ' + orderAddress.address + ' ' + orderAddress.extension + ', ' + orderAddress.cityState + ' ' + orderAddress.zip;
+			order.email = orderAddress.email;
+		}
 		return order;
 	})
 
@@ -128,11 +131,26 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 		return order.isCart === false;
 	})
 
-	$scope.setStatus = function(id, status){
-			AdminFactory.setOrderStatus(id, status)
-			.then(function(success){
-				$scope.currentTab = 'Order Info';
-				$state.reload();
+	$scope.setStatus = function (id, email, status) {
+		var orderId = id;
+		var email = {
+            from: 'Mine_customerService@MINE.com',
+            to: email,
+            subject: 'Order #' + id + ' Status',
+            text: 'The status of your order has changed to ' + status
+        };
+
+        CartFactory.sendConfirmationEmail(email);
+
+		AdminFactory.setOrderStatus(id, status)
+			.then(function (success) {
+				for(var i = 0; i < $scope.orders.length; i++){
+					if($scope.orders[i].id === orderId) {
+						$scope.orders[i].status = status;
+						break;
+					}
+				}
+				
 			})
 			.catch(console.error.bind(console));
 	}

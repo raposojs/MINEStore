@@ -186,9 +186,9 @@
         <td>{{order.price}}</td>
         <td>{{order.address}}</td>
         <td>{{order.status}}</td>
-        <td><button ng-click="setStatus(order.id, status.processing)">Process</button></td>
-        <td><button ng-click="setStatus(order.id, status.cancelled)">Cancel</button></td>
-        <td><button ng-click="setStatus(order.id, status.completed)">Completed</button></td>
+        <td><button ng-click="setStatus(order.id, order.email, status.processing)">Process</button></td>
+        <td><button ng-click="setStatus(order.id, order.email, status.cancelled)">Cancel</button></td>
+        <td><button ng-click="setStatus(order.id, order.email, status.completed)">Completed</button></td>
       </tr>
     </tbody>
   </table>
