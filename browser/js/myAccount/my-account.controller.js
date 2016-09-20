@@ -1,11 +1,13 @@
-app.controller('TabsCtrl', function($scope, CartFactory, $state){
+app.controller('TabsCtrl', function($scope, CartFactory, $state, AuthService, adminstatus){
 	$scope.tabs = [{
 	        title: 'Past Orders',
 	        url: 'pastOrders'
 	    }, {
 	        title: 'Settings',
 	        url: 'settings'
-	}];
+		}];
+
+	$scope.isAdm = adminstatus.isAdmin;
 
 	$scope.currentTab = 'pastOrders';
 
@@ -48,6 +50,12 @@ app.controller('TabsCtrl', function($scope, CartFactory, $state){
 		}).catch(console.error.bind(console));
 	}
 
+	$scope.setUser = function () {
+	    AuthService.getLoggedInUser().then(function (user) {
+	        // return user
+	        console.log(user)
+	    });
+	};
 
 
 })

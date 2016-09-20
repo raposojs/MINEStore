@@ -1,6 +1,6 @@
 <!-- <div class="container"> -->
 
-<div class="myaccount" id="login-form">
+<div class="myaccount">
     <div id="tabs">
         <ul>
             <li ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="onClickTab(tab)" class="havePointer">{{tab.title}}</li>
@@ -12,7 +12,6 @@
 </div>
 
 <script type="text/ng-template" id="addProduct">
-    <legend>Add New Product to Catalog</legend>
     <form id="newProduct">
     <div class="form-group">
         <label class="control-label">Product Name</label>
@@ -119,7 +118,6 @@
 
 
 <script type="text/ng-template" id="editUsers">
-        <legend>Edit Users</legend>
 
             <div class="form-group">
               <form ng-submit="findUser()">
@@ -167,7 +165,6 @@
 
 <!-- ORDERS -->
 <script type="text/ng-template" id="adminOrders">
-  <legend>Order Info</legend>
   <table class="pure-table pure-table-horizontal">
     <thead>
       <tr>
@@ -196,7 +193,6 @@
 </script>
 
 <script type="text/ng-template" id="editProduct">
-<legend>Edit Product</legend>
             <div class="form-group">
               <form ng-submit="findProduct()">
                 Find product by name:
