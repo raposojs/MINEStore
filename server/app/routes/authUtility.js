@@ -25,6 +25,7 @@ module.exports = {
 	},
 	adminOrUser: function(req,res,next){
 		if(req.session.passport.user === +req.params.id || (req.user && req.user.isAdmin)){
+			if(!req.user.isAdmin && req.body.isAdmin) res.status(401).end()
 			next();
 		} else {
 			res.status(401).end();
