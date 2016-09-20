@@ -57,7 +57,6 @@ module.exports = db.define('order', {
 				promiseUpdateProducts.push(self.save());
 				return Promise.all(promiseUpdateProducts)
 					.then(function (productArray) {
-						console.log(productArray);
 						return productArray;
 					}).catch(function (err) {
 						console.error(err)

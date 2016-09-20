@@ -22,7 +22,6 @@ app.factory('SingleProductFactory', function ($http) {
             return $http.delete('/api/reviews/' + review.id)
         },
         createProduct: function (productObj) {
-            console.log('productObj', productObj);
             return $http.post('/api/products/add', productObj)
                 .then(function (createdProduct) {
                     return createdProduct

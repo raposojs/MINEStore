@@ -8,7 +8,6 @@ var utilities = require("../authUtility.js");
 
 router.param('id', utilities.ensureAuthenticated, function (req, res, next, id) {
     if (typeof +id !== 'number') return next();
-	console.log('ID is', id);
 	User.findById(id)
 		.then(function (user) {
 			if (user) {

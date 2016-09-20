@@ -35,7 +35,6 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 
         SingleProductFactory.createProduct(productObj)
 			.then(function (productCreated) {
-				console.log(productCreated);
 				$state.go('catalog');
 			})
 			.catch(console.error.bind(console));
@@ -72,7 +71,6 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 		user.password = "123456";
 		AdminFactory.saveUser(user)
 		.then(function(user){
-			console.log(user);
 		}).catch(console.error.bind(console));
 	}
 
