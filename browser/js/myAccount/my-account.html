@@ -30,7 +30,7 @@
         <tbody>
             <tr ng-repeat-start="order in pastOrders">
                 <td>
-                    <button ng-click="expanded = !expanded ; getCartById(order.id)" expand>
+                    <button ng-click="expanded = !expanded ; getCartById(order.id)" class="btn"expand>
                         <span ng-bind="expanded ? '-' : '+'"></span>
                     </button>
                 </td>
