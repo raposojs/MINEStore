@@ -23,9 +23,19 @@
 			<hr>
 			<h3 class="stock-status" ng-show="product.stocks >= 1">In Stock</h3>
 			<p>{{product.stocks}} stocks left</p>
-			<button class="btn btn-primary" id="minebtn" ng-click="addToCart(product)" ng-hide="product.stocks <= 0"> Mine It! ⚒ </button>
-			<button class="btn btn-primary" id="outofstock" ng-disabled="true" ng-show="product.stocks <= 0"> Out of Stock </button>
-			<button class="btn btn-info" ng-click="openReviewCreate()">Write a review</button>
+			<button 
+			class="btn btn-primary" 
+			id="minebtn" 
+			ng-click="addToCart(product) ; notification(product.name)" 
+			ng-hide="product.stocks <= 0"> Mine It! ⚒ </button>
+			<button 
+			class="btn btn-primary" 
+			id="outofstock" 
+			ng-disabled="true" 
+			ng-show="product.stocks <= 0"> Out of Stock </button>
+			<button 
+			class="btn btn-info" 
+			ng-click="openReviewCreate()">Write a review</button>
 		</div>
 	</div>
 	<br>

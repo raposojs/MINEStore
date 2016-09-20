@@ -1,14 +1,17 @@
 'use strict';
 
-app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory, CatalogFactory){
+app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory, CatalogFactory, Notification){
 	
 	CatalogFactory.getAll()
 	.then(function(products){
 		$scope.products = products;
 		$scope.all = angular.copy($scope.products, []);
-		// $scope.rarity = $scope.products.rarity
-			
 	});
+
+	$scope.primaryTitle = function(msg){
+		return Notification.success(msg + ' has been added to your cart!')	
+	}
+
 	$scope.categories = ['All', 'Mineral', 'Meteorite', 'Rock'];
 	$scope.sortBy = ['name', 'price', 'rarity', 'stocks'];
 	
@@ -29,7 +32,7 @@ app.controller('CatalogCtrl', function($scope, $http, $state, CartFactory, Catal
 	$scope.addToCart = function(product){
 		CartFactory.addItemToCart(product.id, product.price)
 		.then(function(cart){
-			$state.go('cart')
+			// $state.go('cart')
 			return cart;
 		}).catch(console.error.bind(console));
 	}
