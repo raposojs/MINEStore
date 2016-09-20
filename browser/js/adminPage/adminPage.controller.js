@@ -1,8 +1,10 @@
 app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users,orders, AdminFactory) {
+	// JOE: I love this, you are using data/information
+	// to produce UI controls. Gold star.
 	$scope.tabs = [{
 		title: 'Add Product',
 		url: 'addProduct'
-	}, {
+	}, { // JOE: Be very strict about indentation.
 			title: 'Edit Users',
 			url: 'editUsers'
 		}, {
@@ -45,6 +47,8 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
     $scope.error = null;
 
     $scope.findUser = function () {
+    	// JOE: The `this` context in a $scope method,
+		// if not otherwise rebound, is always $scope itself.
 		if (!this.text) {
 			$scope.selectedUser = null;
 			$scope.error = null;
@@ -53,6 +57,8 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 
 		$scope.selectedUser = null;
 		$scope.error = null;
+		// JOE: Default to using things like .forEach/.map/.reduce
+		// instead of for loops
 		for (var i = 0; i < users.data.length; i++) {
 			if (this.text === users.data[i].username) {
 				$scope.error = null;
@@ -61,13 +67,15 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 			}
 		}
 		if (!$scope.selectedUser) {
-			$scope.error = "Username " + '"' + this.text + '"' + " does not exist"
+			// JOE: A perfect use case for template strings. Changed code below.
+			$scope.error = `Username "${this.text}" does not exist`;
 		}
 	};
 
 	$scope.deleteUser = AdminFactory.deleteUser;
 	$scope.saveUser = AdminFactory.saveUser;
 	$scope.resetPassword = function(user){
+		// JOE: This can lead to a number of security flaws.
 		user.password = "123456";
 		AdminFactory.saveUser(user)
 		.then(function(user){

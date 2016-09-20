@@ -2,6 +2,9 @@ app.directive('cart', function (CartFactory, $state) {
     return {
         restrict: 'E',
         scope: {
+            // JOE: `value` is a notoriously bad variable name.
+            // Try to make it clear with your labeling what things
+            // should be.
             value: '='
         },
         templateUrl: 'js/cart/templates/cart.html',
@@ -15,6 +18,9 @@ app.directive('cart', function (CartFactory, $state) {
                 scope.products[index].quantity = quantity.quantity;
             })
 
+            // JOE: As you start to service more markets, you probably
+            // want to AJAX to the backend to centralized what tax percentage
+            // should be used.
             scope.tax = 0.17; //WHERE WILL WE PUT THIS?
             scope.checkOut = function () {
                 //Assume products, quantities are on scope (can be through ng-model)

@@ -11,6 +11,8 @@ app.config(function ($stateProvider) {
         },
         resolve: {
         	users: function($http){
+        	    // JOE: You should have factory methods for this
+                // and the `orders` resolve AJAX call.
         		return $http.get('api/members')
         	},
             orders: function($http){
