@@ -40,7 +40,7 @@ router.get('/secret-stash', utilities.isAdministrator, function (req, res) {
         'http://www.dailymobile.net/wp-content/uploads/2014/10/lollipops.jpg'
     ];
 
-    res.send(_.shuffle(theStash));
+    res.send(_.shuffle(theStash))
 
 });
 

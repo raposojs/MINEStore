@@ -2,18 +2,20 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 	$scope.tabs = [{
 		title: 'Add Product',
 		url: 'addProduct'
-	},{
-		title: 'Edit Product',
-		url: "editProduct"
-	},{
-		title: 'Edit Users',
-		url: 'editUsers'
-	},{
-		title: 'Order Info',
-		url: 'adminOrders'
-	}];
+	}, {
+			title: 'Edit Product',
+			url: "editProduct"
+		}, {
+			title: 'Edit Users',
+			url: 'editUsers'
+		}, {
+			title: 'Order Info',
+			url: 'adminOrders'
+		}];
 
-	$scope.currentTab = 'addProduct';
+	if(!$scope.currentTab){
+		$scope.currentTab = 'addProduct';
+	}
 	$scope.product = {};
 
 	$scope.onClickTab = function (tab) {
@@ -68,63 +70,79 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 		}
 	};
 
-	$scope.currentProduct=null;
-	$scope.editProduct=function(id, updates){
+	$scope.currentProduct = null;
+	$scope.editProduct = function (id, updates) {
 		AdminFactory.editProduct(id, updates)
-		.then(function(){
-			$scope.message="Product Successfully updated."
-		})
+			.then(function () {
+				$scope.message = "Product Successfully updated."
+			})
 	}
-	$scope.findProduct=function(){
-		$scope.currentProduct=null;
-		$scope.message=null;
-		$scope.error=null;
+	$scope.findProduct = function () {
+		$scope.currentProduct = null;
+		$scope.message = null;
+		$scope.error = null;
 		console.log("hello");
-		if (!this.productText){
+		if (!this.productText) {
 			return
 		}
-		for (var i=0; i<products.length; i++){
-			if (this.productText===products[i].name){
-				$scope.currentProduct=products[i];
-				$scope.display=this.productText;
+		for (var i = 0; i < products.length; i++) {
+			if (this.productText === products[i].name) {
+				$scope.currentProduct = products[i];
+				$scope.display = this.productText;
 			}
 		}
-		if (!$scope.currentProduct){
-			$scope.error="The product you entered does not exist.";
+		if (!$scope.currentProduct) {
+			$scope.error = "The product you entered does not exist.";
 		}
 		console.log($scope.currentProduct);
 	};
 
-	$scope.deleteUser = function(userId){
+	$scope.deleteUser = function (userId) {
 		AdminFactory.deleteUser(userId)
-		.then(function(success){
-			$scope.selectedUser = null;
-			users.data = users.data.map(function(user){
-				return user.id !== userId;
+			.then(function (success) {
+				$scope.selectedUser = null;
+				users.data = users.data.map(function (user) {
+					return user.id !== userId;
+				})
 			})
-		})
-		.catch(console.error.bind(console))
+			.catch(console.error.bind(console))
 	}
 
 	$scope.saveUser = AdminFactory.saveUser;
-	$scope.resetPassword = function(user){
+	$scope.resetPassword = function (user) {
 		user.password = "123456";
 		AdminFactory.saveUser(user)
-		.then(function(savedUser){
-			console.log('USER IS', savedUser);
-		}).catch(console.error.bind(console));
+			.then(function (savedUser) {
+				console.log('USER IS', savedUser);
+			}).catch(console.error.bind(console));
 	}
 
-	    // orders admin page
-	    $scope.orders = orders.data.map(function(order){
-			var orderAddress = JSON.parse(order.address);
-			if(orderAddress) order.address = orderAddress.name + ' ' + orderAddress.address + ' ' + orderAddress.extension + ', ' + orderAddress.cityState + ' ' + orderAddress.zip;
-			return order;
-		})
+	// orders admin page
+	$scope.orders = orders.data.map(function (order) {
+		var orderAddress = JSON.parse(order.address);
+		if (orderAddress) order.address = orderAddress.name + ' ' + orderAddress.address + ' ' + orderAddress.extension + ', ' + orderAddress.cityState + ' ' + orderAddress.zip;
+		return order;
+	})
 
-		$scope.orders = $scope.orders.filter(function(order){
-			return order.isCart === false;
-		})
+	$scope.orders = $scope.orders.filter(function (order) {
+		return order.isCart === false;
+	})
+
+	$scope.setStatus = function(id, status){
+			AdminFactory.setOrderStatus(id, status)
+			.then(function(success){
+				$scope.currentTab = 'Order Info';
+				$state.reload();
+			})
+			.catch(console.error.bind(console));
+	}
+
+	$scope.status = {
+		completed: 'Completed',
+		processing: 'Processing',
+		cancelled: 'Cancelled'
+	}
+
 
 
 })

@@ -21,6 +21,12 @@ app.factory('AdminFactory', function($http){
                     return product;
                 }
             });
+        },
+        setOrderStatus: function(id, status){
+            return $http.put('/api/orders/setStatus?id=' + id + '&status=' + status)
+                .then(function(order){
+                    console.log('successfully set status');
+                })
         }
     }
 })
