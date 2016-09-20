@@ -1,4 +1,4 @@
-app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, products) {
+app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, products, orders, AdminFactory) {
 	$scope.tabs = [{
 		title: 'Add Product',
 		url: 'addProduct'
@@ -8,9 +8,13 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 	},{
 		title: 'Edit Users',
 		url: 'editUsers'
+	},{
+		title: 'Order Info',
+		url: 'adminOrders'
 	}];
 
 	$scope.currentTab = 'addProduct';
+	$scope.product = {};
 
 	$scope.onClickTab = function (tab) {
 		$scope.currentTab = tab.url;
@@ -21,8 +25,6 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 	}
 
 	$scope.createProduct = function () {
-		console.log($scope);
-
         var productObj = {
             name: $scope.product.name,
             category: $scope.product.category,
@@ -36,7 +38,6 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
 
         SingleProductFactory.createProduct(productObj)
 			.then(function (productCreated) {
-				console.log(productCreated);
 				$state.go('catalog');
 			})
 			.catch(console.error.bind(console));
@@ -46,26 +47,64 @@ app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $stat
     $scope.selectedUser = null;
     $scope.error = null;
 
-    $scope.findUser = function() {
-    	if(!this.text){
-    		$scope.selectedUser = null;
-    		$scope.error = null;
-    		return;
-    	}
+    $scope.findUser = function () {
+		if (!this.text) {
+			$scope.selectedUser = null;
+			$scope.error = null;
+			return;
+		}
 
-	    $scope.selectedUser = null;
-	    $scope.error = null;
-	      for(var i = 0; i < users.data.length; i++){
-	      	if(this.text === users.data[i].username){
-	      		$scope.error = null;
-	      		$scope.selectedUser = users.data[i]
-	      		$scope.display = this.text
-	      	}
-	      }
-	      if(!$scope.selectedUser){
-	      	$scope.error = "Username " + '"' + this.text + '"' + " does not exist" 
-	      }
-	    };
+		$scope.selectedUser = null;
+		$scope.error = null;
+		for (var i = 0; i < users.data.length; i++) {
+			if (this.text === users.data[i].username) {
+				$scope.error = null;
+				$scope.selectedUser = users.data[i]
+				$scope.display = this.text
+			}
+		}
+		if (!$scope.selectedUser) {
+			$scope.error = "Username " + '"' + this.text + '"' + " does not exist"
+		}
+	};
+
+	$scope.currentProduct=null;
+	$scope.editProduct=function(id, updates){
+		AdminFactory.editProduct(id, updates)
+		.then(function(){
+			$scope.message="Product Successfully updated."
+		})
+	}
+	$scope.findProduct=function(){
+		$scope.currentProduct=null;
+		console.log("hello");
+		if (!this.productText){
+			return
+		}
+		for (var i=0; i<products.length; i++){
+			if (this.productText===products[i].name){
+				$scope.currentProduct=products[i];
+				$scope.display=this.productText;
+			}
+		}
+		if (!$scope.currentProduct){
+			$scope.error="The product you entered does not exist.";
+		}
+		console.log($scope.currentProduct);
+	};
+
+	$scope.deleteUser = AdminFactory.deleteUser;
+	$scope.saveUser = AdminFactory.saveUser;
+	$scope.resetPassword = function(user){
+		user.password = "123456";
+		AdminFactory.saveUser(user)
+		.then(function(user){
+		}).catch(console.error.bind(console));
+	}
+
+
+	    // orders admin page
+	    $scope.orders = orders;
 
 
 })

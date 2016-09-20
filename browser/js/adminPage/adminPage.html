@@ -13,8 +13,7 @@
 
 <script type="text/ng-template" id="addProduct">
     <legend>Add New Product to Catalog</legend>
-<!--<form id="newProduct" ng-submit="createUser()">-->
-<form name="newProduct">
+    <form id="newProduct">
     <div class="form-group">
         <label class="control-label">Product Name</label>
         <input 
@@ -114,7 +113,7 @@
 
 
     <button type="submit" class="btn btn-success"  ng-disabled="registerForm.$invalid"  ng-click="createProduct()">Add to Catalog</button>
-</form>
+        </form>
 </script>
 
 
@@ -138,12 +137,12 @@
 
                 <!-- if user is found -->
                 <pre 
-                ng-show="selectedUser">
+                ng-show="CurrentProduct">
 
                   <ul>ID: {{selectedUser.id}}</ul>
                   <ul>Email: {{selectedUser.email}}</ul>
                   <ul>Username: {{selectedUser.username}}</ul>
-                  <ul>Admin: <input type="checkbox"></input></ul>
+                  <ul>Admin: <input type="checkbox" ng-model="selectedUser.isAdmin"></input></ul>
 
                 </pre>
 
@@ -158,49 +157,97 @@
         <button 
         type="submit" 
         class="btn btn-success" 
-        ng-click=saveInDb()>Save</button>
+        ng-click=saveUser(selectedUser)>Save</button>
+        <button type="submit" class="btn btn-success" ng-click="deleteUser(selectedUser.id)">Delete User</button>
+        <button type="submit" class="btn btn-success" ng-click="resetPassword(selectedUser)">Reset Password</button>
+
+</script>
 
 
-
-
+<!-- ORDERS -->
+<script type="text/ng-template" id="adminOrders">
+  <legend>Order Info</legend>
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>price</th>
+        <th>address</th>
+        <th>status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="order in orders.data">
+        <td>{{order.id}}</td>
+        <td>{{order.price}}</td>
+        <td>{{order.address}}</td>
+        <td>{{order.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
 </script>
 
 <script type="text/ng-template" id="editProduct">
 <legend>Edit Product</legend>
-<form>
-<div class="form-group">
+            <div class="form-group">
+              <form ng-submit="findProduct()">
+                Find product by name:
+
+                <input 
+                type="text" 
+                ng-model="productText" 
+                name="productText" />
+
+                <input 
+                type="submit" 
+                id="button" 
+                value="Find Product" />
+
+                <!-- if user is found -->
+                <pre ng-show="currentProduct">
 <h1> Have fun Editing your product!!!</h1>
 <div class="form-group">
 <label class='control-label'>Name:</label>
-<input type="text">
+<input type="text" value="{{currentProduct.name}}" ng-model="currentProduct.name">
 </div>
 <div class="form-group">
 <label class='control-label'>Categories:</label>
-<input type="text">
+<input type="text" value="{{currentProduct.category}}" ng-model="currentProduct.category">
 </div>
 <div class="form-group">
 <label class='control-label'>Description</label> 
-<textarea></textarea>
+<textarea ng-model="currentProduct.description">{{currentProduct.description}}</textarea>
 </div>
 <div class="form-group">
 <label class='control-label'>Picture Url:</label>
-<input type="text">
+<input type="text" value="{{currentProduct.pictureURL}}" ng-model="currentProduct.pictureURL">
+</div>
+<div class="form-group">
+<label class='control-label'>Price:</label>
+<input type="text" value="{{currentProduct.price}}" ng-model="currentProduct.price">
 </div>
 <div class="form-group">
 <label class='control-label'>Rarity:</label>
-<input type="text">
+<input type="text" value="{{currentProduct.rarity}}" ng-model="currentProduct.rarity">
 </div>
 <div class="form-group">
 <label class='control-label'>Location:</label>
-<input type="text">
+<input type="text" value="{{currentProduct.location}}" ng-model="currentProduct.location">
 </div>
 <div class="form-group">
 <label class='control-label'>Stocks:</label>
-<input type="text">
+<input type="text" value="{{currentProduct.stocks}}" ng-model="currentProduct.stocks">
 </div>
+    <button type="submit" class="btn btn-success"  ng-disabled="registerForm.$invalid"  ng-click="editProduct(currentProduct.id, currentProduct)">Submit Changes</button>
 </div>
-</form>
-</script>
+                </pre>
 
+                <!-- if user isn't found -->
+                <pre ng-show="error">{{error}}</pre>
+                <!-- show if product is updated successfully -->
+                <pre ng-show="message">{{message}}</pre>
 
+                </form>
+            </div>
 </script>

@@ -15,8 +15,14 @@ app.config(function ($stateProvider) {
         	}, 
             products: function($http){
                 return $http.get('api/products')
+                .then(function(products){
+                    return products.data;
+                })
+        	},
+            orders: function($http){
+                return $http.get('/api/orders/all')
             }
         }
-    });
+    })
 
 });

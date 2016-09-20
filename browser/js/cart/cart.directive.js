@@ -6,7 +6,6 @@ app.directive('cart', function (CartFactory, $state) {
         },
         templateUrl: 'js/cart/templates/cart.html',
         link: function (scope) {
-            console.log('SCOPE VALUE', scope.value);
             scope.cart = scope.value.cart;
             scope.products = scope.value.products;
             scope.quantities = scope.value.quantities;
@@ -21,12 +20,6 @@ app.directive('cart', function (CartFactory, $state) {
                 //Assume products, quantities are on scope (can be through ng-model)
                 var products = scope.products;
                 $state.go('checkout', products);
-                // CartFactory.checkOut(scope.products)
-                // .then(function(cart){
-                //     console.log('The Updated Cart is: \n', cart);
-                //     $state.go('checkout');
-                //     return cart;
-                // }).catch(console.error.bind(console));
             }
 
             scope.deleteItemFromCart = function (productId, productPrice, quantity) {

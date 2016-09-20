@@ -16,7 +16,6 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state, $http) {
     $scope.loginUser = function () {
 
         $scope.error = null;
-        console.log('SCOPE LOGIN', $scope.login);
         AuthService.login($scope.login).then(function () {
             $state.go('home');
         }).catch(function () {
@@ -32,7 +31,6 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state, $http) {
         //TODO: move this to Factory
         $http.post('/api/members/', $scope.register)
             .then(function(createdUser){
-                console.log('a user has been created', createdUser);
 
                 AuthService.login({email: $scope.register.email, password: $scope.register.password}).then(function () {
                     $state.go('home');

@@ -34,21 +34,3 @@ router.get('/sendemail', function (req, res, next) {
 
 
 
-/*
-FRONT-END SIDE
-
-var email = {};
-email.to = null;
-email.subject = null;
-email.text = null;
-
-
-
-$http.get('/api/utils/sendemail', email)
-.then(function(data){
-	if (data == 'sent'){
-		console.log('email has been sent successfully');
-	}
-});
-
-*/
