@@ -32,15 +32,21 @@ app.factory('SignInFactory', function($http){
 })
 
 
-app.controller('LoginCtrl', function ($scope, $state, AuthService, SignInFactory) {
+app.controller('LoginCtrl', function ($scope, $state, AuthService, SignInFactory, Notification) {
 
+    $scope.notify = function(user){
+        Notification.info('Welcome back, ' + user + '!') 
+    }
     $scope.login = {};
     $scope.error = null;
 
     $scope.loginUser = function () {
         $scope.error = null;
-        AuthService.login($scope.login).then(function () {
+        AuthService.login($scope.login).then(function (userInfo) {
             $state.go('home');
+            $scope.notify(userInfo.username)
+            // console.log(a)
+            
         }).catch(function () {
             $scope.error = 'Invalid login credentials.';
         });

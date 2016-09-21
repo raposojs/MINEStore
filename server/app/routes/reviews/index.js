@@ -1,55 +1,54 @@
 var express = require("express");
 var router = express.Router();
 var Reviews = require("../../../db/models/reviews.js");
+var User = require("../../../db/models/user.js");
 var utilities = require("../authUtility.js");
 
 
-router.get('/products/:id', function (request, response, next) {
-	var id = request.params.id;
+router.get('/products/:id', function (req, res, next) {
 	Reviews.findAll({
 		where: {
-			productId: id
-		}
+			productId: req.params.id
+		},
+		include: [{model: User}]
 	})
 		.then(function (reviews) {
 			if (reviews) {
-				response.status(200).send(reviews);
+				res.status(200).send(reviews);
 			} else {
-				response.sendStatus(404);
+				res.sendStatus(404);
 			}
 		})
 		.catch(next);
 })
 
-router.get('/users/:id', function (request, response, next) {
-	var id = request.params.id;
+router.get('/users/:id', function (req, res, next) {
 	Reviews.findAll({
 		where: {
-			userId: id
+			userId: req.params.id
 		}
 	})
 		.then(function (reviews) {
 			if (reviews) {
-				response.status(200).send(reviews);
+				res.status(200).send(reviews);
 			} else {
-				response.sendStatus(404);
+				res.sendStatus(404);
 			}
 		})
 		.catch(next);
 })
 
-router.post('/products/:id', utilities.ensureAuthenticated, function (request, response, next) {
-
-	var id = request.params.id;
-	var body = request.body;
+router.post('/products/:id', utilities.ensureAuthenticated, function (req, res, next) {
+	var id = req.params.id;
+	var body = req.body;
 	Reviews.create({
 		reviewContent: body.reviewContent,
 		stars: body.stars,
 		productId: id,
-		userId: body.userId
+		userId: req.user.id
 	})
 		.then(function (review) {
-			response.status(201).send(review);
+			res.status(201).send(review);
 		})
 		.catch(next)
 })
@@ -64,26 +63,26 @@ router.put('/:id', utilities.isAdministrator, function (request, response, next)
 	}
 	)
 		.then(function (review) {
-			response.status(201).send(review);
+			res.status(201).send(review);
 		})
 		.then(function (review) {
-			response.status(201).send(review);
+			res.status(201).send(review);
 		})
 		.catch(next)
 })
 
-router.delete('/:id', utilities.isAdministrator, function (request, response, next) {
-	var id = request.params.id;
+router.delete('/:id', utilities.isAdministrator, function (req, res, next) {
+	var id = req.params.id;
 	Reviews.findById(id)
 		.then(function (review) {
 			if (review) {
 				return review.destroy()
 				.then(function(){
-					response.sendStatus(204);
+					res.sendStatus(204);
 				})
 			}
 			else {
-				response.sendStatus(404);
+				res.sendStatus(404);
 			}
 		})
 })

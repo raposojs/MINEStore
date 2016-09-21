@@ -1,4 +1,4 @@
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, Notification) {
 
     return {
         restrict: 'E',
@@ -17,12 +17,17 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             scope.user = null;
 
+            var bye = function(user){
+                Notification.error("Bye, " + user + "!")
+            }
+
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
             };
 
-            scope.logout = function () {
+            scope.logout = function (user) {
                 AuthService.logout().then(function () {
+                   bye(user)
                    $state.go('home');
                 });
             };
