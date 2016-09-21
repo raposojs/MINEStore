@@ -16,6 +16,10 @@ module.exports = {
     clientSecret: 'EYYqNM0dqF8ErTd_bwKz1E59',
     callbackURL: 'http://127.0.0.1:1337/auth/google/callback'
   },
+  NODEMAIL: {
+    user: 'customerservice.mine@gmail.com',
+    pass: 'MineralsINeverEncountered'
+  },
   LOGGING: true,
   NATIVE: true
 };
