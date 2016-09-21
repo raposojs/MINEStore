@@ -1,13 +1,18 @@
 'use strict';
 var router = require('express').Router(); // eslint-disable-line new-cap
-
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
+
+var env = require('../../../env');
+
 
 
 var transporter = nodemailer.createTransport(smtpTransport({
 	service: 'gmail',
-	auth: env.NODEMAILER
+	auth: {
+		user: env.NODEMAILER.user,
+		pass: env.NODEMAILER.pass
+	}
 }));
 
 
