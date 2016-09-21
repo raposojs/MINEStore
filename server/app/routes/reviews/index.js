@@ -53,9 +53,9 @@ router.post('/products/:id', utilities.ensureAuthenticated, function (req, res, 
 		.catch(next)
 })
 
-router.put('/:id', function (req, res, next) {
-	var reviewId = req.params.id;
-	var body = req.body;
+router.put('/:id', utilities.isAdministrator, function (request, response, next) {
+	var reviewId = request.params.id;
+	var body = request.body;
 	Reviews.update(body, {
 		where: {
 			id: reviewId
