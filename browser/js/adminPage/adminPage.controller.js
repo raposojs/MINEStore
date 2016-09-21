@@ -1,8 +1,8 @@
 app.controller('AdminCtrl', function ($scope, $http, SingleProductFactory, $state, users, products, orders, AdminFactory, CartFactory) {
 	$scope.tabs = [{
-		title: 'Add Product',
-		url: 'addProduct'
-	}, {
+			title: 'Add Product',
+			url: 'addProduct'
+		}, {
 			title: 'Edit Product',
 			url: "editProduct"
 		}, {
