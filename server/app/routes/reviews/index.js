@@ -54,7 +54,7 @@ router.post('/products/:id', utilities.ensureAuthenticated, function (request, r
 		.catch(next)
 })
 
-router.put('/:id', function (request, response, next) {
+router.put('/:id', utilities.isAdministrator, function (request, response, next) {
 	var reviewId = request.params.id;
 	var body = request.body;
 	Reviews.update(body, {
