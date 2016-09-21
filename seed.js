@@ -21,7 +21,7 @@ var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
 var Product = db.model('product');
-var Order = db.model('order');
+// var Order = db.model('order');
 var Review = db.model('review');
 var Promise = require('sequelize').Promise;
 
@@ -33,6 +33,31 @@ var seedUsers = function () {
             password: 'password'
         },
         {
+            username: 'Bruno',
+            email: 'bruno@bruno.com',
+            password: 'mineit',
+            isAdmin: true
+        },
+        {
+            username: 'Ten',
+            email: 'ten@ten.com',
+            password: 'mineit',
+            isAdmin: true
+        },
+        {
+            username: 'Nate',
+            email: 'nate@nate.com',
+            password: 'mineit',
+            isAdmin: true
+        },
+        {
+            username: 'Han',
+            email: 'han@han.com',
+            password: 'mineit',
+            isAdmin: true
+        },
+        {   
+            username: 'President Obama',
             email: 'obama@gmail.com',
             password: 'potus',
             isAdmin: true
@@ -83,7 +108,7 @@ var seedProducts = function (userList) {
             name: 'Quartz',
             category: 'Mineral',
             pictureURL: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Quartz,_Tibet.jpg',
-            price: 9.99,
+            price: 10.00,
             description: 'Quartz is the second most abundant mineral in Earth\'s continental crust, after feldspar',
             rarity: 3,
             location: 'Mike\'s Hard Rocks',
@@ -93,7 +118,7 @@ var seedProducts = function (userList) {
             name: '101955 Bennu',
             category: 'Meteorite',
             pictureURL: 'http://3.bp.blogspot.com/-4vTApLrr-50/VIS_DKIghSI/AAAAAAAAAG4/Rq8oGW68Xrg/s1600/479602main_eros_946-710.jpg',
-            price: 1999.99,
+            price: 2000.00,
             description: '101955 Bennu is a carbonaceous asteroid in the Apollo group that was discovered by the LINEAR Project on September 11, 1999.',
             rarity: 10,
             location: 'Outer Space',
@@ -113,21 +138,91 @@ var seedProducts = function (userList) {
             name: 'Tectosilicates',
             category: 'Mineral',
             pictureURL: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Muscovite-Albite-122886.jpg',
-            price: 199.99,
+            price: 200.00,
             description: 'Tectosilicates, also known as framework silicates, have the highest degree of polymerization. With all corners of a tetrahedra shared, the silicon:oxygen ratio becomes 1:2. Examples are quartz, the feldspars, feldspathoids, and the zeolites. Framework silicates tend to be particularly chemically stable as a result of strong covalent bonds. Forming 12% of the Earth\'s crust, quartz (SiO2) is the most abundant mineral species. It is characterized by its high chemical and physical resistivity. Quartz has several polymorphs, including tridymite and cristobalite at high temperatures, high-pressure coesite, and ultra-high pressure stishovite. The latter mineral can only be formed on Earth by meteorite impacts, and its structure has been composed so much that it had changed from a silicate structure to that of rutile (TiO2). The silica polymorph that is most stable at the Earth\'s surface is α-quartz. Its counterpart, β-quartz, is present only at high temperatures and pressures (changes to α-quartz below 573 °C at 1 bar). These two polymorphs differ by a "kinking" of bonds; this change in structure gives β-quartz greater symmetry than α-quartz, and they are thus also called high quartz (β) and low quartz (α).',
             rarity: 9,
             location: 'very rare place',
             stocks: 2,
         },
         {
-            name: '101955 Bennu',
-            category: 'Meteorite',
-            pictureURL: 'http://3.bp.blogspot.com/-4vTApLrr-50/VIS_DKIghSI/AAAAAAAAAG4/Rq8oGW68Xrg/s1600/479602main_eros_946-710.jpg',
-            price: 1999.99,
-            description: 'In 1986–87, a German team installing a network of seismic stations while prospecting for oil discovered about 65 meteorites on a flat, desert plain about 100 kilometres (62 mi) southeast of Dirj (Daraj), Libya. A few years later, a desert enthusiast saw photographs of meteorites being recovered by scientists in Antarctica, and thought that he had seen similar occurrences in northern Africa. In 1989, he recovered about 100 meteorites from several distinct locations in Libya and Algeria. Over the next several years, he and others who followed found at least 400 more meteorites. The find locations were generally in regions known as regs or hamadas: flat, featureless areas covered only by small pebbles and minor amounts of sand. Dark-colored meteorites can be easily spotted in these places. In the case of several meteorite fields, such as Dar el Gani, Dhofar, and others, favorable light-colored geology consisting of basic rocks (clays, dolomites, and limestones) makes meteorites particularly easy to identify.',
-            rarity: 10,
-            location: 'The Sahara',
+            name: 'Amazonite and Smoky Quartz' ,
+            category: 'Mineral' ,
+            pictureURL: 'http://www.coloradogem.com/image/cache/data/3232_big-700x700.jpg',
+            price: 50.00,
+            description: 'Very perfect miniature with the classic combination of smoky quartz with amazonite.',
+            rarity: 3,
+            location: 'Lake George, Colorado',
+            stocks: 8,
+        },
+        {
+            name: 'Aquamarine' ,
+            category: 'Mineral' ,
+            pictureURL: 'http://www.coloradogem.com/image/cache/data/7924-228x228.jpg',
+            price: 3000.00,
+            description: 'Flawless, brilliant light blue Aquamarines with Orthoclase Feldspar, a very fine group and excellent example of gem crystals found in pegmatites.  This is from 15,000 feet above sea level in the Hindu Kush range of the Himalayas.  Many display angles.  Museum quality.  From the collection of Gene Meiran.',
+            rarity: 8,
+            location: 'Dasso, Northern Territories, Pakistan',
             stocks: 2,
+        },
+        {
+            name: 'Beryl, var. Aquamarine on Quartz' ,
+            category: 'Mineral' ,
+            pictureURL: 'http://www.coloradogem.com/image/cache/data/5430_big-228x228.jpg',
+            price: 3500.00,
+            description: 'Doubly terminated Aquamarine passing through elongated quartz crystal, so far the best matrix specimen from this new find of Aquamarines in Vietnam.',
+            rarity: 9,
+            location: 'Thuong Xuan District Thanh Hoa Province, Vietnam',
+            stocks: 2,
+        },
+        {
+            name: 'Tourmaline, var. Elbaite' ,
+            category: 'Mineral' ,
+            pictureURL: 'http://www.coloradogem.com/image/cache/data/6356-228x228.jpg',
+            price: 3000.00,
+            description: 'Group of bicolor Tourmalines from premier locality in Afghanistan. Collection of Gene Meieran.',
+            rarity: 9,
+            location: 'Kunar, Nuristan Prov., Afghanistan',
+            stocks: 3,
+        },
+        {
+            name: 'Tourmaline' ,
+            category: 'Mineral' ,
+            pictureURL: 'http://www.coloradogem.com/image/cache/data/3333-228x228.jpg',
+            price: 500.00,
+            description: 'Watermelon Tourmaline slice, unusual color zoning, 77.50 carats',
+            rarity: 7,
+            location: 'Minas Gerais, Brazil',
+            stocks: 1,
+        },
+        {
+            name: 'Turquoise after Apatite Pseudomorph' ,
+            category: 'Mineral' ,
+            pictureURL: 'http://www.coloradogem.com/image/cache/data/4381_big-228x228.jpg',
+            price: 350.00,
+            description: 'Very sharp modified crystal habit of previous apatite replaced by solid blue turquoise. Very rare. As noted in the Mineralogical Record, May-June 2007',
+            rarity: 6,
+            location: 'Nacozari, Sonora, Mexico',
+            stocks: 7,
+        },
+        {
+            name: 'CAMPO DEL CIELO "The Old Man in the Moon"' ,
+            category: 'Meteorite' ,
+            pictureURL: 'http://www.aerolite.org/sale-pics/campos/campo-hole-622-2/campo-hole-622-2-cp.jpg',
+            price: 1100.00,
+            description: 'An excellent complete individual with a large and very rare natural hole. "The Old Man in the Moon" stands up as shown, and we see the profile of an old man with a shock of hair and prominent nose, staring off into the distance (or at the moon). An exceptional display piece and one of our very few irons with a good-sized hole.',
+            rarity: 8,
+            location: 'Formosa, Argentina',
+            stocks: 1,
+        },
+        {
+            name: 'CAMPO DEL CIELO "The Old Man in the Moon"' ,
+            category: 'Meteorite' ,
+            pictureURL: 'http://www.aerolite.org/sale-pics/campos/campo-hole-622-2/campo-hole-622-2-cp.jpg',
+            price: 1100.00,
+            description: 'An excellent complete individual with a large and very rare natural hole. "The Old Man in the Moon" stands up as shown, and we see the profile of an old man with a shock of hair and prominent nose, staring off into the distance (or at the moon). An exceptional display piece and one of our very few irons with a good-sized hole.',
+            rarity: 8,
+            location: 'Formosa, Argentina',
+            stocks: 1,
         },
     ]
 
@@ -138,48 +233,48 @@ var seedProducts = function (userList) {
     return Promise.all(creatingProducts);
 }
 
-var seedOrders = function () {
+// var seedOrders = function () {
 
-    var orders = [
-        {
-            price: 20,
-            isCart: true,
-            sId: 'sdfaflwfavsadvdamffdsaf'
-        },
-        {
-            price: 40,
-            isCart: true,
-            sId: 'sdfaflwfavsadvdamffdsah'
-        },
-        {
-            price: 108,
-            isCart: false,
-            sId: 'sdfaflwfavsadvdamffdsag'
-        },
-        {
-            price: 30,
-            isCart: false,
-            sId: 'sasfflwfavsadvdamffdsag'
-        },
-        {
-            price: 77,
-            isCart: false,
-            sId: 'sdfaflwfavsaehyamffdsag'
-        },
-        {
-            price: 100,
-            isCart: true,
-            sId: 'sdfaflwfavsaHanamffdsag'
-        }
-    ];
+//     var orders = [
+//         {
+//             price: 20,
+//             isCart: true,
+//             sId: 'sdfaflwfavsadvdamffdsaf'
+//         },
+//         {
+//             price: 40,
+//             isCart: true,
+//             sId: 'sdfaflwfavsadvdamffdsah'
+//         },
+//         {
+//             price: 108,
+//             isCart: false,
+//             sId: 'sdfaflwfavsadvdamffdsag'
+//         },
+//         {
+//             price: 30,
+//             isCart: false,
+//             sId: 'sasfflwfavsadvdamffdsag'
+//         },
+//         {
+//             price: 77,
+//             isCart: false,
+//             sId: 'sdfaflwfavsaehyamffdsag'
+//         },
+//         {
+//             price: 100,
+//             isCart: true,
+//             sId: 'sdfaflwfavsaHanamffdsag'
+//         }
+//     ];
 
-    var creatingOrders = orders.map(function (orderObj) {
-        return Order.create(orderObj);
-    });
+//     var creatingOrders = orders.map(function (orderObj) {
+//         return Order.create(orderObj);
+//     });
 
-    return Promise.all(creatingOrders);
+//     return Promise.all(creatingOrders);
 
-};
+// };
 
 var seedReviews = function () {
 
@@ -220,7 +315,7 @@ var seedReviews = function () {
 
 var seed = function () {
     var users;
-    var orders;
+    // var orders;
     var products;
     var reviews;
 
@@ -229,14 +324,14 @@ var seed = function () {
             users = createdUsers;
             return seedProducts();
         })
-        .then(function (createdProducts) {
-            products = createdProducts;
-            return seedOrders();
-        })
-        .then(function (createdOrders) {
-            orders = createdOrders;
-            return seedReviews();
-        })
+        // .then(function (createdProducts) {
+        //     products = createdProducts;
+        //     return seedOrders();
+        // })
+        // .then(function (createdOrders) {
+        //     orders = createdOrders;
+        //     return seedReviews();
+        // })
         .then(function (createdReviews) {
             reviews = createdReviews;
 
@@ -247,27 +342,27 @@ var seed = function () {
         })
 
 
-        .then(function (r) {
-            var userOrders = users.map(function (user, index) {
-                return user.addOrder(orders[index]);
-            });
-            return Promise.all(userOrders);
-        })
+        // .then(function (r) {
+        //     var userOrders = users.map(function (user, index) {
+        //         return user.addOrder(orders[index]);
+        //     });
+        //     return Promise.all(userOrders);
+        // })
         .then(function (r) {
             var userReviews = users.map(function (user, index) {
                 return user.addReview(reviews[index]);
             });
             return Promise.all(userReviews);
         })
-        .then(function (r) {
-            var orderProducts = orders.map(function (order, index) {
-                return order.addProduct(products[index]);
-            });
-            orderProducts.push(orders[1].addProduct(products[2]));
-            orderProducts.push(orders[1].addProduct(products[4]));
-            orderProducts.push(orders[3].addProduct(products[5]));
-            return Promise.all(orderProducts);
-        });
+        // .then(function (r) {
+        //     var orderProducts = orders.map(function (order, index) {
+        //         return order.addProduct(products[index]);
+        //     });
+        //     orderProducts.push(orders[1].addProduct(products[2]));
+        //     orderProducts.push(orders[1].addProduct(products[4]));
+        //     orderProducts.push(orders[3].addProduct(products[5]));
+        //     return Promise.all(orderProducts);
+        // });
 }
 
 
