@@ -25,7 +25,7 @@ app.controller('CheckoutCtrl', function ($scope, CartFactory, cart, $state) {
 
         CartFactory.checkOut(cart.products, shipping)
             .then(function (cart) {
-                $state.go('confirmation');
+                $state.go('myAccount');
                 return cart;
             }).catch(console.error.bind(console));
     }
