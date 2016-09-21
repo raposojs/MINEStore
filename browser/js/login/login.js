@@ -24,7 +24,6 @@ app.factory('SignInFactory', function($http){
         //ajax request to creat a user
         return $http.post('/api/members/', register)
             .then(function(createdUser){
-                //console.log('a user has been created', createdUser); 
             })
     }
 
@@ -39,11 +38,11 @@ app.controller('LoginCtrl', function ($scope, $state, AuthService, SignInFactory
     }
 
     $scope.notifyBad = function(user){
-        Notification.error('Someone has already signup with this e-mail') 
+        Notification.error('Error: Someone has already signup with this e-mail') 
     }
 
-    $scope.new = function(user){
-        Notification(user + ', your account has been successfully created! Welcome to MINE!') 
+    $scope.newUser = function(){
+        Notification('Your account has been successfully created! Welcome to MINE!') 
     }
 
     $scope.login = {};
@@ -64,23 +63,18 @@ app.controller('LoginCtrl', function ($scope, $state, AuthService, SignInFactory
 
     // == SIGN UP CONTROLS == //
     $scope.createUser = function(){
-        console.log("nega")
+        // $scope.new("BAD")
         return SignInFactory.checkEmail($scope.register.email)
             .then(function(check){
-                if(check === false) {
-                    console.log("OJDAOSJASOJ")
+                if(check.data !== false) {
+                    $scope.notifyBad()
                     $scope.takenEmail = true;
                     return;
-
                 } else {
-                    // $scope.notifyBad()
-                    $scope.new("OK")
                     return SignInFactory.createUser($scope.register)
                         .then(function(createdUser){
-
-                            console.log("YAY1")
+                            $scope.newUser()
                            return AuthService.login({email: $scope.register.email, password: $scope.register.password}).then(function () {
-                                console.log("YAY2")
                                 $state.go('home');
                             }).catch(function () {
                                 $scope.error = 'Invalid login credentials.';
@@ -90,7 +84,6 @@ app.controller('LoginCtrl', function ($scope, $state, AuthService, SignInFactory
                     
                 }
             })
-            console.log("NEGA")
     }
 
 
