@@ -29,7 +29,7 @@
                     </td>
                     <td ng-bind="order.id"></td>
                     <td ng-bind="order.createdAt.slice(0,10)"></td>
-                    <td ng-bind="'$' + order.price"></td>
+                    <td ng-bind="'$' + (order.price * 1).toFixed(2)"></td>
                 </tr>
                 <tr ng-show="expanded">
                     <td></td>
@@ -50,7 +50,7 @@
                                     src="{{product.pictureURL}}"
                                     style="width:128px;height:128px;"></td>
                                     <td style="width:15%;" ng-bind="product.name"></td>
-                                    <td style="width:15%;" ng-bind="1"></td>
+                                    <td style="width:15%;" ng-bind="product.OrderedProduct.quantity"></td>
                                     <td style="width:15%;" ng-bind="product.category"></td>
                                     <td style="width:15%;" ng-bind="'$' + product.price"></td>
                                 </tr>
