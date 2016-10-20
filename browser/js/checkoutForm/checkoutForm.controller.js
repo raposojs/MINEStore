@@ -1,4 +1,4 @@
-app.controller('CheckoutCtrl', function ($scope, CartFactory, cart, $state) {
+app.controller('CheckoutCtrl', function ($scope, CartFactory, cart, $state, Notification) {
     $scope.value = cart.cart.price;
 
     $scope.cart = cart.cart;
@@ -10,6 +10,10 @@ app.controller('CheckoutCtrl', function ($scope, CartFactory, cart, $state) {
     cart.quantities.forEach(function (quantity, index) {
         $scope.products[index].quantity = quantity.quantity;
     })
+
+    $scope.notifyGood = function(){
+        Notification.info('Your order has been placed!') 
+    }
 
     $scope.checkOut = function () {
         var shipping = JSON.stringify($scope.shipping);
@@ -25,6 +29,7 @@ app.controller('CheckoutCtrl', function ($scope, CartFactory, cart, $state) {
 
         CartFactory.checkOut(cart.products, shipping)
             .then(function (cart) {
+                //notify
                 $state.go('myAccount');
                 return cart;
             }).catch(console.error.bind(console));

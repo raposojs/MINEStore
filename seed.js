@@ -29,10 +29,6 @@ var seedUsers = function () {
 
     var users = [
         {
-            email: 'testing@fsa.com',
-            password: 'password'
-        },
-        {
             username: 'Bruno',
             email: 'bruno@bruno.com',
             password: 'mineit',
@@ -62,25 +58,6 @@ var seedUsers = function () {
             password: 'potus',
             isAdmin: true
         },
-        {
-            email: 'tenloh@gmail.com',
-            password: 'flack'
-        },
-        {
-            email: 'han@gmail.com',
-            password: 'hoorah',
-            address: 'GrandCentral, NY'
-        },
-        {
-            email: 'angularAwesome@fsa.com',
-            password: 'react',
-            address: 'FB street, Google ave, NY'
-        },
-        {
-            email: 'a@b.com',
-            password: '.then',
-            address: 'Bird st, Blue City'
-        }
     ];
 
     var creatingUsers = users.map(function (userObj) {
@@ -195,7 +172,7 @@ var seedProducts = function (userList) {
             stocks: 1,
         },
         {
-            name: 'Turquoise after Apatite Pseudomorph' ,
+            name: 'Turquoise Apatite Pseudomorph' ,
             category: 'Mineral' ,
             pictureURL: 'http://www.coloradogem.com/image/cache/data/4381_big-228x228.jpg',
             price: 350.00,
@@ -205,17 +182,7 @@ var seedProducts = function (userList) {
             stocks: 7,
         },
         {
-            name: 'CAMPO DEL CIELO "The Old Man in the Moon"' ,
-            category: 'Meteorite' ,
-            pictureURL: 'http://www.aerolite.org/sale-pics/campos/campo-hole-622-2/campo-hole-622-2-cp.jpg',
-            price: 1100.00,
-            description: 'An excellent complete individual with a large and very rare natural hole. "The Old Man in the Moon" stands up as shown, and we see the profile of an old man with a shock of hair and prominent nose, staring off into the distance (or at the moon). An exceptional display piece and one of our very few irons with a good-sized hole.',
-            rarity: 8,
-            location: 'Formosa, Argentina',
-            stocks: 1,
-        },
-        {
-            name: 'CAMPO DEL CIELO "The Old Man in the Moon"' ,
+            name: '"The Old Man in the Moon"' ,
             category: 'Meteorite' ,
             pictureURL: 'http://www.aerolite.org/sale-pics/campos/campo-hole-622-2/campo-hole-622-2-cp.jpg',
             price: 1100.00,
@@ -279,30 +246,6 @@ var seedProducts = function (userList) {
 var seedReviews = function () {
 
     var reviews = [
-        {
-            reviewContent: 'Great Product',
-            stars: 5
-        },
-        {
-            reviewContent: 'Horrible Product',
-            stars: 1,
-        },
-        {
-            reviewContent: 'Meh was okay',
-            stars: 3,
-        },
-        {
-            reviewContent: 'Mediocre item to have',
-            stars: 4,
-        },
-        {
-            reviewContent: 'I will never buy this again EVER',
-            stars: 1,
-        },
-        {
-            reviewContent: 'THE STUFF',
-            stars: 5,
-        }
     ];
 
     var creatingReviews = reviews.map(function (reviewObj) {
